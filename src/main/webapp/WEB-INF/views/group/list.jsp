@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<title>그룹리스트</title>
 </head>
 <body>
-	<h1>그룹페이지</h1>
+	<h1>그룹리스트 입니다.</h1>
 
 </body>
 </html>
