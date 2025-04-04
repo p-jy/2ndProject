@@ -14,7 +14,7 @@
 	.form{
 		width: 550px;
 		margin: 0 auto;
-		transform: translateY(30%);
+		transform: translateY(25%);
 	}
 	
 	.loginLabel{
