@@ -18,6 +18,25 @@ public class HomeController {
 	@Autowired
 	MemberService memberService;
 	
+	@GetMapping("/signup")
+	public String signup(Model model, String id) {
+		model.addAttribute("id", id);
+		return "/member/signup";
+	}
+	
+	@PostMapping("/signup")
+	public String signup(Model model, MemberVO member) {
+		if(memberService.signup(member)) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "회원 가입에 성공했습니다.");
+		} else {
+			model.addAttribute("url", "/signup?id=" + member.getMe_id());
+			model.addAttribute("msg", "회원 가입에 실패했습니다.");
+		}
+		
+		return "message";
+	}
+	
 	@GetMapping("/login")
 	public String login(Model model, String id) {
 		model.addAttribute("id", id);
