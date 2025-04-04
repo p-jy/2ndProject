@@ -38,21 +38,54 @@
 	}
 	
 	
+	.button-container{
+		display: flex;
+		flex-wrap: wrap;
+		padding: 20px;
+	}
+	
+	.recordtitle{
+		text-align: center;
+		padding: 10px;
+	}
+	
+	P{ 
+		text-align: center;
+		margin-top: 5px;
+	}
 	
 </style>
 </head>
 <body>
-	<form action="<c:url value="/login"/>" method="post">
-		<div class="container">
-			<p><b>css 디자인 만드는 중 ㅠ 만들고나서 로그인 회원가입 넣겠습니다...!</b></p>
-			<label for="id" class="form-label">아이디</label>
-			<input type="text" placeholder="아이디를 입력하세요." id="id" name="me_id">
-			
-			<label for="pw" class="form-label">비밀번호</label>
-			<input type="password" placeholder="비밀번호를 입력하세요." id="pw" name="me_pw">
-			
-			<button type="submit" class="btn mt-3">로그인</button>
+	<div class="recordtitle">
+		<h2>오늘의 활동을 등록해보세요.</h2>
+	</div>
+	
+	<form action="" method="post">
+		<label></label>
+		<div class="button-container">
+		  <a href="<c:url value='/record/diet' />" class="btn btn-outline-secondary btn-block">식단</a>
+		  <a href="<c:url value='/record/inbody' />" class="btn btn-outline-secondary btn-block">신체</a>
+		  <a href="<c:url value='/record/workout' />" class="btn btn-outline-secondary btn-block">운동</a>
+		  <a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
 		</div>
+	</form>
+	<form action="" method="post">
+		<c:if test="${empty dietList}">
+			<p>등록된 리스트가 없습니다.</p>
+		</c:if>
+		<c:forEach var="diet" items="${dietList}">
+			<div class="form-group">
+			  <label for="di_name">식단 이름 : </label>
+			  <input type="text" class="form-control" id="di_name" value="${diet.di_name }">
+			  <label for="di_date">식단한 날짜 : </label>
+			  <input type="text" class="form-control" id="di_date" value="${diet.di_date }">
+			  <label for="di_ampm">오전/오후 : </label>
+			  <input type="text" class="form-control" id="di_ampm" value="${diet.di_ampm }">
+			  <label for="di_time">식단한 시간 : </label>
+			  <input type="text" class="form-control" id="di_time" value="${diet.di_time }">
+			</div>
+		</c:forEach>
 	</form>
 </body>
 </html>
