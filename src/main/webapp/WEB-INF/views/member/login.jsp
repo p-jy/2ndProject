@@ -44,13 +44,14 @@
 <body>
 	<form action="<c:url value="/login"/>" method="post">
 		<div class="container">
-			<p><b>css 디자인 만드는 중 ㅠ 만들고나서 로그인 회원가입 넣겠습니다...!</b></p>
-			<label for="id" class="form-label">아이디</label>
-			<input type="text" placeholder="아이디를 입력하세요." id="id" name="me_id">
-			
-			<label for="pw" class="form-label">비밀번호</label>
-			<input type="password" placeholder="비밀번호를 입력하세요." id="pw" name="me_pw">
-			
+			<div class="form-group">
+				<label for="id">아이디</label>
+				<input type="text" class="form-control" id="id" name="me_id" value="${id}">
+			</div>
+			<div class="form-group">
+				<label for="pw">비밀번호</label>
+				<input type="password" class="form-control" id="pw" name="me_pw">
+			</div>
 			<button type="submit" class="btn mt-3">로그인</button>
 		</div>
 	</form>
