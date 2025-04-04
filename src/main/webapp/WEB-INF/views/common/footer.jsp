@@ -5,12 +5,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<style>
+	.jumbotron {
+		border-top: 1px solid #e4e4e4;
+		padding: 1rem 0;
+		margin: 1rem 0;
+	}
+	
+	.footer-message {
+		font-weight: bold;
+		font-size: 0.9rem;
+		color: #545e6f;
+		margin-bottom: 0.3rem;
+		margin: 0 0 0 0.6rem;
+	}
+	
+	.footer-contact {
+		font-size: 0.9rem;
+		color: #545e6f;
+		margin: 0.6rem;
+	}
+</style>
 </head>
 <body>
-<div class="mt-4 p-5 bg-primary text-white rounded">
-    <h1>footer(푸터)</h1> 
-    <p>KH정보교육원</p> 
+<div class="jumbotron text-center">
+    <div class="footer-message">푸터에는 무슨 말을 써야할 지 모르겠다 문구 추천 받습니다.</div>
+    <div class="footer-contact">제작자: 박주영, 오준호, 유동훈, 표한결</div>
   </div>
 </body>
 </html>
