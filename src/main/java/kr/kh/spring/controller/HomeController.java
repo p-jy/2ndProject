@@ -43,7 +43,7 @@ public class HomeController {
 		
 		return "message";
 	}
-	
+  
 	@GetMapping("/login")
 	public String login(Model model, String id) {
 		model.addAttribute("id", id);
