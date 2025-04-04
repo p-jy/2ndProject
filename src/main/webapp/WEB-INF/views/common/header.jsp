@@ -8,10 +8,10 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm jumbotron navbar-light">
-		<a class="navbar-brand ml-3" href="#">Logo</a>
+		<a class="navbar-brand ml-3" href="<c:url value="/"/>">Logo</a>
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="<c:url value="/home"/>">기록</a>
+				<a class="nav-link" href="<c:url value="/"/>">기록</a>
 			</li>
 			
 			<li class="nav-item">
