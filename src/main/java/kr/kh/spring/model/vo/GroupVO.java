@@ -14,10 +14,10 @@ public class GroupVO {
 	char gr_code;
 	char gr_pw;
 	String gr_name;
-	String introduction;
+	String gr_introduction;
 	Date gr_start_date;
 	int gr_period;
-	int grpersonnel;
+	int gr_personnel;
 	int participant;
 	String gr_me_id;
 	
