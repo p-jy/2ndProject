@@ -13,16 +13,15 @@
 		
 	</div>
 	
-	<h1>그룹 리스트</h1>
-	<table>
+	<h1 class="justify-content-center">그룹 리스트</h1>
+	<table class="table table-hover table-primary">
 		<thead>
 			<tr>
 				<th>번호</th>
-				<th>공개여부</th>
 				<th>그룹이름</th>
 				<th>소개</th>
-				<th>참여인원/정원</th>
-				<th>개설일</th>
+				<th>인원</th>
+				<th>시작일</th>
 				<th>방장이름</th>
 			</tr>
 		</thead>
@@ -30,10 +29,11 @@
 			<c:forEach items="${list}" var="group">
 				<tr>
 					<td>${group.gr_num}</td>
-					<td>${group.gr_public}</td>
-					<td>${group.gr_name}</td>
+					<td>
+						<a href='<c:url value="/group/main/${group.gr_num}"/>'>${group.gr_name}</a>
+					</td>
 					<td>${group.gr_introduction}</td>
-					<td>${group.gr_personnel}/${group.gr_period}</td>
+					<td>${group.gr_personnel}</td>
 					<td><fmt:formatDate value="${group.gr_start_date}" pattern="yyyy-MM-dd"/></td>
 					<td>${group.gr_me_id}</td>
 				</tr>
@@ -45,7 +45,24 @@
 			</c:if>
 		</tbody>
 	</table>
-
+	
+	<ul class="pagination justify-content-center">	
+		<li class="page-item">
+	  		<a class="page-link" href="${url}">이전</a>
+	  	</li>
+	
+		<li class="page-item">
+			<a class="page-link" href="${url}">1</a>
+		</li>
+	  
+		<li class="page-item">
+			<a class="page-link" href="${url}">다음</a>
+		</li>
+	  
+	</ul>
+	
+	<a href='<c:url value="/group/make"/>' class="btn btn-outline-info btn-insert">그룹 만들기</a>
+	
 	
 
 </body>

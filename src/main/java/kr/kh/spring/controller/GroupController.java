@@ -25,5 +25,25 @@ public class GroupController {
 		return"/group/list";
 	}
 	
+	@GetMapping("/make")
+	public String make(Model model) {
+		
+		return"/group/make";
+	}
+	
+	@GetMapping("/main")
+	public String main(Model model) {
+		
+		return"/group/main";
+	}
+	
+	@GetMapping("/message")
+	public String message(Model model) {
+		
+		return"/group/message";
+	}
+	
+	
+	
 	
 }

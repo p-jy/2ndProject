@@ -4,9 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 </head>
 <body>
-	<h1>그룹 메시지</h1>
+	<h1>메시지 페이지</h1>
 </body>
 </html>
