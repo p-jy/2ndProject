@@ -83,6 +83,11 @@ public class MemberServiceImp implements MemberService {
 		return memberDao.updateMember(user);
 	}
 
+	@Override
+	public void deleteId(MemberVO user) {
+		memberDao.deleteId(user);
+	}
+
 	
 	
 

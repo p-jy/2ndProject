@@ -96,7 +96,7 @@
 				</div>
 			</form>
 			<div class="d-flex justify-content-center">
-				<button type="button" class="btn signupBtn">회원가입</button>
+				<a href="<c:url value="/signup"/>" class="btn signupBtn">회원가입</a>
 			</div>
 		</div>
 			

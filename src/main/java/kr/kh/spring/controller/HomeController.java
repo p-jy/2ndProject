@@ -115,4 +115,27 @@ public class HomeController {
 		model.addAttribute("url", "/mypage");
 		return "/msg/msg";
 	}
+	
+	@GetMapping("/deleteId")
+	public String deleteId() {
+		return "/member/deleteId";
+	}
+	
+	@PostMapping("/deleteId")
+	public String deleteId(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		session.removeAttribute("user");
+		if(user == null) {
+			return "redirect:/";
+		}
+		if(memberService.deleteId(user)) {
+			model.addAttribute("msg", "회원 탈퇴 성공");
+		} else {
+			model.addAttribute("msg", "회원 탈퇴 실패");
+		}
+		model.addAttribute("url", "/");
+		
+		return "msg/msg";
+	}
 }

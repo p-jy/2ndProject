@@ -15,4 +15,6 @@ public interface MemberService {
 	boolean checkPhone(String phone);
 
 	boolean updateMember(MemberVO user, MemberVO member);
+
+	boolean deleteId(MemberVO user);
 }

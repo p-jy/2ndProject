@@ -15,5 +15,7 @@ public interface MemberDAO {
 	MemberVO selectMemberByPhone(@Param("me_phone")String phone);
 
 	boolean updateMember(@Param("user")MemberVO user);
+
+	void deleteId(@Param("user")MemberVO user);
 	
 }

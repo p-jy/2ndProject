@@ -43,6 +43,10 @@
 		color: white;
 	}
 	
+	.deleteIdBtn {
+		color: #9b9b9b;
+	}
+	
 	.error, .red {
 		color: red;
 	}
@@ -77,6 +81,9 @@
 					<button type="submit" class="btn updateBtn col-12">회원 정보 수정</button>
 				</div>
 			</form>
+			<div class="d-flex justify-content-center">
+				<a href="<c:url value="/deleteId"/>" class="btn deleteIdBtn">회원탈퇴</a>
+			</div>
 		</div>	
 	</div>
 	

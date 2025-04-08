@@ -27,4 +27,13 @@
 			me_name = #{user.me_name}
 		where me_id = #{user.me_id}
 	</update>
+	
+	<update id="deleteId">
+		update member set
+			me_pw = null,
+			me_name = null,
+			me_phone = null,
+			me_del = "Y"
+		where me_id = #{user.me_id}
+	</update>
 </mapper>
