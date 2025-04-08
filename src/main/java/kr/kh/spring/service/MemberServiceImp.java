@@ -22,14 +22,21 @@ public class MemberServiceImp implements MemberService {
 			return false;
 		}
 		
-		String encPw = passwordEncoder.encode(member.getMe_pw());
-		member.setMe_pw(encPw);
-		
-		try {
-			return memberDao.insertMember(member);
-		} catch(Exception e) {
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+		if(user != null) {
 			return false;
 		}
+		
+		//암호화
+		String encodedPw = passwordEncoder.encode(member.getMe_pw());
+		member.setMe_pw(encodedPw);
+		return memberDao.insertMember(member);
+	}
+	
+	@Override
+	public boolean checkId(String id) {
+		MemberVO user = memberDao.selectMember(id);
+		return user == null;
 	}
 	
 	@Override
@@ -49,6 +56,8 @@ public class MemberServiceImp implements MemberService {
 		}
 		return user;
 	}
+
+	
 
 	
 }

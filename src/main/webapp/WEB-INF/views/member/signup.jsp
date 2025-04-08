@@ -1,13 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-<style>
+<style type="text/css">
 	
 	.container1 {
 		min-height: 730px;
@@ -61,9 +61,8 @@
 		color: white;
 	}
 	
-	.red {
+	.error, .red {
 		color: red;
-		font-size: 12px;
 	}
 	
 	.green {
@@ -83,7 +82,7 @@
 				<div class="container2">
 					<div class="form-group">
 						<label for="id">아이디</label>
-						<input type="text" class="form-control" id="id" name="me_id" value="${id}">
+						<input type="text" class="form-control" id="id" name="me_id">
 						<label id="checkId" class="red"></label>
 					</div>
 					<div class="form-group">
@@ -187,7 +186,7 @@
 				},
 				me_phone : {
 					required : true,
-					regex : /^[010]-[0-9]{4}-[0-9]{4}$/
+					regex : /^[0][1][0]-[0-9]{4}-[0-9]{4}$/
 				}
 			},
 			messages : {
