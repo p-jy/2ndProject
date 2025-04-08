@@ -17,7 +17,6 @@
 	<table class="table table-hover table-primary">
 		<thead>
 			<tr>
-				<th>번호</th>
 				<th>그룹이름</th>
 				<th>소개</th>
 				<th>인원</th>
@@ -61,7 +60,23 @@
 	  
 	</ul>
 	
-	<a href='<c:url value="/group/make"/>' class="btn btn-outline-info btn-insert">그룹 만들기</a>
+	<a href='<c:url value="/group/make"/>' class="btn btn-outline-info btn-makegroup">그룹 만들기</a>
+	
+	<!-- 
+	<script type="text/javascript">
+		$(".btn-makegroup").click(function(e){
+			//로그인 했다면 만들기 페이지로 입장
+			if(${user != null}){
+				return;
+			}
+			e.preventDefault();
+			//로그인 안했다면 로그인 페이지로 이동
+			if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
+				location.href="<c:url value="/login"/>";
+			}
+		})
+	</script>
+	 -->
 	
 	
 
