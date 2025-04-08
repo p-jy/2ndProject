@@ -9,6 +9,8 @@ public interface MemberService {
 	MemberVO login(MemberVO member);
 
 	boolean checkId(String id);
+
+	boolean checkName(String name);
 	
-	
+	boolean checkPhone(String phone);
 }

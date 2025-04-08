@@ -12,4 +12,12 @@
 	<select id="selectMember" resultType="kr.kh.spring.model.vo.MemberVO">
 		select * from member where me_id = #{me_id}
 	</select>
+	
+	<select id="selectMemberByName" resultType="kr.kh.spring.model.vo.MemberVO">
+		select * from member where me_name = #{me_name}
+	</select>
+	
+	<select id="selectMemberByPhone" resultType="kr.kh.spring.model.vo.MemberVO">
+		select * from member where me_phone = #{me_phone}
+	</select>
 </mapper>

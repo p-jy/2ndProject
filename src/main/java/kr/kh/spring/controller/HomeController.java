@@ -51,6 +51,18 @@ public class HomeController {
 	public boolean checkId(@RequestParam("id") String id) {
 		return memberService.checkId(id);
 	}
+	
+	@ResponseBody
+	@PostMapping("/check/name")
+	public boolean checkName(@RequestParam("name") String name) {
+		return memberService.checkName(name);
+	}
+	
+	@ResponseBody
+	@PostMapping("/check/phone")
+	public boolean checkPhone(@RequestParam("phone") String phone) {
+		return memberService.checkPhone(phone);
+	}
   
 	@GetMapping("/login")
 	public String login(HttpServletRequest request) {

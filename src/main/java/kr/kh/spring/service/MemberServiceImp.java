@@ -40,6 +40,18 @@ public class MemberServiceImp implements MemberService {
 	}
 	
 	@Override
+	public boolean checkName(String name) {
+		MemberVO user = memberDao.selectMemberByName(name);
+		return user == null;
+	}
+	
+	@Override
+	public boolean checkPhone(String phone) {
+		MemberVO user = memberDao.selectMemberByPhone(phone);
+		return user == null;
+	}
+	
+	@Override
 	public MemberVO login(MemberVO member) {
 		if(member == null) {
 			return null;
@@ -57,6 +69,7 @@ public class MemberServiceImp implements MemberService {
 		return user;
 	}
 
+	
 	
 
 	

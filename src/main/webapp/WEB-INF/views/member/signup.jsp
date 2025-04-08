@@ -96,10 +96,12 @@
 					<div class="form-group">
 						<label for="name">닉네임</label>
 						<input type="text" class="form-control" id="name" name="me_name">
+						<label id="checkName" class="red"></label>
 					</div>
 					<div class="form-group">
 						<label for="phone">전화번호</label>
 						<input type="text" class="form-control" id="phone" name="me_phone">
+						<label id="checkPhone" class="red"></label>
 					</div>
 					<button type="submit" class="btn signupBtn mt-3 col-12">회원가입</button>
 				</div>
@@ -166,7 +168,91 @@
 			$("#checkId").text(str);
 			return res;
 		}
+		
+		$("#name").on("input",function(e){
+			checkName();
+		});
+		function checkName(){
+			//입력한 이름을 가져옴
+			$("#checkName").text("");
+			let name = $("#name").val();
 	
+			if(!/^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$/.test(name)){
+				return false;
+			}
+			
+			let res = false;
+			
+			$.ajax({
+				async : false, 
+				url : '<c:url value="/check/name"/>', 
+				type : 'post', 
+				data : { name : name }, 
+				success : function (data){
+					if(data){
+						res = true;	
+					}
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+	
+				}
+			});
+			let str;
+			if(res){
+				str = "사용 가능한 닉네임입니다.";
+				$("#checkName").addClass("green");
+				$("#checkName").removeClass("red");
+			}else{
+				str = "이미 사용중인 닉네임입니다.";
+				$("#checkName").addClass("red");
+				$("#checkName").removeClass("green");
+			}
+			$("#checkName").text(str);
+			return res;
+		}
+		
+		$("#phone").on("input",function(e){
+			checkPhone();
+		});
+		function checkPhone(){
+			//입력한 이름을 가져옴
+			$("#checkPhone").text("");
+			let phone = $("#phone").val();
+	
+			if(!/^[0][1][0]-[0-9]{4}-[0-9]{4}$/.test(phone)){
+				return false;
+			}
+			
+			let res = false;
+			
+			$.ajax({
+				async : false, 
+				url : '<c:url value="/check/phone"/>', 
+				type : 'post', 
+				data : { phone : phone }, 
+				success : function (data){
+					if(data){
+						res = true;	
+					}
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+	
+				}
+			});
+			let str;
+			if(res){
+				str = "사용 가능한 번호입니다.";
+				$("#checkPhone").addClass("green");
+				$("#checkPhone").removeClass("red");
+			}else{
+				str = "이미 등록된 번호입니다.";
+				$("#checkPhone").addClass("red");
+				$("#checkPhone").removeClass("green");
+			}
+			$("#checkPhone").text(str);
+			return res;
+		}
+		
 		$("form").validate({
 			rules : {
 				me_id : {
