@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.kh.spring.Pagination.Criteria;
+import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.service.GroupService;
@@ -24,7 +26,7 @@ public class GroupController {
 	GroupService groupService;
 	
 	@GetMapping("/list")
-	public String selectGroup(Model model) {
+	public String selectGroup(Model model, Criteria cri) {
 		List<GroupVO> groupList = groupService.selectGroupList();
 		model.addAttribute("groupList", groupList);
 		return "/group/list";

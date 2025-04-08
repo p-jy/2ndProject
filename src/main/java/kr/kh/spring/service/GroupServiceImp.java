@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.kh.spring.Pagination.Criteria;
+import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.dao.GroupDAO;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.MemberVO;
@@ -39,4 +41,6 @@ public class GroupServiceImp implements GroupService{
 		
 		return true;
 	}
+
+	
 }

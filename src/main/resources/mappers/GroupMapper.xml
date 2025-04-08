@@ -16,8 +16,9 @@
 		values
 			(#{group.gr_name},#{group.gr_introduction},#{group.sr_gr_num}
 			,#{group.rl_rule},#{group.gr_start_date},#{group.gr_period}
-			,#{group.gr_personnel},#{group.gg_gr_num},#{group.gr_public})
-			
+			,#{group.gr_personnel},#{group.gg_gr_num},#{group.gr_public})			
 	</insert>
+	
+	
   
 </mapper>
