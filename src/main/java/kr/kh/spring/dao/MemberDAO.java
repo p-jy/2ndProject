@@ -10,8 +10,8 @@ public interface MemberDAO {
 	
 	MemberVO selectMember(@Param("me_id")String me_id);
 
-	MemberVO selectMemberByName(@Param("name")String name);
+	MemberVO selectMemberByName(@Param("me_name")String name);
 	
-	MemberVO selectMemberByPhone(@Param("phone")String phone);
+	MemberVO selectMemberByPhone(@Param("me_phone")String phone);
 	
 }
