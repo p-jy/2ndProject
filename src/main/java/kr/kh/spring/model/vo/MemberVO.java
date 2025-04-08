@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class MemberVO {
 	
-	String me_id;
-	String me_name;
-	String me_pw;
-	String me_phone;
-	String me_del;
+	private String me_id;
+	private String me_pw;
+	private String me_name;
+	private String me_phone;
+	private String me_del;
 	
 }
