@@ -69,6 +69,20 @@ public class MemberServiceImp implements MemberService {
 		return user;
 	}
 
+	@Override
+	public boolean updateMember(MemberVO user, MemberVO member) {
+		if(user == null || member == null ) {
+			return false;
+		}
+		
+		user.setMe_name(member.getMe_name());
+		if(member.getMe_pw().length() != 0) {
+			String encPw = passwordEncoder.encode(member.getMe_pw());
+			user.setMe_pw(encPw);
+		}
+		return memberDao.updateMember(user);
+	}
+
 	
 	
 

@@ -13,4 +13,6 @@ public interface MemberService {
 	boolean checkName(String name);
 	
 	boolean checkPhone(String phone);
+
+	boolean updateMember(MemberVO user, MemberVO member);
 }

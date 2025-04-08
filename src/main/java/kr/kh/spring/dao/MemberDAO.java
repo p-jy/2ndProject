@@ -13,5 +13,7 @@ public interface MemberDAO {
 	MemberVO selectMemberByName(@Param("me_name")String name);
 	
 	MemberVO selectMemberByPhone(@Param("me_phone")String phone);
+
+	boolean updateMember(@Param("user")MemberVO user);
 	
 }

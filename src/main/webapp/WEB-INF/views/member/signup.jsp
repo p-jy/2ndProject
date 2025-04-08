@@ -67,7 +67,6 @@
 	
 	.green {
 		color: green;
-		font-size: 12px;
 	}
 	
 </style>
