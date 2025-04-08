@@ -22,25 +22,25 @@ public class GroupController {
 	public String selectGroup(Model model) {
 		List<GroupVO> groupList = groupService.selectGroupList();
 		model.addAttribute("groupList", groupList);
-		return"/group/list";
+		return "/group/list";
 	}
 	
 	@GetMapping("/make")
 	public String make(Model model) {
 		
-		return"/group/make";
+		return "/group/make";
 	}
 	
 	@GetMapping("/main")
 	public String main(Model model) {
 		
-		return"/group/main";
+		return "/group/main";
 	}
 	
 	@GetMapping("/message")
 	public String message(Model model) {
 		
-		return"/group/message";
+		return "/group/message";
 	}
 	
 	
