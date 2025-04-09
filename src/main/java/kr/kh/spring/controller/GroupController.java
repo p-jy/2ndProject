@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.Pagination.Criteria;
+import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.MemberVO;
@@ -28,9 +29,11 @@ public class GroupController {
 	GroupService groupService;
 	
 	@GetMapping("/list")
-	public String selectGroup(Model model) {
+	public String selectGroup(Model model, GroupCriteria cri) {
+		
 		List<GroupVO> groupList = groupService.selectGroupList();
 		System.out.println(groupList);
+		
 		model.addAttribute("groupList", groupList);
 		return "/group/list";
 	}

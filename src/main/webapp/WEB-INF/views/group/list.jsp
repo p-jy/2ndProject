@@ -8,8 +8,9 @@
 	<title>그룹리스트</title>
 </head>
 <body>
-	
-	<h1 >그룹 리스트</h1>
+	<div class="title justify-content-center mb-3">
+		<h1>그룹 리스트</h1>
+	</div>
 	<table class="table table-hover table-primary">
 		<thead>
 			<tr>
@@ -21,21 +22,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list}" var="group">
+			<c:forEach items="${groupList}" var="group">
 				<tr>
 					<td>${group.gr_num}</td>
 					<td>
 						<a href='<c:url value="/group/main/${group.gr_num}"/>'>${group.gr_name}</a>
 					</td>
 					<td>${group.gr_introduction}</td>
-					<td>${group.gr_personnel}</td>
+					<td>${group.gr_participant}/${group.gr_personnel}</td>
 					<td><fmt:formatDate value="${group.gr_start_date}" pattern="yyyy-MM-dd"/></td>
 					<td>${group.gr_me_id}</td>
 				</tr>
 			</c:forEach>
-			<c:if test="${list.size() eq 0}">
+			<c:if test="${groupList.size() eq 0 }">
 				<tr>
-					<th colspan="5">아직 그룹이 없습니다.</th>
+					<th colspan="5" class="text-center">아직 그룹이 없습니다.</th>
 				</tr>
 			</c:if>
 		</tbody>
