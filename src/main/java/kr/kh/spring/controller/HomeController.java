@@ -75,6 +75,7 @@ public class HomeController {
 		}
 		return "/member/login";
 	}
+	
 	@PostMapping("/login")
 	public String login(Model model, MemberVO member) {
 		MemberVO user = memberService.login(member); 
@@ -89,12 +90,52 @@ public class HomeController {
 		return "msg/msg";
 	}
 	
-	@GetMapping
+	@GetMapping("/logout")
 	public String logout(Model model, HttpSession session) {
 		session.removeAttribute("user");
 		
 		model.addAttribute("url", "/");
 		model.addAttribute("msg", "로그아웃 했습니다.");
+		return "msg/msg";
+	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "/member/mypage";
+	}
+	
+	@PostMapping("/mypage")
+	public String mypage(Model model, MemberVO member, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		if(memberService.updateMember(user, member)) {
+			model.addAttribute("msg", "회원 정보를 변경했습니다.");
+		}else {
+			model.addAttribute("msg", "회원 정보를 변경하지 못했습니다.");
+		}
+		model.addAttribute("url", "/mypage");
+		return "/msg/msg";
+	}
+	
+	@GetMapping("/deleteId")
+	public String deleteId() {
+		return "/member/deleteId";
+	}
+	
+	@PostMapping("/deleteId")
+	public String deleteId(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		session.removeAttribute("user");
+		if(user == null) {
+			return "redirect:/";
+		}
+		if(memberService.deleteId(user)) {
+			model.addAttribute("msg", "회원 탈퇴 성공");
+		} else {
+			model.addAttribute("msg", "회원 탈퇴 실패");
+		}
+		model.addAttribute("url", "/");
+		
 		return "msg/msg";
 	}
 }

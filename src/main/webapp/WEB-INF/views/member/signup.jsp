@@ -16,7 +16,6 @@
 	.form{
 		width: 550px;
 		margin: 0 auto;
-		transform: translateY(5%);
 	}
 	
 	.signupLabel{
@@ -67,7 +66,6 @@
 	
 	.green {
 		color: green;
-		font-size: 12px;
 	}
 	
 </style>
