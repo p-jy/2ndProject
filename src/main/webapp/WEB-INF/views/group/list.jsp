@@ -5,15 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 	<title>그룹리스트</title>
 </head>
 <body>
-	<div>
-		
-	</div>
 	
-	<h1 class="justify-content-center">그룹 리스트</h1>
+	<h1 >그룹 리스트</h1>
 	<table class="table table-hover table-primary">
 		<thead>
 			<tr>
@@ -45,24 +41,27 @@
 		</tbody>
 	</table>
 	
-	<ul class="pagination justify-content-center">	
-		<li class="page-item">
-	  		<a class="page-link" href="${url}">이전</a>
-	  	</li>
+	<!-- 
+		<ul class="pagination justify-content-center">	
+			<li class="page-item">
+		  		<a class="page-link" href="${url}">이전</a>
+		  	</li>
+		
+			<li class="page-item">
+				<a class="page-link" href="${url}">1</a>
+			</li>
+		  
+			<li class="page-item">
+				<a class="page-link" href="${url}">다음</a>
+			</li>
+		  
+		</ul>
+	 -->
 	
-		<li class="page-item">
-			<a class="page-link" href="${url}">1</a>
-		</li>
-	  
-		<li class="page-item">
-			<a class="page-link" href="${url}">다음</a>
-		</li>
-	  
-	</ul>
 	
 	<a href='<c:url value="/group/make"/>' class="btn btn-outline-info btn-makegroup">그룹 만들기</a>
 	
-	<!-- 
+	
 	<script type="text/javascript">
 		$(".btn-makegroup").click(function(e){
 			//로그인 했다면 만들기 페이지로 입장
@@ -76,7 +75,7 @@
 			}
 		})
 	</script>
-	 -->
+	 
 	
 	
 

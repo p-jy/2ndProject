@@ -13,7 +13,7 @@ public interface GroupService {
 
 	List<GroupVO> selectGroupList();
 
-	boolean insertGroup(GroupVO group, MemberVO user, MultipartFile[] fileList);
+	boolean insertGroup(GroupVO group, MemberVO user);
 
 	
 

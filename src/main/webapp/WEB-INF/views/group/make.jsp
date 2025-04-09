@@ -47,7 +47,7 @@
 			<input type="radio"  id="public_y" name="gr_public" checked>Y
 			<input type="radio"  id="public_n" name="gr_public">N
 		</div>
-		<button type="submit" class="btn btn-outline-info mt-3 col-12 justify-content-center">그룹 만들기</button>
+		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 만들기</button>
 	</form>
 </body>
 </html>
