@@ -24,7 +24,6 @@
 		<tbody>
 			<c:forEach items="${groupList}" var="group">
 				<tr>
-					<td>${group.gr_num}</td>
 					<td>
 						<a href='<c:url value="/group/main/${group.gr_num}"/>'>${group.gr_name}</a>
 					</td>
