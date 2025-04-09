@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.spring.dao.GroupDAO">
+	
+	<select id="selectGroupList" resultType="GroupVO">
+		select * from `group`
+	</select>
+	
+	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
+		insert into `group`
+			(gr_name, gr_introduction, sr_gr_num
+			, rl_rule, gr_start_date, gr_period
+			, gr_personnel, gg_gr_num, gr_public) 
+		values
+			(#{group.gr_name},#{group.gr_introduction},#{group.sr_gr_num}
+			,#{group.rl_rule},#{group.gr_start_date},#{group.gr_period}
+			,#{group.gr_personnel},#{group.gg_gr_num},#{group.gr_public})			
+	</insert>
+	
+	
+  
+</mapper>
