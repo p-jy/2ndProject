@@ -54,9 +54,25 @@
 		margin-top: 5px;
 	}
 	
+	#calendar {
+        max-width: 900px;
+        margin: 40px auto;
+    }
+    #scheduleList {
+        max-width: 900px;
+        margin: 20px auto;
+        border-top: 1px solid #ccc;
+        padding-top: 20px;
+    }
+	
 </style>
+
+	<!-- 아래 두 줄은 달력 스크립트입니다. -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/main.min.css' rel='stylesheet' />
+
 </head>
 <body>
+	<div id='calendar'></div>
 	<div class="recordtitle">
 		<h2>오늘의 활동을 등록해보세요.</h2>
 	</div>
@@ -87,5 +103,15 @@
 			</div>
 		</c:forEach>
 	</form>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.min.js'></script>
+	<script>
+	    document.addEventListener('DOMContentLoaded', function () {
+	        var calendarEl = document.getElementById('calendar');
+	        var calendar = new FullCalendar.Calendar(calendarEl, {
+	            initialView: 'dayGridMonth',
+	        });
+	        calendar.render();
+	    });
+	</script>
 </body>
 </html>
