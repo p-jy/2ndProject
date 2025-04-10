@@ -85,8 +85,8 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public void deleteId(MemberVO user) {
-		memberDao.deleteId(user);
+	public boolean deleteId(MemberVO user) {
+		return memberDao.deleteId(user);
 	}
 
 	
