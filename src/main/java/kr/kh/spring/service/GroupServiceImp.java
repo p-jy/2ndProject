@@ -26,7 +26,8 @@ public class GroupServiceImp implements GroupService{
 	@Override
 	public boolean insertGroup(GroupVO group, MemberVO user) {
 		if(group == null ||
-		   group.getGr_name().trim().length() ==0) {
+		   group.getGr_name().trim().length() == 0 ||
+		   group.getGr_introduction().length() == 0) {
 			return false;
 		}
 		if(user == null) {
@@ -39,8 +40,13 @@ public class GroupServiceImp implements GroupService{
 			return false;
 		}
 		
+		return result;
+	}
+
+	@Override
+	public GroupVO getGroup(int gr_num) {
 		
-		return true;
+		return groupDao.selectGroup(gr_num);
 	}
 
 	

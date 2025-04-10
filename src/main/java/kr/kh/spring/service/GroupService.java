@@ -16,6 +16,8 @@ public interface GroupService {
 
 	boolean insertGroup(GroupVO group, MemberVO user);
 
+	GroupVO getGroup(int gr_num);
+
 	
 
 }

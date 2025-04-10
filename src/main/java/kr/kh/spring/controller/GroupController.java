@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,9 +60,12 @@ public class GroupController {
 		return "msg/msg";
 	}
 	
-	@GetMapping("/main")
-	public String main(Model model) {
-		
+	@GetMapping("/main/{gr_num}")
+	public String main(Model model,@PathVariable int gr_num, HttpSession session) {
+		//그룹 페이지 가져옴
+		GroupVO group = groupService.getGroup(gr_num);
+		//화면에 전송
+		model.addAttribute("group", group);
 		return "/group/main";
 	}
 	

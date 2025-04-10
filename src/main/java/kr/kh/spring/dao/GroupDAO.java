@@ -13,6 +13,8 @@ public interface GroupDAO {
 
 	boolean insertGroup(@Param("group")GroupVO group);
 
+	GroupVO selectGroup(@Param("gr_num")int gr_num);
+
 	
 
 }
