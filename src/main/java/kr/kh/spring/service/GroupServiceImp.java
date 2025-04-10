@@ -24,7 +24,7 @@ public class GroupServiceImp implements GroupService{
 	}
 
 	@Override
-	public boolean insertGroup(GroupVO group, MemberVO user, MultipartFile[] fileList) {
+	public boolean insertGroup(GroupVO group, MemberVO user) {
 		if(group == null ||
 		   group.getGr_name().trim().length() ==0) {
 			return false;
@@ -39,8 +39,11 @@ public class GroupServiceImp implements GroupService{
 			return false;
 		}
 		
+		
 		return true;
 	}
+
+	
 
 	
 }
