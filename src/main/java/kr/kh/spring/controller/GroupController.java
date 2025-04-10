@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.Pagination.Criteria;
+import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.service.GroupService;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Controller
 @RequestMapping("/group")
 public class GroupController {
@@ -26,8 +29,11 @@ public class GroupController {
 	GroupService groupService;
 	
 	@GetMapping("/list")
-	public String selectGroup(Model model, Criteria cri) {
+	public String selectGroup(Model model, GroupCriteria cri) {
+		
 		List<GroupVO> groupList = groupService.selectGroupList();
+		System.out.println(groupList);
+		
 		model.addAttribute("groupList", groupList);
 		return "/group/list";
 	}
@@ -39,9 +45,9 @@ public class GroupController {
 	}
 	
 	@PostMapping("/make")
-	public String makeGroup(Model model, GroupVO group, HttpSession session, MultipartFile[] fileList) {
+	public String makeGroup(Model model, GroupVO group, HttpSession session) {
 		MemberVO user=(MemberVO) session.getAttribute("user");
-		if(groupService.insertGroup(group, user, fileList)) {
+		if(groupService.insertGroup(group, user)) {
 			model.addAttribute("url", "/group/main");
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
 		}
@@ -50,7 +56,7 @@ public class GroupController {
 			model.addAttribute("msg", "그룹을 생성하지 못했습니다.");
 		}
 		
-		return "message";
+		return "msg/msg";
 	}
 	
 	@GetMapping("/main")

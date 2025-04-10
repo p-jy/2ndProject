@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
+<style type="text/css">
 
+</style>
 </head>
 <body>
 	<h1>그룹 만들기</h1>
@@ -47,7 +51,7 @@
 			<input type="radio"  id="public_y" name="gr_public" checked>Y
 			<input type="radio"  id="public_n" name="gr_public">N
 		</div>
-		<button type="submit" class="btn btn-outline-info mt-3 col-12 justify-content-center">그룹 만들기</button>
+		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 만들기</button>
 	</form>
 </body>
 </html>

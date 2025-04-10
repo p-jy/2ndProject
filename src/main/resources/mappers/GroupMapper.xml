@@ -5,7 +5,12 @@
 <mapper namespace="kr.kh.spring.dao.GroupDAO">
 	
 	<select id="selectGroupList" resultType="GroupVO">
-		select * from `group`
+		select
+			*
+		from `group`
+		where gr_public="Y"
+		order by gr_num desc
+		
 	</select>
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
