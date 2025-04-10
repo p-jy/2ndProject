@@ -54,6 +54,7 @@
 		margin-top: 5px;
 	}
 	
+	/* 달력 관련 스타일 시작*/
 	#calendar {
         max-width: 900px;
         margin: 40px auto;
@@ -64,15 +65,61 @@
         border-top: 1px solid #ccc;
         padding-top: 20px;
     }
+    a[aria-label] {
+		  color: black;
+	}
+    /*달력 관련 스타일 끝*/
+    /*탭 버든 관련 스타일 시작*/
+    .tab-container {
+	      display: flex;
+	      margin-bottom: 10px;
+    }
+
+    .tab {
+    	  flex: 1;
+    	  text-align: center;
+	      padding: 10px 20px;
+	      cursor: pointer;
+	      border: 1px solid #ccc;
+	      background-color: #f2f2f2;
+	      margin-right: 5px;
+    }
+    /*탭 버든 관련 스타일 끝*/
 	
 </style>
 
-	<!-- 아래 두 줄은 달력 스크립트입니다. -->
+	<!-- 아래 세 줄은 달력 스크립트입니다. -->
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/main.min.css' rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/locales/ko.js'></script>
 
 </head>
 <body>
+	<!-- 달력 영역입니다. -->
 	<div id='calendar'></div>
+	
+	<!-- 탭 버튼입니다. -->
+	<div class="tab-container">
+	   <div class="tab active" data-tab="diet">식단</div>
+	   <div class="tab" data-tab="body">신체</div>
+	   <div class="tab" data-tab="workout">운동</div>
+	   <div class="tab" data-tab="plan">계획</div>
+	</div>
+	<!-- 탭 버튼 클릭시 나오는 페이지 입니다. -->
+	<div id="diet" class="tab-content">
+	    <p>식단 페이지 내용입니다.</p>
+	</div>
+	<div id="body" class="tab-content">
+	    <p>신체 페이지 내용입니다.</p>
+	</div>
+	<div id="workout" class="tab-content">
+	    <p>운동 페이지 내용입니다.</p>
+	</div>
+	<div id="plan" class="tab-content">
+	    <p>계획 페이지 내용입니다.</p>
+	</div>
+	
+	
 	<div class="recordtitle">
 		<h2>오늘의 활동을 등록해보세요.</h2>
 	</div>
@@ -103,14 +150,23 @@
 			</div>
 		</c:forEach>
 	</form>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.min.js'></script>
+	
+	
+	
 	<script>
 	    document.addEventListener('DOMContentLoaded', function () {
 	        var calendarEl = document.getElementById('calendar');
 	        var calendar = new FullCalendar.Calendar(calendarEl, {
 	            initialView: 'dayGridMonth',
+	            locale : 'ko',
+	            headerToolbar: {
+	                left: 'prev',
+	                center: 'title',
+	                right: 'next'
+	              },
 	        });
 	        calendar.render();
+	        console.log(calendar)
 	    });
 	</script>
 </body>
