@@ -116,6 +116,12 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- 롬복 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.36</version>
+		</dependency>
 		<!-- mybatis 의존성 추가 -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>

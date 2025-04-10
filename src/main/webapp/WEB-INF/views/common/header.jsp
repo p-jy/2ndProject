@@ -19,6 +19,10 @@
 			</li>
 			
 			<li class="nav-item">
+				<a class="nav-link" href="<c:url value="/plan/make"/>">계획</a>
+			</li>
+			
+			<li class="nav-item">
 				<a class="nav-link" href="<c:url value="/statistics"/>">통계</a>
 			</li>
 			
