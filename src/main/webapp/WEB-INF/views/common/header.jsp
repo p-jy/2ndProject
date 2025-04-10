@@ -28,7 +28,8 @@
 			
 			<c:if test="${user == null}">
 				<li class="nav-item">
-					<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
+					<!-- <a class="nav-link" href="<c:url value="/login"/>">로그인</a> -->
+					<a class="nav-link loginModal" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="openLoginModal()">로그인</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
@@ -46,6 +47,11 @@
 			
 		</ul>
 	</nav>
-	
+	<script>
+		function openLoginModal() {
+			$(".loginModal").load("/member/login");
+			$(".loginModal").modal();
+		}
+	</script>
 </body>
 </html>
