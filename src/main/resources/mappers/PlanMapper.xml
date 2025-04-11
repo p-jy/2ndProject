@@ -4,5 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.PlanDAO">
 	
+	<insert id="insertPlanList">
+		insert into plan 
+	</insert>
   
 </mapper>

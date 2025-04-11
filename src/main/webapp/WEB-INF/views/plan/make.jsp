@@ -44,7 +44,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="border: none" placeholder="예) 밀가루 안먹기 등"></td>
+					<td>
+						<input type="text" id="title" name="title" style="border: none; width: 100%;" placeholder="예) 밀가루 안먹기 등">
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -77,8 +79,6 @@
 					<td><input type="checkbox" value="workout">운동</td>
 					<td><input type="checkbox" value="diet">식단</td>
 					<td><input type="checkbox" value="body">신체</td>
-					<td><input type="checkbox" value="life">생활</td>
-					<td><input type="checkbox" value="etc">기타</td>
 				</tr>
 			</tbody>
 		</table>
@@ -90,7 +90,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="border: none" placeholder="예) 30일"></td>
+					<td>
+						<input type="text" style="border: none; width: 100%;" placeholder="예) 30일">
+					</td>
 				</tr>
 			</tbody>
 		</table>
