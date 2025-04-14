@@ -58,7 +58,7 @@ public class GroupServiceImp implements GroupService{
 		if(group == null || !group.getGr_me_id().equals(user.getMe_id())) {
 			return false;
 		}
-		//그룹 삭제(공개여부 => "N"으로 변경 및 그룹VO내에 있는 모든 값을 null으로 변경)
+		//그룹 삭제(공개여부 => "N"으로 변경 및 정원수 입장한 맴버수 모두 0으로 변경)
 		boolean result = groupDao.deleteGroup(gr_num);
 		if(!result) {
 			return false;

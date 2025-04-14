@@ -15,11 +15,11 @@
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
 		insert into `group`
-			(gr_name, gr_introduction
+			(gr_name, gr_pw, gr_introduction
 			, gr_start_date, gr_period,  gr_participant
 			, gr_personnel, gr_public) 
 		values
-			(#{group.gr_name},#{group.gr_introduction}
+			(#{group.gr_name},#{group.gr_pw} ,#{group.gr_introduction}
 			,#{group.gr_start_date},#{group.gr_period}, 1
 			,#{group.gr_personnel},#{group.gr_public})			
 	</insert>

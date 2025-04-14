@@ -12,11 +12,21 @@
 </head>
 <body>
 	<h1>그룹 수정</h1>
-	<form action="<c:url value="/group/make"/>">		
+	<form action="<c:url value="/group/make"/>" method="post">		
 		<div class="form-group mt-3">
 			<label for="title" class="form-label">그룹이름</label>
 			<input type="text" class="form-control" id="groupName" name="gr_name">
 		</div>
+		
+		<div class="form-group mt-3">
+			<label for="pw" class="form-label">비밀번호(최대 4자리)</label>
+			<input type="password" class="form-control" id="groupPw" name="gr_pw">
+		</div>
+		<div class="form-group mt-3">
+			<label for="pw2" class="form-label">비밀번호 확인(최대 4자리)</label>
+			<input type="password" class="form-control" id="groupPw2" name="gr_pw2">
+		</div>
+		
 		<div class="form-group mt-3">
 			<label class="form-label">소개글</label>
 			<textarea class="form-control" id="intro" name="gr_introduction" rows="10"></textarea>
@@ -47,9 +57,14 @@
 			<input type="text" class="form-control" id="goal" name="gg_gr_num">
 		</div>
 		<div class="form-group mt-3">
-			<label class="form-label">공개 여부</label>
+			<label class="form-label">공개 여부(Y,N)을 입력하세요.</label>
+			<label class="form-label">Y => 공개, N => 비공개</label>
+			<input type="text" class="form-control" id="public" name="gr_public">
+			<!--
 			<input type="radio"  id="public_y" name="gr_public" checked>Y
 			<input type="radio"  id="public_n" name="gr_public">N
+			 -->
+			
 		</div>
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 수정하기</button>
 	</form>
