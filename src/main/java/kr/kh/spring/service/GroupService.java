@@ -18,6 +18,10 @@ public interface GroupService {
 
 	GroupVO getGroup(int gr_num);
 
+	boolean deleteGroup(int gr_num, MemberVO user);
+
+	boolean updateGroup(GroupVO group, MemberVO user);
+
 	
 
 }

@@ -15,13 +15,13 @@
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
 		insert into `group`
-			(gr_name, gr_introduction, sr_gr_num
-			, rl_rule, gr_start_date, gr_period,  gr_participant
-			, gr_personnel, gg_gr_num, gr_public) 
+			(gr_name, gr_introduction
+			, gr_start_date, gr_period,  gr_participant
+			, gr_personnel, gr_public) 
 		values
-			(#{group.gr_name},#{group.gr_introduction},#{group.sr_gr_num}
-			,#{group.rl_rule},#{group.gr_start_date},#{group.gr_period}, 1
-			,#{group.gr_personnel},#{group.gg_gr_num},#{group.gr_public})			
+			(#{group.gr_name},#{group.gr_introduction}
+			,#{group.gr_start_date},#{group.gr_period}, 1
+			,#{group.gr_personnel},#{group.gr_public})			
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVO">
@@ -30,5 +30,16 @@
 		from `group`
 		where gr_num =#{gr_num} and gr_public="Y"
 	</select>
+	
+	<update id="deleteGroup">
+		update 
+			`group`
+		set
+			gr_public = "N",
+			gr_personnel=0,
+			gr_participant=0,
+		where
+			gr_num=#{gr_num}
+	</update>
   
 </mapper>

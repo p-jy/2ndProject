@@ -17,6 +17,10 @@
 					<label class="form-label">그룹이름</label>
 					<input type="text" class="form-control" value="${group.gr_name}" readonly>
 				</div>
+				<div>
+					<label class="form-label">그룹장</label>
+					<input type="text" class="form-control" value="${group.gr_me_id}" readonly>
+				</div>
 				<div class="form-group mt-3">
 					<label class="form-label">소개글</label>
 					<div class="form-control" id="content" style="min-height: 400px;">${group.gr_introduction}</div>
@@ -53,11 +57,20 @@
 		</c:otherwise>
 	</c:choose>
 	<div class="d-flex justify-content-between">
-		<a href='<c:url value="/"/>' class="btn">메인화면으로 돌아가기</a>
+		<a href='<c:url value="/"/>' class="btn">메인화면으로 돌아가기</a>		
 		<c:if test="${user.me_id eq group.gr_me_id}">
+		<a href='<c:url value="/"/>' class="btn">채팅방 입장하기</a>
 			<div class="btns">
-				<a href='<c:url value="/"/>' class="btn">그룹설정 변경하기</a>
-				<a href='<c:url value="/"/>' class="btn">그룹 삭제하기</a>
+				<a href='<c:url value="/group/remake/${group.gr_num}"/>' class="btn">그룹설정 변경하기</a>
+				<a href='<c:url value="/group/delete/${group.gr_num}"/>' class="btn">그룹 삭제하기</a>
+				<a href='<c:url value="/"/>' class="btn">맴버 초대하기</a>
+				<a href='<c:url value="/"/>' class="btn">맴버 초대받기</a>
+			</div>
+		</c:if>
+		<c:if test="${user.me_id ne group.gr_me_id}">
+		<a href='<c:url value="/"/>' class="btn">채팅방 입장하기</a>
+			<div class="btns">
+				<a href='<c:url value="/"/>' class="btn">가입신청하기</a>
 			</div>
 		</c:if>
 	</div>

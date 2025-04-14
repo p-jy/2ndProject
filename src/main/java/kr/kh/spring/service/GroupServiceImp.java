@@ -40,13 +40,50 @@ public class GroupServiceImp implements GroupService{
 			return false;
 		}
 		
-		return result;
+		return true;
 	}
 
 	@Override
 	public GroupVO getGroup(int gr_num) {
 		
 		return groupDao.selectGroup(gr_num);
+	}
+
+	@Override
+	public boolean deleteGroup(int gr_num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		GroupVO group = groupDao.selectGroup(gr_num);
+		if(group == null || !group.getGr_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//그룹 삭제(공개여부 => "N"으로 변경 및 그룹VO내에 있는 모든 값을 null으로 변경)
+		boolean result = groupDao.deleteGroup(gr_num);
+		if(!result) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean updateGroup(GroupVO group, MemberVO user) {
+		if(user == null || group == null ||
+		   group.getGr_name().trim().length()==0||
+		   group.getGr_introduction().length() == 0) {
+			return false;
+		}
+		GroupVO dbGroup = groupDao.selectGroup(group.getGr_num());
+		if(dbGroup == null || 
+		   !dbGroup.getGr_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		boolean result =groupDao.updateGroup(group);
+		if(!result) {
+			return false;
+		}
+		return true;
 	}
 
 	

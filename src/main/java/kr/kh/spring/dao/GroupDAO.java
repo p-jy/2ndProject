@@ -15,6 +15,10 @@ public interface GroupDAO {
 
 	GroupVO selectGroup(@Param("gr_num")int gr_num);
 
+	boolean deleteGroup(@Param("gr_num")int gr_num);
+
+	boolean updateGroup(@Param("group")GroupVO group);
+
 	
 
 }

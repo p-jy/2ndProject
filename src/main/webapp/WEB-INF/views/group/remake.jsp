@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-	<h1>그룹 만들기</h1>
+	<h1>그룹 수정</h1>
 	<form action="<c:url value="/group/make"/>">		
 		<div class="form-group mt-3">
 			<label for="title" class="form-label">그룹이름</label>
@@ -51,7 +51,10 @@
 			<input type="radio"  id="public_y" name="gr_public" checked>Y
 			<input type="radio"  id="public_n" name="gr_public">N
 		</div>
-		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 만들기</button>
+		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 수정하기</button>
 	</form>
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>
