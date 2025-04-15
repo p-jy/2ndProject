@@ -35,7 +35,7 @@
 	<div class="title">
 		<h1>계획 만들기</h1>
 	</div>
-	<form action="submit">
+	<form action="<c:url value = "/plan/make"/>" method="post">
 		<table class="table">
 			<thead>
 				<tr>
