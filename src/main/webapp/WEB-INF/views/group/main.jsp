@@ -48,7 +48,7 @@
 				</div>
 				<div class="form-group mt-3">
 					<label class="form-label">목표</label>
-					<input type="text" class="form-control" value="${group.gl_num}" readonly>
+					<input type="text" class="form-control" value="${group.gg_gl_num}" readonly>
 				</div>
 			</div>
 		</c:when>

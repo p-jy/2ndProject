@@ -24,17 +24,19 @@
 			,#{group.gr_personnel},#{group.gr_public})			
 	</insert>
 	
-	<insert id="insertRule">
+	<insert id="insertRule" useGeneratedKeys="true" keyProperty="group.rl_num">
 		insert into rule(rl_rule,rl_gr_num)
 		value(#{group.rl_rule},#{group.rl_gr_num})
 	</insert>
 	
-	<insert id="insertShareRecode">
-	
+	<insert id="insertShareRecode" useGeneratedKeys="true" keyProperty="group.sr_num">
+		insert into `share_record`(sr_rc_num, sr_gr_num)
+		value(#{group.sr_rc_num}, #{group.sr_gr_num})
 	</insert>
 	
-	<insert id="insertGroupGoal">
-	
+	<insert id="insertGroupGoal" useGeneratedKeys="true" keyProperty="group.gg_num">
+		insert into `group_goal`(gg_gl_num, gg_gr_num)
+		value(#{group.gg_gl_num}, #{group.gg_gr_num})
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVO">
@@ -50,9 +52,7 @@
 		update 
 			`group`
 		set
-			gr_del = "Y",
-			gr_personnel=0,
-			gr_participant=0,
+			gr_del = "Y"
 		where
 			gr_num=#{gr_num}
 	</update>
