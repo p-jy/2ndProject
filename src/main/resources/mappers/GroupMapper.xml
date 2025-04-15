@@ -8,22 +8,53 @@
 		select
 			*
 		from `group`
-		where gr_public="Y"
+		where gr_public="Y" and gr_del="N"
 		order by gr_num desc
 		
 	</select>
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
 		insert into `group`
-			(gr_name, gr_introduction, sr_gr_num
-			, rl_rule, gr_start_date, gr_period
-			, gr_personnel, gg_gr_num, gr_public) 
-		values
-			(#{group.gr_name},#{group.gr_introduction},#{group.sr_gr_num}
-			,#{group.rl_rule},#{group.gr_start_date},#{group.gr_period}
-			,#{group.gr_personnel},#{group.gg_gr_num},#{group.gr_public})			
+			(gr_name, gr_pw, gr_introduction, gr_me_id
+			, gr_start_date, gr_period,  gr_participant
+			, gr_personnel, gr_public) 
+		value
+			(#{group.gr_name},#{group.gr_pw} ,#{group.gr_introduction},#{group.gr_me_id}
+			,#{group.gr_start_date},#{group.gr_period}, 1
+			,#{group.gr_personnel},#{group.gr_public})			
 	</insert>
 	
+	<insert id="insertRule" useGeneratedKeys="true" keyProperty="group.rl_num">
+		insert into rule(rl_rule,rl_gr_num)
+		value(#{group.rl_rule},#{group.rl_gr_num})
+	</insert>
 	
+	<insert id="insertShareRecode" useGeneratedKeys="true" keyProperty="group.sr_num">
+		insert into `share_record`(sr_rc_num, sr_gr_num)
+		value(#{group.sr_rc_num}, #{group.sr_gr_num})
+	</insert>
+	
+	<insert id="insertGroupGoal" useGeneratedKeys="true" keyProperty="group.gg_num">
+		insert into `group_goal`(gg_gl_num, gg_gr_num)
+		value(#{group.gg_gl_num}, #{group.gg_gr_num})
+	</insert>
+	
+	<select id="selectGroup" resultType="GroupVO">
+		select
+			*
+		from `group`
+		where gr_num =#{gr_num} and gr_public="Y" and gr_del="N"
+	</select>
+	
+	
+	
+	<update id="deleteGroup">
+		update 
+			`group`
+		set
+			gr_del = "Y"
+		where
+			gr_num=#{gr_num}
+	</update>
   
 </mapper>

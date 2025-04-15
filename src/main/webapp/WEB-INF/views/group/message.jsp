@@ -6,6 +6,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<h1>메시지 페이지</h1>
+	<h1>채팅방</h1>
 </body>
 </html>

@@ -69,6 +69,7 @@
 		  color: black;
 	}
     /*달력 관련 스타일 끝*/
+    
     /*탭 버든 관련 스타일 시작*/
     .tab-container {
 	      display: flex;
@@ -139,14 +140,16 @@
 		</c:if>
 		<c:forEach var="diet" items="${dietList}">
 			<div class="form-group">
-			  <label for="di_name">식단 이름 : </label>
-			  <input type="text" class="form-control" id="di_name" value="${diet.di_name }">
-			  <label for="di_date">식단한 날짜 : </label>
-			  <input type="text" class="form-control" id="di_date" value="${diet.di_date }">
-			  <label for="di_ampm">오전/오후 : </label>
-			  <input type="text" class="form-control" id="di_ampm" value="${diet.di_ampm }">
-			  <label for="di_time">식단한 시간 : </label>
-			  <input type="text" class="form-control" id="di_time" value="${diet.di_time }">
+			  <label for="di_Num">식단 번호 : </label>
+		  		<input type="text" class="form-control" id="di_Num" value="${diet.di_Num }">
+			  <label for="di_Name">식단 이름 : </label>
+			  	<input type="text" class="form-control" id="di_Name" value="${diet.di_Name }">
+			  <label for="di_Date">식단한 날짜 : </label>
+			 	 <input type="text" class="form-control" id="di_Date" value="${diet.di_Date }">
+			  <label for="di_AmPm">오전/오후 : </label>
+			  	<input type="text" class="form-control" id="di_AmPm" value="${diet.di_AmPm }">
+			  <label for="di_Time">식단한 시간 : </label>
+			 	 <input type="text" class="form-control" id="di_Time" value="${diet.di_Time }">
 			</div>
 		</c:forEach>
 	</form>
