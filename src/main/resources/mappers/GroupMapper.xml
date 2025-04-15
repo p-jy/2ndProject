@@ -8,7 +8,7 @@
 		select
 			*
 		from `group`
-		where gr_public="Y"
+		where gr_public="Y" and gr_del="N"
 		order by gr_num desc
 		
 	</select>
@@ -41,7 +41,7 @@
 		select
 			*
 		from `group`
-		where gr_num =#{gr_num} and gr_public="Y"
+		where gr_num =#{gr_num} and gr_public="Y" and gr_del="N"
 	</select>
 	
 	
@@ -50,7 +50,7 @@
 		update 
 			`group`
 		set
-			gr_public = "N",
+			gr_del = "Y",
 			gr_personnel=0,
 			gr_participant=0,
 		where
