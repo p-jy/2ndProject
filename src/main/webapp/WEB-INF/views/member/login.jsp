@@ -71,7 +71,7 @@
 </style>
 </head>
 <body>
-	<div class="container1" id="#loginModal">
+	<div class="container1">
 		<div class="form">
 			<div class="loginLabel d-flex justify-content-center mb-3">
 				<h2>로그인</h2>

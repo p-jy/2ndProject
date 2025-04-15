@@ -1,5 +1,7 @@
 package kr.kh.spring.controller;
 
+import java.io.Console;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -65,22 +67,21 @@ public class HomeController {
 	}
   
 	@GetMapping("/login")
-	public String login(Model model, String id) {
-		model.addAttribute("id", id);
-		return "/member/login";
+	@RequestMapping(value="member/loginModal", method = {RequestMethod.GET})
+	public String login() {
+		return "member/loginModal";
 	}
 	
 	@PostMapping("/login")
-	public String login(Model model, MemberVO member) {
-		MemberVO user = memberService.login(member); 
-		if(user != null) {
-			model.addAttribute("url", "/");
-			model.addAttribute("msg", "로그인에 성공했습니다.");
-			model.addAttribute("user", user);
-		}else {
-			model.addAttribute("url", "/login?id=" + member.getMe_id());
-			model.addAttribute("msg", "로그인에 실패했습니다.");
+	@RequestMapping(value="/", method = {RequestMethod.POST})
+	public String login(Model model, MemberVO member, HttpServletRequest request) {
+		MemberVO user = memberService.login(member);
+		if(user == null) {
+			return "";
 		}
+		model.addAttribute("msg", "로그인 성공");
+		model.addAttribute("user", user);
+		request.getSession().setAttribute("user", user);
 		return "msg/msg";
 	}
 	
