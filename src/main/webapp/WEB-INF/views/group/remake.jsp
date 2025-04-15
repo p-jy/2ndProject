@@ -15,7 +15,7 @@
 	<form action="<c:url value="/group/make"/>" method="post">		
 		<div class="form-group mt-3">
 			<label for="title" class="form-label">그룹이름</label>
-			<input type="text" class="form-control" id="groupName" name="gr_name">
+			<input type="text" class="form-control" id="groupName" name="gr_name" value="${group.gr_name}">
 		</div>
 		
 		<div class="form-group mt-3">
@@ -29,37 +29,37 @@
 		
 		<div class="form-group mt-3">
 			<label class="form-label">소개글</label>
-			<textarea class="form-control" id="intro" name="gr_introduction" rows="10"></textarea>
+			<textarea class="form-control" id="intro" name="gr_introduction" rows="10">${group.gr_introduction}</textarea>
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">공유할 기록</label>
-			<input type="text" class="form-control" id="recode" name="sr_gr_num">
+			<input type="text" class="form-control" id="recode" name="sr_gr_num" value="${group.sr_gr_num}">
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">규칙</label>
-			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<input type="text" class="form-control" id="rule" name="rl_rule" value="${group.rl_rule}">
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">시작일</label>
-			<input type="text" class="form-control" id="startdate" name="gr_start_date">
+			<input type="text" class="form-control" id="startdate" name="gr_start_date" value="${group.gr_start_date}">
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">진행 기간</label>
-			<input type="text" class="form-control" id="period" name="gr_period">
+			<input type="text" class="form-control" id="period" name="gr_period" value="${group.gr_period}">
 		</div>
 		
 		<div class="form-group mt-3">
 			<label class="form-label">최대정원</label>
-			<input type="text" class="form-control" id="person" name="gr_personnel">
+			<input type="text" class="form-control" id="person" name="gr_personnel" value="${group.gr_name}">
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">목표</label>
-			<input type="text" class="form-control" id="goal" name="gg_gr_num">
+			<input type="text" class="form-control" id="goal" name="gg_gr_num" value="${group.gg_gr_num}">
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">공개 여부(Y,N)을 입력하세요.</label>
 			<label class="form-label">Y => 공개, N => 비공개</label>
-			<input type="text" class="form-control" id="public" name="gr_public">
+			<input type="text" class="form-control" id="public" name="gr_public" value="${group.gr_public}">
 			<!--
 			<input type="radio"  id="public_y" name="gr_public" checked>Y
 			<input type="radio"  id="public_n" name="gr_public">N

@@ -19,6 +19,12 @@ public interface GroupDAO {
 
 	boolean updateGroup(@Param("group")GroupVO group);
 
+	boolean insertRule(@Param("group")GroupVO group);
+
+	boolean insertShareRecode(@Param("group")GroupVO group);
+
+	boolean insertGroupGoal(@Param("group")GroupVO group);
+
 	
 
 }

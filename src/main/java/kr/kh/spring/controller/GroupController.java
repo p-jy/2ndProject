@@ -52,17 +52,15 @@ public class GroupController {
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");
 		//방 만들기
+		System.out.println(group);
 		if(groupService.insertGroup(group, user)) {
-			model.addAttribute("url", "/group/main");
+			model.addAttribute("url", "/group/list");
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
+			return "msg/msg";
 		}
 		//방 만들기 실패했을 경우
-		else {
-			model.addAttribute("url", "/group/make");
-			model.addAttribute("msg", "그룹을 생성하지 못했습니다.");
-		}
 		
-		return "msg/msg";
+		return "redirect:/make";
 	}
 	
 	//그룹 출력

@@ -4,6 +4,8 @@ package kr.kh.spring.model.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -16,6 +18,7 @@ public class GroupVO {
 	char gr_pw;
 	String gr_name;
 	String gr_introduction;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	Date gr_start_date;
 	int gr_period;
 	int gr_personnel;

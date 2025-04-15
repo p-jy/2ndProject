@@ -15,13 +15,26 @@
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
 		insert into `group`
-			(gr_name, gr_pw, gr_introduction
+			(gr_name, gr_pw, gr_introduction, gr_me_id
 			, gr_start_date, gr_period,  gr_participant
 			, gr_personnel, gr_public) 
-		values
-			(#{group.gr_name},#{group.gr_pw} ,#{group.gr_introduction}
+		value
+			(#{group.gr_name},#{group.gr_pw} ,#{group.gr_introduction},#{group.gr_me_id}
 			,#{group.gr_start_date},#{group.gr_period}, 1
 			,#{group.gr_personnel},#{group.gr_public})			
+	</insert>
+	
+	<insert id="insertRule">
+		insert into rule(rl_rule,rl_gr_num)
+		value(#{group.rl_rule},#{group.rl_gr_num})
+	</insert>
+	
+	<insert id="insertShareRecode">
+	
+	</insert>
+	
+	<insert id="insertGroupGoal">
+	
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVO">
@@ -30,6 +43,8 @@
 		from `group`
 		where gr_num =#{gr_num} and gr_public="Y"
 	</select>
+	
+	
 	
 	<update id="deleteGroup">
 		update 

@@ -11,3 +11,15 @@ INSERT INTO SUB_CATE(SC_TYPE, SC_NAME, SC_MC_NUM) VALUES
 ("컨디션", "최악", 3), ("컨디션", "나쁨", 3), ("컨디션", "보통", 3), ("컨디션", "좋음", 3), ("컨디션", "최상", 3),
 ("강도", "가볍게", 4), ("강도", "적당히", 4), ("강도", "약간세게", 4), ("강도", "철저하게", 4),
 ("목표", "체지방줄이기", 5), ("목표", "근육량늘리기", 5), ("목표", "체력키우기", 5), ("목표", "바디프로필", 5), ("목표", "몸유지하기", 5), ("목표", "건강한습관만들기", 5);
+
+insert into `member` value ("dbehdgns12","dbehdgns12","dbehdgns12!","010-1234-5678","N");
+insert into `group` value 
+(1,"Y","ABCDEF","1234","테스트","테스트입니다.","2025-04-08",30,10,1,"dbehdgns12");
+insert into `group`
+			(gr_name, gr_pw, gr_introduction, gr_me_id
+			, gr_start_date, gr_period,  gr_participant
+			, gr_personnel, gr_public) 
+		value
+			("테스트2","1111" ,"테스트중입니다.2","dbehdrb12"
+			,"2025-04-16",30, 1
+			,10,"Y")	

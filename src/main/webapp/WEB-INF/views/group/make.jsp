@@ -20,7 +20,7 @@
 </head>
 <body>
 	<h1>그룹 만들기</h1>
-	<form action="<c:url value="/group/make"/>" method="post" >		
+	<form action="<c:url value="/group/make"/>" method="post">		
 		<div class="form-group mt-3">
 			<label for="title" class="form-label">그룹이름</label>
 			<input type="text" class="form-control" id="groupName" name="gr_name">
