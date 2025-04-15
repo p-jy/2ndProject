@@ -7,5 +7,6 @@
 </head>
 <body>
 <h1>식단 목록</h1>
+${dietList }
 </body>
 </html>
