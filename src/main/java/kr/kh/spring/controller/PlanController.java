@@ -1,13 +1,17 @@
 package kr.kh.spring.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.kh.spring.model.vo.DayVO;
+import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.model.vo.PlanVO;
 import kr.kh.spring.service.PlanService;
 
 @Controller
@@ -24,11 +28,13 @@ public class PlanController {
 	}
 	
 	@PostMapping("/make")
-	public String insertPost(@RequestParam("title") String title, Model model) {
-		
-		System.out.println("입력한 제목 : " + title);
-		model.addAttribute("title", title);
-		
-		return "redirect:/plan/make";
+	public String insertPost(PlanVO plan, Model model, HttpSession session) {
+		//유저 정보 끌어옴
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(planService.insertPlan(plan, user)) {
+			System.out.println(plan);
+			return "redirect:";
+		}
+		return "redirect:/";			
 	}
 }
