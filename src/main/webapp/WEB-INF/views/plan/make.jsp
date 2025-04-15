@@ -35,7 +35,7 @@
 	<div class="title">
 		<h1>계획 만들기</h1>
 	</div>
-	<form action="submit">
+	<form action="<c:url value = "/plan/make"/>" method="post">
 		<table class="table">
 			<thead>
 				<tr>
@@ -44,7 +44,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="border: none" placeholder="예) 밀가루 안먹기 등"></td>
+					<td>
+						<input type="text" id="title" name="title" style="border: none; width: 100%;" placeholder="예) 밀가루 안먹기 등">
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -56,13 +58,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="checkbox" value="mon">월</td>
-					<td><input type="checkbox" value="the">화</td>
-					<td><input type="checkbox" value="wed">수</td>
-					<td><input type="checkbox" value="thu">목</td>
-					<td><input type="checkbox" value="fri">금</td>
-					<td><input type="checkbox" value="sat">토</td>
-					<td><input type="checkbox" value="sun">일</td>
+					<td><input type="checkbox" id="days" name="days" value="월">월</td>
+					<td><input type="checkbox" id="days" name="days" value="화">화</td>
+					<td><input type="checkbox" id="days" name="days" value="수">수</td>
+					<td><input type="checkbox" id="days" name="days" value="목">목</td>
+					<td><input type="checkbox" id="days" name="days" value="금">금</td>
+					<td><input type="checkbox" id="days" name="days" value="토">토</td>
+					<td><input type="checkbox" id="days" name="days" value="일">일</td>
 				</tr>
 			</tbody>
 		</table>
@@ -74,11 +76,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="checkbox" value="workout">운동</td>
-					<td><input type="checkbox" value="diet">식단</td>
-					<td><input type="checkbox" value="body">신체</td>
-					<td><input type="checkbox" value="life">생활</td>
-					<td><input type="checkbox" value="etc">기타</td>
+					<td><input type="checkbox" id="days" name="categories" value="workout">운동</td>
+					<td><input type="checkbox" id="days" name="categories" value="diet">식단</td>
+					<td><input type="checkbox" id="days" name="categories" value="body">신체</td>
 				</tr>
 			</tbody>
 		</table>
@@ -90,12 +90,14 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="text" style="border: none" placeholder="예) 30일"></td>
+					<td>
+						<input type="text" id="period" name="period" style="border: none; width: 100%;" placeholder="예) 30일">
+					</td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="container">
-			<button type="button" class="btn btn-info">만들기</button>
+			<button type="submit" class="btn btn-info">만들기</button>
 		</div>
 	</form>
 </body>
