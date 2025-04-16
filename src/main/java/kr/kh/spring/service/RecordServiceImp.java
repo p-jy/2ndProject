@@ -24,6 +24,7 @@ public class RecordServiceImp implements RecordService{
 	@Override
 	public boolean selectDietRecord(MemberVO user, int date) {
 		return recordDAO.selectDietRecord(user, date);
+	}
 
 	public boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile[] fileList) {
 		if(user == null) {
