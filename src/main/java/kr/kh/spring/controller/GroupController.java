@@ -137,6 +137,7 @@ public class GroupController {
 		return "msg/msg";
 	}
 	
+	//그룹 맴버 리스트
 	@GetMapping("/groupmember/{gr_num}")
 	public String groupMember(Model model, @PathVariable("gr_num")int gr_num, HttpSession session) {
 		//맴버 정보를 가져옴
@@ -148,6 +149,7 @@ public class GroupController {
 		model.addAttribute("memberList", memberList);
 		return "/group/groupmember";
 	}
+	
 	
 	@GetMapping("/message")
 	public String message(Model model) {

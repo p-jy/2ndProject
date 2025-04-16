@@ -26,7 +26,7 @@
 		
 	</table>
 	<div class="d-flex justify-content-between">
-		<a href='<c:url value="/"/>' class="btn">메인화면으로 돌아가기</a>		
+		<a href='<c:url value="/group/list"/>' class="btn">그룹리스트로 돌아가기</a>		
 	</div>
 </body>
 </html>

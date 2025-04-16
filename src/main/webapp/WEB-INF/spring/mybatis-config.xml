@@ -7,5 +7,6 @@
 		<typeAlias type="kr.kh.spring.model.vo.MemberVO" alias="MemberVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.GroupVO" alias="GroupVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.DietVO" alias="DietVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.Group_MemberVO" alias="Group_MemberVO"/>
 	</typeAliases>
 </configuration>
