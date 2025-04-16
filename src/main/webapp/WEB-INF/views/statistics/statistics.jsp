@@ -88,7 +88,7 @@
 			$type.not(this).removeClass('active');
 		})
 	</script>
-		$(".")
+
 	<script>
 		
 	</script>
