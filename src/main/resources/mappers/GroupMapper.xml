@@ -39,6 +39,11 @@
 		value(#{group.gg_gl_num}, #{group.gr_num})
 	</insert>
 	
+	<insert id="GroupMember" useGeneratedKeys="true" keyProperty="gm_num" >
+		insert into `group_member`(gm_me_id,gm_gr_num) 
+		value(#{group.gr_me_id}, #{group.gr_num})
+	</insert>
+	
 	<select id="selectGroup" resultType="GroupVO">
 		select
 			*
@@ -107,5 +112,10 @@
 			gg_gr_num = #{group.gr_num}
 	</update>
   
+  	<select id="selectMemberList" >
+  		select * from `group_member`
+  		join `group` on gm_gr_num = gr_num
+  		where gm_gr_num=#{gr_num}
+  	</select>
   	
 </mapper>

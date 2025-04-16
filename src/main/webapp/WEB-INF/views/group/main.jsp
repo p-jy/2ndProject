@@ -68,8 +68,10 @@
 				<a href='<c:url value="/"/>' class="btn">맴버 초대받기</a>
 			</div>
 		</c:if>
+		
 		<c:if test="${user.me_id ne group.gr_me_id}">
 		<a href='<c:url value="/"/>' class="btn btn-insertgroup">채팅방 입장하기</a>
+		
 			<div class="btns">
 				<a href='<c:url value="/"/>' class="btn btn-insertgroup">가입신청하기</a>
 			</div>

@@ -10,6 +10,7 @@ import kr.kh.spring.Pagination.Criteria;
 import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.dao.GroupDAO;
 import kr.kh.spring.model.vo.GroupVO;
+import kr.kh.spring.model.vo.Group_MemberVO;
 import kr.kh.spring.model.vo.MemberVO;
 
 @Service
@@ -63,7 +64,10 @@ public class GroupServiceImp implements GroupService{
 		}
 		*/
 		
-		
+		boolean groupmember = groupDao.GroupMember(group);
+		if(!groupmember) {
+			return false;
+		}
 		
 		return true;
 	}
@@ -138,9 +142,17 @@ public class GroupServiceImp implements GroupService{
 			return false;
 		}
 		*/
-		
 		return true;
 	}
+
+	@Override
+	public List<Group_MemberVO> getMemberList(int gr_num, MemberVO user) {
+		if(user == null) {
+			return null;
+		}
+		return groupDao.selectMemberList(gr_num);
+	}
+	
 
 	
 

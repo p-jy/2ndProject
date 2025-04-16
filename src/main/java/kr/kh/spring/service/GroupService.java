@@ -8,6 +8,7 @@ import kr.kh.spring.Pagination.Criteria;
 import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.model.vo.GroupVO;
+import kr.kh.spring.model.vo.Group_MemberVO;
 import kr.kh.spring.model.vo.MemberVO;
 
 public interface GroupService {
@@ -23,6 +24,9 @@ public interface GroupService {
 	boolean updateGroup(GroupVO group, MemberVO user);
 
 	GroupVO getRule(int gr_num);
+
+	List<Group_MemberVO> getMemberList(int gr_num, MemberVO user);
+
 
 	
 

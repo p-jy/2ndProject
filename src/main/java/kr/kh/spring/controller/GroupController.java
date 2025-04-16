@@ -17,6 +17,7 @@ import kr.kh.spring.Pagination.Criteria;
 import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.model.vo.GroupVO;
+import kr.kh.spring.model.vo.Group_MemberVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.service.GroupService;
 import lombok.extern.log4j.Log4j;
@@ -136,7 +137,17 @@ public class GroupController {
 		return "msg/msg";
 	}
 	
-	
+	@GetMapping("/groupmember/{gr_num}")
+	public String groupMember(Model model, @PathVariable("gr_num")int gr_num, HttpSession session) {
+		//맴버 정보를 가져옴
+		MemberVO user=(MemberVO) session.getAttribute("user");
+		//그룹맴버 페이지를 가져옴
+		List<Group_MemberVO> memberList = groupService.getMemberList(gr_num,user);
+		System.out.println(memberList);
+		
+		model.addAttribute("memberList", memberList);
+		return "/group/groupmember";
+	}
 	
 	@GetMapping("/message")
 	public String message(Model model) {

@@ -42,7 +42,9 @@ public class GroupVO {
 	//공유기록 테이블
 	int sr_num;
 	int sr_rc_num;
-	int sr_gr_num; 
+	int sr_gr_num;
+	
+	
 	
 	
 }
