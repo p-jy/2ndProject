@@ -76,21 +76,22 @@ public class HomeController {
 	}
   
 	@GetMapping("/login")
-	@RequestMapping(value="member/loginModal", method = {RequestMethod.GET})
-	public String login() {
-		return "member/loginModal";
+	public String login(Model model, String id) {
+		model.addAttribute("id", id);
+		return "/member/login";
 	}
 	
 	@PostMapping("/login")
-	@RequestMapping(value="/", method = {RequestMethod.POST})
-	public String login(Model model, MemberVO member, HttpServletRequest request) {
+	public String login(Model model, MemberVO member) {
 		MemberVO user = memberService.login(member);
-		if(user == null) {
-			return "";
+		if(user != null) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "로그인 성공");
+			model.addAttribute("user", user);
+		}else {
+			model.addAttribute("url", "/login?id=" + member.getMe_id());
+			model.addAttribute("msg", "로그인 실패");
 		}
-		model.addAttribute("msg", "로그인 성공");
-		model.addAttribute("user", user);
-		request.getSession().setAttribute("user", user);
 		return "msg/msg";
 	}
 	
