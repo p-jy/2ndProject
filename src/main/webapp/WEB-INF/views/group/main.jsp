@@ -10,7 +10,7 @@
 <body id="body">
 
 	<c:choose>
-		<c:when test="${group ne null }">
+		<c:when test="${group ne null}">			
 			<h1>그룹 메인페이지</h1>
 			<div>
 				<div>
@@ -35,7 +35,7 @@
 				</div>
 				<div class="form-group mt-3">
 					<label class="form-label">시작일</label>
-					<input type="text" class="form-control" value="<fmt:formatDate value="${group.gr_start_date}" pattern="yyyy-MM-dd HH:mm:ss" />" readonly>
+					<input type="text" class="form-control" value="<fmt:formatDate value="${group.gr_start_date}" pattern="yyyy-MM-dd" />" readonly>
 				</div>
 				<div class="form-group mt-3">
 					<label class="form-label">진행 기간</label>
@@ -51,6 +51,7 @@
 					<input type="text" class="form-control" value="${group.gg_gl_num}" readonly>
 				</div>
 			</div>
+			
 		</c:when>
 		<c:otherwise>
 			<h3>삭제되었거나 존재하지 않는 그룹입니다.</h3>		
@@ -67,13 +68,28 @@
 				<a href='<c:url value="/"/>' class="btn">맴버 초대받기</a>
 			</div>
 		</c:if>
+		
 		<c:if test="${user.me_id ne group.gr_me_id}">
-		<a href='<c:url value="/"/>' class="btn">채팅방 입장하기</a>
+		<a href='<c:url value="/"/>' class="btn btn-insertgroup">채팅방 입장하기</a>
+		
 			<div class="btns">
-				<a href='<c:url value="/"/>' class="btn">가입신청하기</a>
+				<a href='<c:url value="/"/>' class="btn btn-insertgroup">가입신청하기</a>
 			</div>
 		</c:if>
 	</div>
 	
+	<script type="text/javascript">
+		$(".btn-insertgroup").click(function(e){
+			//로그인 했다면 가입 페이지또는 채팅방 입장
+			if(${user != null}){
+				return;
+			}
+			e.preventDefault();
+			//로그인 안했다면 로그인 페이지로 이동
+			if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
+				location.href="<c:url value="/login"/>";
+			}
+		})
+	</script>
 </body>
 </html>

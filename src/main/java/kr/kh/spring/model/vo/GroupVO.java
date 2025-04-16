@@ -18,7 +18,7 @@ public class GroupVO {
 	String gr_pw;
 	String gr_name;
 	String gr_introduction;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date gr_start_date;
 	int gr_period;
 	int gr_personnel;
@@ -42,7 +42,9 @@ public class GroupVO {
 	//공유기록 테이블
 	int sr_num;
 	int sr_rc_num;
-	int sr_gr_num; 
+	int sr_gr_num;
+	
+	
 	
 	
 }

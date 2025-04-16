@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Group_MemberVO {
 	
-	int gm_num;
-	int gm_me_id;
-	int gm_gr_num;
+	private int gm_num;
+	private int gm_me_id;
+	private int gm_gr_num;
 }
