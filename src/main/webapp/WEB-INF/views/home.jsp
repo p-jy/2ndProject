@@ -72,7 +72,6 @@
     
     /*탭 버든 관련 스타일 시작*/
     .tab-container {
-	      display: flex;
 	      margin-bottom: 10px;
     }
 
@@ -101,11 +100,22 @@
 	
 	<!-- 탭 버튼입니다. -->
 	<div class="tab-container">
-	   <div class="tab active" data-tab="diet">식단</div>
-	   <div class="tab" data-tab="body">신체</div>
-	   <div class="tab" data-tab="workout">운동</div>
-	   <div class="tab" data-tab="plan">계획</div>
+		<ul class="nav nav-tabs nav-justified">
+			<li class="nav-item">
+				<a class="nav-link active" data-tab="diet" href="#">식단</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-tab="body" href="#">신체</a>
+    		</li>
+			<li class="nav-item">
+				<a class="nav-link" data-tab="workout" href="#">운동</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" data-tab="plan"href="#">계획</a>
+			</li>
+		</ul>
 	</div>
+	
 	<!-- 탭 버튼 클릭시 나오는 페이지 입니다. -->
 	<div id="diet" class="tab-content">
 	    <p>식단 페이지 내용입니다.</p>
