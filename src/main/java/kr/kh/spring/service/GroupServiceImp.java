@@ -35,21 +35,35 @@ public class GroupServiceImp implements GroupService{
 		//그룹 테이블에 집어넣을 내용
 		group.setGr_me_id(user.getMe_id());
 		boolean resultGroup =groupDao.insertGroup(group);
-		
+		if(!resultGroup) {
+			return false;
+		}
+		System.out.println(group);
 		//규칙 테이블에 집어넣을 내용
 		group.setRl_gr_num(group.getGr_num());
 		boolean resultRule = groupDao.insertRule(group);
-		//공유 기록에 집어넣을 내용
-		group.setSr_gr_num(group.getGr_num());
-		boolean resultS_Recode = groupDao.insertShareRecode(group);	
-		//그룹 목표에 집어넣을 내용
-		group.setGg_gr_num(group.getGg_gr_num());
-		boolean resultGroupGoal = groupDao.insertGroupGoal(group); 
-		//
-		if(!resultGroup || !resultRule ||
-		   !resultS_Recode || !resultGroupGoal) {
+		if(!resultRule) {
 			return false;
 		}
+		System.out.println(group);
+		//공유 기록에 집어넣을 내용
+		/*
+		group.setSr_gr_num(group.getGr_num());
+		boolean resultS_Recode = groupDao.insertShareRecode(group);
+		if(resultS_Recode) {
+			return false;
+		}
+		*/
+		//그룹 목표에 집어넣을 내용
+		/*
+		group.setGg_gr_num(group.getGg_gr_num());
+		boolean resultGroupGoal = groupDao.insertGroupGoal(group); 
+		if(!resultGroupGoal) {
+			return false;
+		}
+		*/
+		
+		
 		
 		return true;
 	}
@@ -61,15 +75,23 @@ public class GroupServiceImp implements GroupService{
 	}
 
 	@Override
+	public GroupVO getRule(int gr_num) {
+		
+		return groupDao.selectRule(gr_num);
+	}
+
+	@Override
 	public boolean deleteGroup(int gr_num, MemberVO user) {
 		if(user == null) {
 			return false;
 		}
+		//그룹 정보 가져옴
 		GroupVO group = groupDao.selectGroup(gr_num);
+		//해당 그룹의 그룹장과 유저가 다르면 false로 리턴 
 		if(group == null || !group.getGr_me_id().equals(user.getMe_id())) {
 			return false;
 		}
-		//그룹 삭제(공개여부 => "N"으로 변경 및 정원수 입장한 맴버수 모두 0으로 변경)
+		//그룹 삭제(공개여부 => "N", 삭제여부 => "Y"으로 변경 및 null값으로 처리 가능한 값들을 모두 null값으로 처리)
 		boolean result = groupDao.deleteGroup(gr_num);
 		if(!result) {
 			return false;
@@ -80,26 +102,43 @@ public class GroupServiceImp implements GroupService{
 
 	@Override
 	public boolean updateGroup(GroupVO group, MemberVO user) {
-		if(user == null || group == null ||
-		   group.getGr_name().trim().length()==0||
-		   group.getGr_introduction().length() == 0) {
+		if(user == null || group == null) {
 			return false;
 		}
 		GroupVO dbGroup = groupDao.selectGroup(group.getGr_num());
+		
 		if(dbGroup == null || 
 		   !dbGroup.getGr_me_id().equals(user.getMe_id())) {
 			return false;
 		}
-		//그룹 테이블에 집어넣을 내용
+		System.out.println(dbGroup);
+		//그룹 테이블에 수정할 내용
 		boolean result =groupDao.updateGroup(group);
 		if(!result) {
 			return false;
 		}
-		//규칙 테이블에 집어넣을 내용
+		System.out.println(group);
+		//규칙 테이블에 수정할 내용
+		boolean resultRule = groupDao.updateRule(group);
+		if(!resultRule) {
+			return false;
+		}
+		System.out.println(group);
+		//공유 기록에 수정할 내용
+		/*
+		 boolean resultS_Recode = groupDao.updateShareRecode(group);	
+		 if(!resultS_Recode) {
+			 return false;
+		 }
+		 */
+		//그룹 목표에 수정할 내용
+		/*
+		boolean resultGroupGoal = groupDao.updateGroupGoal(group);
+		if(!resultGroupGoal) {
+			return false;
+		}
+		*/
 		
-		//공유 기록에 집어넣을 내용
-		
-		//그룹 목표에 집어넣을 내용
 		return true;
 	}
 

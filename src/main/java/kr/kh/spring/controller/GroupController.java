@@ -68,6 +68,14 @@ public class GroupController {
 	public String main(Model model,@PathVariable int gr_num, HttpSession session) {
 		//그룹 페이지 가져옴
 		GroupVO group = groupService.getGroup(gr_num);
+		GroupVO rule = groupService.getRule(gr_num);
+		
+		group.setRl_num(rule.getRl_num());
+		group.setRl_rule(rule.getRl_rule());
+		group.setRl_gr_num(rule.getRl_gr_num());
+		
+		System.out.println(group);
+		
 		//화면에 전송
 		model.addAttribute("group", group);
 		return "/group/main";
@@ -92,6 +100,11 @@ public class GroupController {
 	public String groupRemake(Model model, @PathVariable("gr_num")int gr_num, HttpSession session) {
 		//그룹 정보 호출
 		GroupVO group =groupService.getGroup(gr_num);
+		GroupVO rule = groupService.getRule(gr_num);
+		
+		group.setRl_num(rule.getRl_num());
+		group.setRl_rule(rule.getRl_rule());
+		group.setRl_gr_num(rule.getRl_gr_num());
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");
 		//로그인이 안되어있거나 그룹이 존재하지 않거나, 그룹장이 아닌경우
@@ -102,7 +115,7 @@ public class GroupController {
 		}
 		
 		model.addAttribute("group", group);
-		return "/msg/msg";
+		return "/group/remake";
 	}
 	
 	//그룹 내용 수정하기(재작성)
@@ -111,15 +124,15 @@ public class GroupController {
 			HttpSession session) {
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");
-		//방 만들기
+		//방 수정하기
 		if(groupService.updateGroup(group, user)) {
 			model.addAttribute("msg", "그룹을 수정하였습니다.");
 		}
-		//방 만들기 실패했을 경우
+		//방 수정하기 실패했을 경우
 		else {
 			model.addAttribute("msg", "그룹을 생성하지 못했습니다.");
 		}
-		model.addAttribute("url","/group/main"+group.getGr_num());
+		model.addAttribute("url","/group/main/"+group.getGr_num());
 		return "msg/msg";
 	}
 	

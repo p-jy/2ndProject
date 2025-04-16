@@ -10,7 +10,7 @@
 <body id="body">
 
 	<c:choose>
-		<c:when test="${group ne null }">
+		<c:when test="${group ne null}">			
 			<h1>그룹 메인페이지</h1>
 			<div>
 				<div>
@@ -35,7 +35,7 @@
 				</div>
 				<div class="form-group mt-3">
 					<label class="form-label">시작일</label>
-					<input type="text" class="form-control" value="<fmt:formatDate value="${group.gr_start_date}" pattern="yyyy-MM-dd HH:mm:ss" />" readonly>
+					<input type="text" class="form-control" value="<fmt:formatDate value="${group.gr_start_date}" pattern="yyyy-MM-dd" />" readonly>
 				</div>
 				<div class="form-group mt-3">
 					<label class="form-label">진행 기간</label>
@@ -51,6 +51,7 @@
 					<input type="text" class="form-control" value="${group.gg_gl_num}" readonly>
 				</div>
 			</div>
+			
 		</c:when>
 		<c:otherwise>
 			<h3>삭제되었거나 존재하지 않는 그룹입니다.</h3>		

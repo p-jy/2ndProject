@@ -22,6 +22,8 @@ public interface GroupService {
 
 	boolean updateGroup(GroupVO group, MemberVO user);
 
+	GroupVO getRule(int gr_num);
+
 	
 
 }
