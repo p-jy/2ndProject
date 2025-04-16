@@ -25,8 +25,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			//세션에 회원 정보를 추가
 			request.getSession().setAttribute("user", user);
 		}
-		System.out.println("인터셉터가 못 받아옴 ㅠ");
-		System.out.println(user);
 	}
 	@Override
 	public boolean preHandle(HttpServletRequest request, 
