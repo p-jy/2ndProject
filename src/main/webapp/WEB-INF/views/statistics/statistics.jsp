@@ -7,14 +7,8 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <style type="text/css">
-	.date-pill{
+	.nav-pills{
 		border: 2px solid #f0f2f4;
-		border-radius: 5px;
-		padding: 3px;
-	}
-	.type-pill{
-		background-color: #f0f2f4;
-		border: 1px solid #f0f2f4;
 		border-radius: 5px;
 		padding: 3px;
 	}
@@ -24,15 +18,10 @@
 	.nav-link:hover{
 		color: #9b9b9b;
 	}	
-	.date-pill .nav-link.active, .nav-pills .show>.nav-link{
+	.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
 		color: #545e6f;
 		font-weight: bold;
 		background-color: #f0f2f4;
-	}
-	.type-pill .nav-link.active, .nav-pills .show>.nav-link{
-		color: #545e6f;
-		font-weight: bold;
-		background-color: white;
 	}
 	.weekChart{
 		width: 70%;
@@ -41,32 +30,32 @@
 </style>
 </head>
 <body>
-	<div class="date-tab">
-		<ul class="nav nav-pills date-pill nav-justified">
+	<div class="period-tab">
+		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item">
-				<a class="nav-link date week active">7일</a>
+				<a class="nav-link period week active" data-target="week">7일</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link date month">1개월</a>
+				<a class="nav-link period month" data-target="month">1개월</a>
     		</li>
 			<li class="nav-item">
-				<a class="nav-link date months">3개월</a>
+				<a class="nav-link period months" data-target="months">3개월</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link date year">1년</a>
+				<a class="nav-link period year" data-target="year">1년</a>
 			</li>
 		</ul>
 	</div>
 	<div class="type-tab mt-2">
-		<ul class="nav nav-pills type-pill nav-justified">
+		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item">
-				<a class="nav-link type diet active">식단</a>
+				<a class="nav-link diet active" onclick="diet()">식단</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link type workout">운동</a>
+				<a class="nav-link workout" onclick="workout()">운동</a>
     		</li>
 			<li class="nav-item">
-				<a class="nav-link type inbody">신체</a>
+				<a class="nav-link inbody" onclick="inbody()">신체</a>
 			</li>
 		</ul>
 	</div>
@@ -76,21 +65,55 @@
 	</div>
 	
 	<script type="text/javascript">
-		const $date = $('.date');
+		const $period = $('.period');
 		const $type = $('.type');
+		let period = $(".period.active").data("target");
+		let date;
 		
-		$date.click(function() {
+		$period.click(function() {
 			$(this).addClass('active');
-			$date.not(this).removeClass('active');
+			$period.not(this).removeClass('active');
 		});
 		$type.click(function() {
 			$(this).addClass('active');
 			$type.not(this).removeClass('active');
 		})
-	</script>
-
-	<script>
 		
+		if(period === "week") {
+			date = 7;
+		} else if(period === "month") {
+			date = 30;
+		} else if(period === "months") {
+			date = 90;
+		} else {
+			date = 365;
+		}
+		
+		function diet(){
+			alert($(".period.active").data("target"));
+			
+			$.ajax({
+				async : false, 
+				url : '<c:url value="/chart/diet"/>', 
+				type : 'post', 
+				data : { date : date }, 
+				success : function (data){
+					console.log(data);
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+	
+				}
+			});
+		}
+		function workout() {
+			
+			
+		}
+		function inbody() {
+			
+			
+		}
 	</script>
+	
 </body>
 </html>

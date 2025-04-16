@@ -5,10 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.spring.model.vo.DietVO;
+import kr.kh.spring.model.vo.MemberVO;
 
 public interface RecordDAO {
 
 	List<DietVO> selectDietList();
+
+	boolean selectDietRecord(MemberVO user, int date);
 
 	boolean insertDietPost(@Param("diet")DietVO diet);
     
