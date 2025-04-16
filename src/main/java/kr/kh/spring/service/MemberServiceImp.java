@@ -88,6 +88,19 @@ public class MemberServiceImp implements MemberService {
 		return memberDao.deleteId(user);
 	}
 
+	@Override
+	public MemberVO getMemberByCookie(String me_cookie) {
+		if(me_cookie == null) {
+			return null;
+		}
+		return memberDao.selectMemberByCookie(me_cookie);
+	}
+
+	@Override
+	public void updateCookie(MemberVO user) {
+		memberDao.updateCookie(user);
+	}
+
 	
 	
 

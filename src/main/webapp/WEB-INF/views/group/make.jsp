@@ -27,12 +27,12 @@
 		</div>
 		
 		<div class="form-group mt-3">
-			<label for="pw" class="form-label">비밀번호(최대 4자리)</label>
+			<label for="pw" class="form-label">비밀번호(4자리)</label>
 			<input type="password" class="form-control" id="groupPw" name="gr_pw">
 			<label id="checkId" class="red"></label>
 		</div>
 		<div class="form-group mt-3">
-			<label for="pw2" class="form-label">비밀번호 확인(최대 4자리)</label>
+			<label for="pw2" class="form-label">비밀번호 확인(4자리)</label>
 			<input type="password" class="form-control" id="groupPw2" name="gr_pw2">
 			<label id="checkId" class="red"></label>
 		</div>

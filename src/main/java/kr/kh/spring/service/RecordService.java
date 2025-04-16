@@ -8,11 +8,14 @@ import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.WorkoutVO;
+import kr.kh.spring.model.vo.RecordVO;
 
 public interface RecordService {
 
 	List<DietVO> selectDietList();
 
+	List<RecordVO> selectDietRecord(MemberVO user, int date);
+  
 	boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile[] fileList);
 
 	List<InbodyVO> selectInbodyList();

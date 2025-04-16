@@ -26,35 +26,96 @@
 	
 	<insert id="insertRule" useGeneratedKeys="true" keyProperty="group.rl_num">
 		insert into rule(rl_rule,rl_gr_num)
-		value(#{group.rl_rule},#{group.rl_gr_num})
+		value(#{group.rl_rule},#{group.gr_num})
 	</insert>
 	
 	<insert id="insertShareRecode" useGeneratedKeys="true" keyProperty="group.sr_num">
 		insert into `share_record`(sr_rc_num, sr_gr_num)
-		value(#{group.sr_rc_num}, #{group.sr_gr_num})
+		value(#{group.sr_rc_num}, #{group.gr_num})
 	</insert>
 	
 	<insert id="insertGroupGoal" useGeneratedKeys="true" keyProperty="group.gg_num">
 		insert into `group_goal`(gg_gl_num, gg_gr_num)
-		value(#{group.gg_gl_num}, #{group.gg_gr_num})
+		value(#{group.gg_gl_num}, #{group.gr_num})
+	</insert>
+	
+	<insert id="GroupMember" useGeneratedKeys="true" keyProperty="gm_num" >
+		insert into `group_member`(gm_me_id,gm_gr_num) 
+		value(#{group.gr_me_id}, #{group.gr_num})
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVO">
 		select
 			*
 		from `group`
-		where gr_num =#{gr_num} and gr_public="Y" and gr_del="N"
+		where gr_num =#{gr_num} and gr_del="N"
 	</select>
 	
-	
+	<select id="selectRule" resultType="GroupVO">
+		select * from rule where rl_gr_num = #{gr_num}
+	</select>
 	
 	<update id="deleteGroup">
 		update 
 			`group`
 		set
-			gr_del = "Y"
+			gr_del = "Y",
+			gr_public = "N",
+			gr_name = null,
+			gr_pw = null,
+			gr_code = null,
+			gr_introduction = null,
+			gr_start_date = null,
+			gr_period = null,
+			gr_personnel = null,
+			gr_participant = null,
+			gr_me_id = null
 		where
 			gr_num=#{gr_num}
 	</update>
+	
+	<update id="updateGroup">
+		update `group`
+		set
+			gr_name = #{group.gr_name}, 
+			gr_pw = #{group.gr_pw}, 
+			gr_introduction = #{group.gr_introduction}, 
+			gr_start_date = #{group.gr_start_date}, 
+			gr_period = #{group.gr_period},
+			gr_personnel = #{group.gr_personnel}, 
+			gr_public = #{group.gr_public}
+		where
+			gr_num = #{group.gr_num}
+	</update>
+	
+	<update id="updateRule">
+		update `rule`
+		set
+			rl_rule=#{group.rl_rule}
+		where
+			rl_gr_num = #{group.gr_num}
+	</update>
+	
+	<update id="updateShareRecode">
+		update `share_record`
+		set
+			sr_rc_num = #{group.sr_rc_num}
+		where
+			sr_gr_num = #{group.gr_num}
+	</update>
+	
+	<update id="updateGroupGoal">
+		update `group_goal`
+		set
+			gg_gl_num = #{group.gg_gl_num}
+		where
+			gg_gr_num = #{group.gr_num}
+	</update>
   
+  	<select id="selectMemberList" resultType="Group_MemberVO">
+  		select * from `group_member`
+  		join `group` on gm_gr_num = gr_num
+  		where gm_gr_num=#{gr_num}
+  	</select>
+  	
 </mapper>

@@ -17,4 +17,8 @@ public interface MemberService {
 	boolean updateMember(MemberVO user, MemberVO member);
 
 	boolean deleteId(MemberVO user);
+
+	MemberVO getMemberByCookie(String me_cookie);
+
+	void updateCookie(MemberVO user);
 }
