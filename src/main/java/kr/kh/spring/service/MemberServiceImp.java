@@ -1,11 +1,14 @@
 
 package kr.kh.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.kh.spring.dao.MemberDAO;
+import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.MemberVO;
 
 @Service
@@ -99,6 +102,14 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public void updateCookie(MemberVO user) {
 		memberDao.updateCookie(user);
+	}
+
+	@Override
+	public List<DietVO> selectDietList(String me_id, int date) {
+		if(me_id == null || me_id == "") {
+			return null;
+		}
+		return memberDao.selectDietList(me_id, date);
 	}
 
 	

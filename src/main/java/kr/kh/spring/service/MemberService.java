@@ -1,5 +1,8 @@
 package kr.kh.spring.service;
 
+import java.util.List;
+
+import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.MemberVO;
 
 public interface MemberService {
@@ -21,4 +24,6 @@ public interface MemberService {
 	MemberVO getMemberByCookie(String me_cookie);
 
 	void updateCookie(MemberVO user);
+
+	List<DietVO> selectDietList(String me_id, int date);
 }

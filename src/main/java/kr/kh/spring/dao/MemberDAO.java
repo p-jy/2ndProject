@@ -1,7 +1,10 @@
 package kr.kh.spring.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.MemberVO;
 
 public interface MemberDAO {
@@ -21,5 +24,7 @@ public interface MemberDAO {
 	MemberVO selectMemberByCookie(@Param("me_cookie")String me_cookie);
 
 	void updateCookie(@Param("user")MemberVO user);
+
+	List<DietVO> selectDietList(@Param("me_id")String me_id, @Param("date")int date);
 	
 }

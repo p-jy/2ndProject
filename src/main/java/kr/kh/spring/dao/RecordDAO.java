@@ -13,8 +13,6 @@ public interface RecordDAO {
 
 	List<DietVO> selectDietList();
 
-	List<RecordVO> selectDietRecord(String me_id, int date);
-
 	boolean insertDietPost(@Param("diet")DietVO diet);
 
 	List<InbodyVO> selectInbodyList();

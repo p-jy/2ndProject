@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.MemberVO;
-import kr.kh.spring.model.vo.RecordVO;
-import kr.kh.spring.service.RecordService;
+import kr.kh.spring.service.MemberService;
 
 @Controller
 public class StatisticsController {
 
 	@Autowired
-	RecordService recordService;
+	MemberService memberService;
 	
 	@GetMapping("/statistics")
 	public String statistics() {
@@ -28,9 +28,10 @@ public class StatisticsController {
 	
 	@ResponseBody
 	@PostMapping("/chart/diet")
-	public List<RecordVO> chartDiet(@RequestParam int date, HttpSession session) {
+	public List<DietVO> chartDiet(@RequestParam int date, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		return recordService.selectDietRecord(user, date);
+		String me_id = user.getMe_id();
+		return memberService.selectDietList(me_id, date);
 	}
 	
 }
