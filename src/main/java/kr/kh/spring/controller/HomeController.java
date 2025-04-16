@@ -143,4 +143,9 @@ public class HomeController {
 		
 		return "msg/msg";
 	}
+	
+	@GetMapping("/statistics")
+	public String statistics() {
+		return "/statistics/statistics";
+	}
 }
