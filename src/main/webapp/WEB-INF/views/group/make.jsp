@@ -80,7 +80,7 @@
 	</form>
 	
 	<script type="text/javascript">
-		$("#pw").on('input', funcrion(e){
+		$("#pw").on('input', function(e){
 			let pw = $("#pw").val();
 			
 			if(pw ==""){
