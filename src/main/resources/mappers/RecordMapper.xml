@@ -6,6 +6,12 @@
   <select id="selectDietList" resultType="DietVO">
   	select * from diet
   </select>
+  <select id="selectInbodyList" resultType="InbodyVO">
+  	select * from inbody
+  </select>
+  <select id="selectWorkoutList" resultType="WorkoutVO">
+  	select * from workout
+  </select>
   <select id="selectDietRecord" resultType="DietVO">
   	select * from diet
   	where di_date between (date_sub(now(), interval 7 day)) and now() and di_me_id = #{me_id}
