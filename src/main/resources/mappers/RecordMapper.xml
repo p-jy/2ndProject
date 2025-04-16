@@ -10,4 +10,8 @@
   	select * from diet
   	where di_date between (date_sub(now(), interval 7 day)) and now() and di_me_id = #{me_id}
   </select>
+  <insert id="insertDietPost">
+  	insert into diet(di_Name, di_Date, di_AmPm, di_Time, di_Me_Id)
+  	value(#{diet.di_Name}, #{diet.di_Date}, #{diet.di_AmPm}, #{diet.di_Time}, #{diet.di_Me_Id})
+  </insert>
 </mapper>
