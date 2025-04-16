@@ -6,4 +6,8 @@
   <select id="selectDietList" resultType="DietVO">
   	select * from diet
   </select>
+  <select id="selectDietRecord" resultType="DietVO">
+  	select * from diet
+  	where di_date between (date_sub(now(), interval 7 day)) and now() and di_me_id = #{me_id}
+  </select>
 </mapper>
