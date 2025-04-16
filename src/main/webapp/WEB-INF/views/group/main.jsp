@@ -58,7 +58,8 @@
 		</c:otherwise>
 	</c:choose>
 	<div class="d-flex justify-content-between">
-		<a href='<c:url value="/"/>' class="btn">메인화면으로 돌아가기</a>		
+		<a href='<c:url value="/"/>' class="btn">메인화면으로 돌아가기</a>
+		<a href='<c:url value="/group/groupmember/${group.gr_num}"/>' class="btn">그룹맴버</a>		
 		<c:if test="${user.me_id eq group.gr_me_id}">
 		<a href='<c:url value="/"/>' class="btn">채팅방 입장하기</a>
 			<div class="btns">
