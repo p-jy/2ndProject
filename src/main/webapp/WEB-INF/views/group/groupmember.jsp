@@ -16,12 +16,12 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${memberList}" var="group">
-		
-		</c:forEach>
+		<c:forEach items="${memberList}" var="group_member">
 			<tr>
 				<td>${group_member.gm_me_id}</td>
 			</tr>
+		</c:forEach>
+			
 		</tbody>
 		
 	</table>

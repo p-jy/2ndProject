@@ -147,10 +147,11 @@ public class GroupServiceImp implements GroupService{
 
 	@Override
 	public List<Group_MemberVO> getMemberList(int gr_num, MemberVO user) {
-		if(user == null) {
+		if(gr_num == 0 || user ==null) {
 			return null;
 		}
-		return groupDao.selectMemberList(gr_num);
+		
+		return groupDao.selectMemberList(gr_num, user);
 	}
 	
 
