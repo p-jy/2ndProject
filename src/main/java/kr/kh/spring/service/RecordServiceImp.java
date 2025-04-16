@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.kh.spring.dao.RecordDAO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.model.vo.RecordVO;
 
 @Service
 public class RecordServiceImp implements RecordService{
@@ -22,8 +23,8 @@ public class RecordServiceImp implements RecordService{
 	}
 
 	@Override
-	public boolean selectDietRecord(MemberVO user, int date) {
-		return recordDAO.selectDietRecord(user, date);
+	public List<RecordVO> selectDietRecord(MemberVO user, int date) {
+		return recordDAO.selectDietRecord(user.getMe_id(), date);
 	}
 
 	public boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile[] fileList) {

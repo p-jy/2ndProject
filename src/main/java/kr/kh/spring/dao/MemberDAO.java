@@ -17,5 +17,9 @@ public interface MemberDAO {
 	boolean updateMember(@Param("user")MemberVO user);
 
 	boolean deleteId(@Param("user")MemberVO user);
+
+	MemberVO selectMemberByCookie(@Param("me_cookie")String me_cookie);
+
+	void updateCookie(@Param("user")MemberVO user);
 	
 }

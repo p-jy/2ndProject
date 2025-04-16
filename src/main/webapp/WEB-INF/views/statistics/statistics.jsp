@@ -77,7 +77,7 @@
 		$type.click(function() {
 			$(this).addClass('active');
 			$type.not(this).removeClass('active');
-		})
+		});
 		
 		if(period === "week") {
 			date = 7;
@@ -96,7 +96,8 @@
 				async : false, 
 				url : '<c:url value="/chart/diet"/>', 
 				type : 'post', 
-				data : { date : date }, 
+				data : { date : date },
+				dataType : "json",
 				success : function (data){
 					console.log(data);
 				}, 
@@ -106,11 +107,11 @@
 			});
 		}
 		function workout() {
-			
+			alert($(".period.active").data("target"));
 			
 		}
 		function inbody() {
-			
+			alert($(".period.active").data("target"));
 			
 		}
 	</script>
