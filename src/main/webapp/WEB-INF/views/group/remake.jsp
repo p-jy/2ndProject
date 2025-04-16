@@ -7,23 +7,32 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
 <style type="text/css">
-
+	
+	.error, .red {
+		color: red;
+	}
+	
+	.green {
+		color: green;
+	}
+	
 </style>
 </head>
 <body>
 	<h1>그룹 수정</h1>
 	<form action="<c:url value="/group/make"/>" method="post">		
+		<input type="hidden" name="gr_num" value="${group.gr_num}">
 		<div class="form-group mt-3">
 			<label for="title" class="form-label">그룹이름</label>
 			<input type="text" class="form-control" id="groupName" name="gr_name" value="${group.gr_name}">
 		</div>
 		
 		<div class="form-group mt-3">
-			<label for="pw" class="form-label">비밀번호(최대 4자리)</label>
+			<label for="pw" class="form-label">비밀번호(4자리)</label>
 			<input type="password" class="form-control" id="groupPw" name="gr_pw">
 		</div>
 		<div class="form-group mt-3">
-			<label for="pw2" class="form-label">비밀번호 확인(최대 4자리)</label>
+			<label for="pw2" class="form-label">비밀번호 확인(4자리)</label>
 			<input type="password" class="form-control" id="groupPw2" name="gr_pw2">
 		</div>
 		
@@ -69,7 +78,38 @@
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 수정하기</button>
 	</form>
 	<script type="text/javascript">
+		$("#pw").on('input', function(e){
+			let pw = $("#pw").val();
+			
+			if(pw ==""){
+				$(".btn-outline-info").removeClass("make");
+			}
+			
+			if(pw !=""){
+				$(".btn-outline-info").addClass("make");
+			}
+		});
 		
+		$("form").validate({
+			rules :{
+				me_pw : {
+					required : true,
+					regex : /^[a-zA-Z0-9!@#$]{0,4}$/
+				}
+				me_pw2 : {
+					equalTo: pw
+				}
+			},
+			messages : {
+				me_pw : {
+					required : "비밀번호를 입력하세요."
+					regex : "비밀번호는 영문, 숫자, 특수문자만 가능하며, 최대 4자까지 입력가능합니다."
+				}
+				me_pw2 : {
+					equalTo : "비밀번호와 비밀번호 확인이 일치하지 않습니다."
+				}
+			}
+		})
 	</script>
 </body>
 </html>
