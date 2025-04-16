@@ -6,4 +6,8 @@
   <select id="selectDietList" resultType="DietVO">
   	select * from diet
   </select>
+  <insert id="insertDietPost">
+  	insert into diet(di_Name, di_Date, di_AmPm, di_Time, di_Me_Id)
+  	value(#{diet.di_Name}, #{diet.di_Date}, #{diet.di_AmPm}, #{diet.di_Time}, #{diet.di_Me_Id})
+  </insert>
 </mapper>
