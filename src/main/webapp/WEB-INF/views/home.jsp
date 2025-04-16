@@ -150,16 +150,14 @@
 		</c:if>
 		<c:forEach var="diet" items="${dietList}">
 			<div class="form-group">
-			  <label for="di_Num">식단 번호 : </label>
-		  	  <input type="text" class="form-control" id="di_Num" value="${diet.di_Num }">
 			  <label for="di_Name">식단 이름 : </label>
-			  <input type="text" class="form-control" id="di_Name" value="${diet.di_Name }">
+			  <input type="text" class="form-control" id="di_Name" value="${diet.di_Name }" readonly>
 			  <label for="di_Date">식단한 날짜 : </label>
-			  <input type="text" class="form-control" id="di_Date" value="${diet.di_Date }">
+			  <input type="text" class="form-control" id="di_Date" value="${diet.di_Date }" readonly>
 			  <label for="di_AmPm">오전/오후 : </label>
-			  <input type="text" class="form-control" id="di_AmPm" value="${diet.di_AmPm }">
+			  <input type="text" class="form-control" id="di_AmPm" value="${diet.di_AmPm }" readonly>
 			  <label for="di_Time">식단한 시간 : </label>
-			  <input type="text" class="form-control" id="di_Time" value="${diet.di_Time }">
+			  <input type="text" class="form-control" id="di_Time" value="${diet.di_Time }" readonly>
 			</div>
 		</c:forEach>
 	</form>
