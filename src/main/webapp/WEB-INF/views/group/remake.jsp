@@ -56,6 +56,12 @@
 		<div class="form-group mt-3">
 			<label class="form-label">규칙</label>
 			<input type="text" class="form-control" id="rule" name="rl_rule" value="${group.rl_rule}">
+			<!-- 
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			 -->
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">시작일</label>

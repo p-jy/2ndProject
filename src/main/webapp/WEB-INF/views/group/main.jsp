@@ -29,10 +29,16 @@
 					<label class="form-label">공유할 기록</label>
 					<input type="text" class="form-control" value="${group.sr_gr_num}" readonly>
 				</div>
-				<div class="form-group mt-3">
-					<label class="form-label">규칙</label>
-					<input type="text" class="form-control" value="${group.rl_rule}" readonly>
-				</div>
+				<c:if test="${ruleList.size()>0}">
+					<div class="form-group mt-3">
+						<label class="form-label">규칙</label>
+						<c:forEach items="${ruleList}" var="rule">
+							<input type="text" class="form-control" value="${rule.rl_rule}" readonly>
+						</c:forEach>
+						
+					</div>
+				</c:if>
+				
 				<div class="form-group mt-3">
 					<label class="form-label">시작일</label>
 					<input type="text" class="form-control" value="<fmt:formatDate value="${group.gr_start_date}" pattern="yyyy-MM-dd" />" readonly>
