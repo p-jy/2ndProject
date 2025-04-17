@@ -39,6 +39,8 @@ public interface GroupDAO {
 
 	List<Group_MemberVO> selectMemberList(@Param("gr_num")int gr_num,@Param("user")MemberVO user);
 
+	int countByGroupCode(@Param("code")String code);
+
 	
 
 	

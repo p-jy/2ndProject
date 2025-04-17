@@ -1,6 +1,7 @@
 package kr.kh.spring.service;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,12 @@ public class GroupServiceImp implements GroupService{
 		if(group.getGr_name()==null) {
 			return false;
 		}
-		
+		group.setGr_code(generateUniqueGroupCode());
 		//그룹 테이블에 집어넣을 내용
+		
 		group.setGr_me_id(user.getMe_id());
+		
+		
 		boolean resultGroup =groupDao.insertGroup(group);
 		if(!resultGroup) {
 			return false;
@@ -73,6 +77,27 @@ public class GroupServiceImp implements GroupService{
 		}
 		
 		return true;
+	}
+
+	private String generateUniqueGroupCode() {
+		 String code;
+		    do {
+		        code = generateGroupCode(); // 6자리 랜덤 코드 생성
+		    } while (groupDao.countByGroupCode(code) > 0); // DB에 이미 존재하는지 체크
+		    return code;
+	}
+
+	private String generateGroupCode() {
+		 int length = 6;
+		 String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		 StringBuilder code = new StringBuilder();
+
+		 Random rnd = new Random();
+		 for (int i = 0; i < length; i++) {
+		     code.append(chars.charAt(rnd.nextInt(chars.length())));
+		 }
+
+		 return code.toString();
 	}
 
 	@Override
