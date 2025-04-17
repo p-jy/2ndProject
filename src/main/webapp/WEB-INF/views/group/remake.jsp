@@ -40,9 +40,9 @@
 			
 		</div>
 		
-		<div class="form-group mt-3">
+		<div class="form-group mt-3" id="passwordField">
 			<label for="pw" class="form-label">비밀번호(4자리)</label>
-			<input type="text" class="form-control" id="groupPw" name="gr_pw" value="${group.gr_pw}">
+			<input type="text" class="form-control" id="groupPw" name="gr_pw">	
 		</div>
 				
 		<div class="form-group mt-3">
@@ -51,7 +51,7 @@
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">공유할 기록</label>
-			<input type="text" class="form-control" id="recode" name="sr_gr_num" value="${group.sr_gr_num}">
+			<input type="text" class="form-control" id="recode" name="sr_gr_num" value="${group.sr_gr_num}" required>
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">규칙</label>
@@ -63,7 +63,7 @@
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">진행 기간</label>
-			<input type="text" class="form-control" id="period" name="gr_period" value="${group.gr_period}">
+			<input type="text" class="form-control" id="period" name="gr_period" value="${group.gr_period}" required>
 		</div>
 		
 		<div class="form-group mt-3">
@@ -72,7 +72,7 @@
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">목표</label>
-			<input type="text" class="form-control" id="goal" name="gg_gr_num" value="${group.gg_gr_num}">
+			<input type="text" class="form-control" id="goal" name="gg_gr_num" value="${group.gg_gr_num}" required>
 		</div>
 		
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 수정하기</button>
@@ -110,6 +110,28 @@
 				}
 			}
 		})
+	</script>
+	<script type="text/javascript">
+	 // DOM이 로딩되면 실행
+	    window.onload = function() {
+	        const radios = document.getElementsByName("gr_public");
+	        const pwField = document.getElementById("passwordField");
+	
+	        function togglePasswordField() {
+	            const selected = [...radios].find(r => r.checked).value;
+	            if (selected === "N") {
+	                pwField.style.display = "block";
+	            } else {
+	                pwField.style.display = "none";
+	            }
+	        }
+	
+	        // 라디오 버튼 변경 시마다 실행
+	        radios.forEach(r => r.addEventListener("change", togglePasswordField));
+	
+	        // 초기 상태 반영
+	        togglePasswordField();
+	    };
 	</script>
 </body>
 </html>

@@ -39,7 +39,7 @@
 			
 		</div>
 		
-		<div class="form-group mt-3">
+		<div class="form-group mt-3" id="passwordField">
 			<label for="pw" class="form-label">비밀번호(4자리)</label>
 			<input type="text" class="form-control" id="groupPw" name="gr_pw">	
 		</div>
@@ -56,6 +56,12 @@
 		<div class="form-group mt-3">
 			<label class="form-label">규칙</label>
 			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<!-- 
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			<input type="text" class="form-control" id="rule" name="rl_rule">
+			 -->
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">시작일</label>
@@ -77,7 +83,6 @@
 		
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 만들기</button>
 	</form>
-	
 	<script type="text/javascript">
 		$("#pw").on('input', function(e){
 			let pw = $("#pw").val();
@@ -111,6 +116,29 @@
 				}
 			}
 		})
+	</script>
+	
+	<script type="text/javascript">
+		 // DOM이 로딩되면 실행
+	    window.onload = function() {
+	        const radios = document.getElementsByName("gr_public");
+	        const pwField = document.getElementById("passwordField");
+	
+	        function togglePasswordField() {
+	            const selected = [...radios].find(r => r.checked).value;
+	            if (selected === "N") {
+	                pwField.style.display = "block";
+	            } else {
+	                pwField.style.display = "none";
+	            }
+	        }
+	
+	        // 라디오 버튼 변경 시마다 실행
+	        radios.forEach(r => r.addEventListener("change", togglePasswordField));
+	
+	        // 초기 상태 반영
+	        togglePasswordField();
+	    };
 	</script>
 </body>
 </html>
