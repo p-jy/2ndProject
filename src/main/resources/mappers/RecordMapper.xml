@@ -3,12 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.RecordDAO">
+
   <select id="selectDietList" resultType="DietVO">
   	select * from diet
   </select>
-  <select id="selectDietRecord" resultType="DietVO">
-  	select * from diet
-  	where di_date between (date_sub(now(), interval 7 day)) and now() and di_me_id = #{me_id}
+  <select id="selectInbodyList" resultType="InbodyVO">
+  	select * from inbody
+  </select>
+  <select id="selectWorkoutList" resultType="WorkoutVO">
+  	select * from workout
   </select>
   <insert id="insertDietPost">
   	insert into diet(di_Name, di_Date, di_AmPm, di_Time, di_Me_Id)

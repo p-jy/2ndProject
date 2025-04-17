@@ -49,13 +49,13 @@
 	<div class="type-tab mt-2">
 		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item">
-				<a class="nav-link diet active" onclick="diet()">식단</a>
+				<a class="nav-link type diet active" onclick="diet()">식단</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link workout" onclick="workout()">운동</a>
+				<a class="nav-link type workout" onclick="workout()">운동</a>
     		</li>
 			<li class="nav-item">
-				<a class="nav-link inbody" onclick="inbody()">신체</a>
+				<a class="nav-link type inbody" onclick="inbody()">신체</a>
 			</li>
 		</ul>
 	</div>
@@ -67,6 +67,7 @@
 	<script type="text/javascript">
 		const $period = $('.period');
 		const $type = $('.type');
+		
 		let period = $(".period.active").data("target");
 		let date;
 		
@@ -77,7 +78,7 @@
 		$type.click(function() {
 			$(this).addClass('active');
 			$type.not(this).removeClass('active');
-		})
+		});
 		
 		if(period === "week") {
 			date = 7;
@@ -96,7 +97,8 @@
 				async : false, 
 				url : '<c:url value="/chart/diet"/>', 
 				type : 'post', 
-				data : { date : date }, 
+				data : { date : date },
+				dataType : "json",
 				success : function (data){
 					console.log(data);
 				}, 
@@ -107,10 +109,8 @@
 		}
 		function workout() {
 			
-			
 		}
 		function inbody() {
-			
 			
 		}
 	</script>
