@@ -44,4 +44,26 @@
 		update member set me_cookie = #{user.me_cookie}, me_limit = #{user.me_limit}
 		where me_id = #{user.me_id}
 	</update>
+	
+	<select id="selectDietList" resultType="DietVO">
+		select
+			diet.*, me_id as di_me_id
+		from member
+		join diet on di_me_id = me_id
+		where di_date between date_sub(now(), interval #{date} day) and now() and di_me_id = #{me_id}
+	</select>
+	<select id="selectWorkoutList" resultType="WorkoutVO">
+		select
+			workout.*, me_id as wo_me_id
+		from member
+		join workout on wo_me_id = me_id
+		where wo_me_id between date_sub(now(), interval #{date} day) and now() and wo_me_id = #{me_id}
+	</select>
+	<select id="selectInbodyList" resultType="InbodyVO">
+		select
+			inbody.*, me_id as ib_me_id
+		from member
+		join inbody on ib_me_id = me_id
+		where ib_me_id between date_sub(now(), interval #{date} day) and now() and ib_me_id = #{me_id}
+	</select>
 </mapper>
