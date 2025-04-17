@@ -32,6 +32,9 @@ public class GroupServiceImp implements GroupService{
 		if(user == null) {
 			return false;
 		}
+		if(group.getGr_name()==null) {
+			return false;
+		}
 		
 		//그룹 테이블에 집어넣을 내용
 		group.setGr_me_id(user.getMe_id());
@@ -147,7 +150,7 @@ public class GroupServiceImp implements GroupService{
 
 	@Override
 	public List<Group_MemberVO> getMemberList(int gr_num, MemberVO user) {
-		if(gr_num == 0 || user ==null) {
+		if(gr_num == 0 || user == null) {
 			return null;
 		}
 		

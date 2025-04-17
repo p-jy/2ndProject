@@ -20,6 +20,7 @@ import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.service.GroupService;
+import kr.kh.spring.service.MemberService;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -29,6 +30,9 @@ public class GroupController {
 	
 	@Autowired
 	GroupService groupService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	//그룹 리스트 출력
 	@GetMapping("/list")
@@ -70,10 +74,15 @@ public class GroupController {
 		//그룹 페이지 가져옴
 		GroupVO group = groupService.getGroup(gr_num);
 		GroupVO rule = groupService.getRule(gr_num);
+		//해당 그룹맴버 정보를 가져옴.
 		
+		//해당 그룹하고 같은 번호를 가진 규칙 테이블의 값들을 객체에 삽입.
 		group.setRl_num(rule.getRl_num());
 		group.setRl_rule(rule.getRl_rule());
 		group.setRl_gr_num(rule.getRl_gr_num());
+		//해당 그룹하고 같은 번호를 가진 목표 테이블의 값들을 객체에 삽입.
+		
+		//해당 그룹하고 같은 번호를 가진 공유할 기록 테이블의 값들을 객체에 삽입.
 		
 		System.out.println(group);
 		
@@ -139,16 +148,27 @@ public class GroupController {
 	
 	//그룹 맴버 리스트
 	@GetMapping("/groupmember/{gr_num}")
-	public String groupMember(Model model, @PathVariable("gr_num")int gr_num, HttpSession session) {
+	public String groupMember(Model model, @PathVariable("gr_num") int gr_num, HttpSession session) {
 		//맴버 정보를 가져옴
 		MemberVO user=(MemberVO) session.getAttribute("user");
+		List<MemberVO> members = memberService.getMemberList();
+		GroupVO group = groupService.getGroup(gr_num);
+		System.out.println("그룹번호 : "+gr_num);
+		
+		System.out.println(members);
+		
+
 		//그룹맴버 페이지를 가져옴
 		List<Group_MemberVO> memberList = groupService.getMemberList(gr_num,user);
 		System.out.println(memberList);
 		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("group", group);
+		model.addAttribute("gr_num", gr_num);
 		return "/group/groupmember";
 	}
+	
+	//맴버 초대하기 기능
 	
 	
 	@GetMapping("/message")

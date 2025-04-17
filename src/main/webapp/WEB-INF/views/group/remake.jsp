@@ -28,14 +28,23 @@
 		</div>
 		
 		<div class="form-group mt-3">
-			<label for="pw" class="form-label">비밀번호(4자리)</label>
-			<input type="password" class="form-control" id="groupPw" name="gr_pw" value="${group.gr_pw}">
-		</div>
-		<div class="form-group mt-3">
-			<label for="pw2" class="form-label">비밀번호 확인(4자리)</label>
-			<input type="password" class="form-control" id="groupPw2" name="gr_pw2" value="${group.gr_pw}">
+			
+			<!-- 
+			<label class="form-label">공개 여부(Y,N)을 입력하세요.</label>
+			<label class="form-label">Y => 공개, N => 비공개</label>
+			<input type="text" class="form-control" id="public" name="gr_public">
+			 -->
+			<label class="form-label">공개 여부(Y,N)을 선택하세요.</label>
+			<input type="radio"  id="public_y" name="gr_public"  value="Y" checked>Y
+			<input type="radio"  id="public_n" name="gr_public" value="N">N
+			
 		</div>
 		
+		<div class="form-group mt-3">
+			<label for="pw" class="form-label">비밀번호(4자리)</label>
+			<input type="text" class="form-control" id="groupPw" name="gr_pw" value="${group.gr_pw}">
+		</div>
+				
 		<div class="form-group mt-3">
 			<label class="form-label">소개글</label>
 			<textarea class="form-control" id="intro" name="gr_introduction" rows="10">${group.gr_introduction}</textarea>
@@ -59,22 +68,13 @@
 		
 		<div class="form-group mt-3">
 			<label class="form-label">최대정원</label>
-			<input type="text" class="form-control" id="person" name="gr_personnel" value="${group.gr_personnel}">
+			<input type="text" class="form-control" id="person" name="gr_personnel" value="${group.gr_personnel}" required>
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">목표</label>
 			<input type="text" class="form-control" id="goal" name="gg_gr_num" value="${group.gg_gr_num}">
 		</div>
-		<div class="form-group mt-3">
-			<label class="form-label">공개 여부(Y,N)을 입력하세요.</label>
-			<label class="form-label">Y => 공개, N => 비공개</label>
-			<input type="text" class="form-control" id="public" name="gr_public" value="${group.gr_public}">
-			<!--
-			<input type="radio"  id="public_y" name="gr_public" checked>Y
-			<input type="radio"  id="public_n" name="gr_public">N
-			 -->
-			
-		</div>
+		
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 수정하기</button>
 	</form>
 	<script type="text/javascript">

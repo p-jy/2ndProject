@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.GroupDAO">
+<resultMap type="Group_MemberVO" id="GroupMemberMap">
+	<result property="gm_gr_num" column="gm_gr_num"/>
+  	<result property="gm_me_id" column="gm_me_id"/>
+</resultMap>
 	
 	<select id="selectGroupList" resultType="GroupVO">
 		select
@@ -39,7 +43,7 @@
 		value(#{group.gg_gl_num}, #{group.gr_num})
 	</insert>
 	
-	<insert id="GroupMember" useGeneratedKeys="true" keyProperty="gm_num" >
+	<insert id="GroupMember"  useGeneratedKeys="true" keyProperty="gm_num" >
 		insert into `group_member`(gm_me_id,gm_gr_num) 
 		value(#{group.gr_me_id}, #{group.gr_num})
 	</insert>
@@ -112,9 +116,10 @@
 			gg_gr_num = #{group.gr_num}
 	</update>
   
-  	<select id="selectMemberList" resultType="Group_MemberVO">
+  	<select id="selectMemberList" resultMap="GroupMemberMap">
   		select * from `group_member`
   		join `group` on gm_gr_num = gr_num
+  		join `member` on gm_me_id = me_id
   		where gm_gr_num=#{gr_num}
   	</select>
   	

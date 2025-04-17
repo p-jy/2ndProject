@@ -112,6 +112,12 @@ public class MemberServiceImp implements MemberService {
 		return memberDao.selectDietList(me_id, date);
 	}
 
+	@Override
+	public List<MemberVO> getMemberList() {
+		
+		return memberDao.selectMemberList();
+	}
+
 	
 	
 

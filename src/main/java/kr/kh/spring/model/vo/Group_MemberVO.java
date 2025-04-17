@@ -10,6 +10,12 @@ import lombok.NoArgsConstructor;
 public class Group_MemberVO {
 	
 	private int gm_num;
-	private int gm_me_id;
+	private String gm_me_id;
 	private int gm_gr_num;
+	
+	public Group_MemberVO(int gm_num) {
+		this.gm_num = gm_num;
+	}
+	
+	
 }
