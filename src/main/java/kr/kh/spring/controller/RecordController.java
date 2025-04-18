@@ -31,7 +31,6 @@ public class RecordController {
 	RecordService recordService;
 	
 	@GetMapping("/diet")
-	
 	public String selectDiet(Model model) {
 		List<DietVO> dietList = recordService.selectDietList();
 		model.addAttribute("dietList", dietList);

@@ -56,27 +56,32 @@ P {
 	margin-top: 5px;
 }
 
-/* 달력 관련 스타일 시작*/
-#calendar {
-	max-width: 900px;
-	margin: 40px auto;
+/* 달력 css */
+.calendar{
+	font-style: black;
+}
+.fc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#scheduleList {
-	max-width: 900px;
-	margin: 20px auto;
-	border-top: 1px solid #ccc;
-	padding-top: 20px;
+.fc-toolbar-title {
+  font-weight: bold;
+  color: #333;
 }
-
-a[aria-label] {
-	color: black;
+.fc-toolbar-chunk:nth-child(3) {
+  display: flex;
 }
-/*달력 관련 스타일 끝*/
+.fc-button {
+  margin: 0 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
 
 /*탭 버든 관련 스타일 시작*/
 .tab-container {
-	margin-bottom: 10px;
+	margin-top: 20px;
 }
 
 .tab {
@@ -188,16 +193,33 @@ a[aria-label] {
 		document.addEventListener('DOMContentLoaded', function() {
 			var calendarEl = document.getElementById('calendar');
 			var calendar = new FullCalendar.Calendar(calendarEl, {
-				initialView : 'dayGridMonth',
+				height: '200px',
+				initialView : 'dayGridWeek',
 				locale : 'ko',
 				headerToolbar : {
-					left : 'prev',
-					center : 'title',
-					right : 'next'
+					start : 'title',
+					center : '',
+					end : 'today week month prev,next'
+				},
+				customButtons:{
+					week:{
+						text:'week',
+						click: function(){
+							calendar.changeView('dayGridWeek');
+						}
+					},
+					month:{
+						text:'month',
+						click: function(){
+							calendar.changeView('dayGridMonth');
+						}
+					}
+				},
+				events : {
+					display: 'auto'
 				},
 			});
 			calendar.render();
-			console.log(calendar)
 		});
 	</script>
 	<script>
@@ -209,7 +231,6 @@ a[aria-label] {
 				url : '<c:url value="/record/diet" />',
 				method : 'GET',
 				success : function(data) {
-					console.log(data);
 					$('.tab-content').html(data);
 				}
 			});
