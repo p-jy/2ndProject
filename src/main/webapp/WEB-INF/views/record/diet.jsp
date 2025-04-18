@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +25,7 @@
 						<label>식단점수(1~5) : </label>
 						<input type="text" class="form-control" value="${diet.di_score }" readonly> 
 						<label>식단한 날짜	: </label>
-						<input type="text" class="form-control" value="${diet.di_date }" readonly>
+						<input type="text" class="form-control" value="<fmt:formatDate value='${diet.di_date}' pattern='yyyy-MM-dd' />" readonly>
 						<label>오전/오후 : </label> 
 						<input type="text" class="form-control" value="${diet.di_ampm }" readonly> 
 						<label>식단한 시간 : </label> 

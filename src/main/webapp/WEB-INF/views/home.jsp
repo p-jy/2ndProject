@@ -57,8 +57,8 @@ P {
 }
 
 /* 달력 css */
-.calendar{
-	font-style: black;
+a {
+    color: black;
 }
 .fc-toolbar {
   display: flex;
@@ -221,6 +221,8 @@ P {
 			});
 			calendar.render();
 			addEventByType('2025-04-18','diet'); //테스트용
+			addEventByType('2025-04-18','inbody'); //테스트용
+			addEventByType('2025-04-18','workout'); //테스트용
 			
 			function addEventByType(date, type) {
 			    let titleIcon = '';
