@@ -220,6 +220,36 @@ P {
 				},
 			});
 			calendar.render();
+			addEventByType('2025-04-18','diet'); //테스트용
+			
+			function addEventByType(date, type) {
+			    let titleIcon = '';
+			    let backgroundColor = '';
+
+			    switch (type) {
+			      case 'diet':
+			        titleIcon = '🍽️';
+			        backgroundColor = '#FFA07A';
+			        break;
+			      case 'inbody':
+			        titleIcon = '🧍';
+			        backgroundColor = '#98FB98';
+			        break;
+			      case 'workout':
+			        titleIcon = '💪';
+			        backgroundColor = '#87CEFA';
+			        break;
+			    }
+
+			    calendar.addEvent({
+			      title: titleIcon,
+			      start: date,
+			      allDay: true,
+			      backgroundColor: backgroundColor,
+			      borderColor: backgroundColor
+			    });
+			  }
+			
 		});
 	</script>
 	<script>
