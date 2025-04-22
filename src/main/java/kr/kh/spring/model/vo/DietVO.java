@@ -2,16 +2,20 @@ package kr.kh.spring.model.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
 public class DietVO {
-	int di_Num; 
-	String di_Name;
-	Date di_Date;
-	String di_AmPm; 
-	String di_Time; 
-	String di_Memo; 
-	String di_Me_Id;
+	int di_num; 
+	String di_name;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	Date di_date;
+	String di_amPm; 
+	String di_time;
+	int di_score;
+	String di_memo; 
+	String di_me_id;
 
 }

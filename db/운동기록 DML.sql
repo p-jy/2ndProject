@@ -1,5 +1,5 @@
 INSERT INTO MAJOR_CATE(MC_NAME)
-VALUES("운동"), ("식단"), ("신체"), ("그룹"), ("목표");
+VALUES("운동"), ("식단"), ("신체"), ("그룹"), ("목표"),("기타");
 
 # SC_MC_NUM => 1: 운동, 2: 식단, 3: 신체, 4: 그룹, 5: 목표
 INSERT INTO SUB_CATE(SC_TYPE, SC_NAME, SC_MC_NUM) VALUES

@@ -12,37 +12,43 @@ import lombok.Data;
 public class GroupVO {
 	
 	//그룹 테이블
-	int gr_num;
-	char gr_public;
-	String gr_code;
-	String gr_pw;
-	String gr_name;
-	String gr_introduction;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	Date gr_start_date;
-	int gr_period;
-	int gr_personnel;
-	int gr_participant;
-	char gr_del;
-	String gr_me_id;
+	private int gr_num;
+	private String gr_public;
+	private String gr_code;
+	private String gr_pw;
+	private String gr_name;
+	private String gr_introduction;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date gr_start_date;
+	private int gr_period;
+	private int gr_personnel;
+	private int gr_participant;
+	private char gr_del;
+	private String gr_me_id;
 	
 	//목표 테이블
-	int gl_num;
+	private int gl_num;
 	
 	//그룹목표 테이블
-	int gg_num;
-	int gg_gr_num;
-	int gg_gl_num;
+	private int gg_num;
+	private int gg_gr_num;
+	private int gg_gl_num;
 	
 	//규칙 테이블
-	int rl_num;
-	String rl_rule;
-	int rl_gr_num;
+	private int rl_num;
+	private String rl_rule;
+	private int rl_gr_num;
 	
 	//공유기록 테이블
-	int sr_num;
-	int sr_rc_num;
-	int sr_gr_num; 
+	private int sr_num;
+	private int sr_rc_num;
+	private int sr_gr_num;
+	
+	//그룹맴버 테이블
+	private int gm_num;
+	private String gm_me_id;
+	private int gm_gr_num;
+	
 	
 	
 }
