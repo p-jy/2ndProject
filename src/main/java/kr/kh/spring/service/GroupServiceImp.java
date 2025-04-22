@@ -27,7 +27,7 @@ public class GroupServiceImp implements GroupService{
 	}
 
 	@Override
-	public boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule) {
+	public boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule, Group_MemberVO gmVO) {
 		if(group == null) {
 			return false;
 		}
@@ -80,7 +80,6 @@ public class GroupServiceImp implements GroupService{
 			return false;
 		}
 		*/
-		Group_MemberVO gmVO =new Group_MemberVO();
 		gmVO.setGm_me_id(user.getMe_id());
 		gmVO.setGm_gr_num(group.getGr_num());
 		

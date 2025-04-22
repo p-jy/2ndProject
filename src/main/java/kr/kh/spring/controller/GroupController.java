@@ -55,7 +55,8 @@ public class GroupController {
 	
 	//그룹 만들기
 	@PostMapping("/make")
-	public String makeGroup(Model model,GroupVO group, GroupRuleListDTO grList,HttpSession session) {
+	public String makeGroup(Model model,GroupVO group, GroupRuleListDTO grList,
+			Group_MemberVO gmVO, HttpSession session) {
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");		
 		
@@ -66,7 +67,8 @@ public class GroupController {
 		System.out.println(group);		
 		System.out.println(rule);
 		//방 만들기
-		if(groupService.insertGroup(group, user, rule)) {
+		if(groupService.insertGroup(group, user, rule, gmVO)) {
+			
 			model.addAttribute("url", "/group/list");
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
 			return "msg/msg";

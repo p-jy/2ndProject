@@ -18,7 +18,7 @@ public interface GroupService {
 
 	List<RuleVO> allRuleList();
 	
-	boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule);
+	boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule, Group_MemberVO gmVO);
 
 	GroupVO getGroup(int gr_num);
 

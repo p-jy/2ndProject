@@ -11,6 +11,8 @@ public class RuleVO {
 	private int rl_num;
 	private String rl_rule;
 	private int rl_gr_num;
+	//그룹 테이블(그룹 번호(기본키))
+	private int gr_num;
 	
 	public RuleVO(String rl_rule, int rl_gr_num) {
 		this.rl_rule = rl_rule;

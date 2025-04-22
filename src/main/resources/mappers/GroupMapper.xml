@@ -47,7 +47,7 @@
 		value(#{group.gg_gl_num}, #{group.gr_num})
 	</insert>
 	
-	<insert id="GroupMember"  useGeneratedKeys="true" keyProperty="gm_num" >
+	<insert id="GroupMember"  useGeneratedKeys="true" keyProperty="gmVO.gm_num" >
 		insert into `group_member`(gm_me_id,gm_gr_num) 
 		value(#{gmVO.gm_me_id}, #{gmVO.gm_gr_num})
 	</insert>
