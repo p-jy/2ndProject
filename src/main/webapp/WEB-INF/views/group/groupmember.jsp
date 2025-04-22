@@ -28,7 +28,13 @@
 	</table>
 	<div class="d-flex justify-content-between">
 		<a href='<c:url value="/group/main/${group.gr_num}"/>' class="btn btn-back">그룹으로 돌아가기</a>		
+		<c:if test="${user.me_id eq group.gr_me_id}">
+			<div class="btns">
+				<a href='<c:url value="/group/invitation/${group.gr_num}"/>' class="btn">맴버 초대하기</a>
+			</div>
+		</c:if>
 	</div>
+	
 </body>
 <script type="text/javascript">
 	

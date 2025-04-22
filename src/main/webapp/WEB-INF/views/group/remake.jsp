@@ -54,20 +54,25 @@
 			<input type="text" class="form-control" id="recode" name="sr_gr_num" value="${group.sr_gr_num}" required>
 		</div>
 		<div class="form-group mt-3">
-			<label class="form-label">규칙</label>
-			<input type="text" class="form-control" id="rule" name="ruleList[0].rl_rule">			 
-			<input type="text" class="form-control" id="rule" name="ruleList[1].rl_rule">
-			<input type="text" class="form-control" id="rule" name="ruleList[2].rl_rule">
-			<input type="text" class="form-control" id="rule" name="ruleList[3].rl_rule">
-			<input type="text" class="form-control" id="rule" name="ruleList[4].rl_rule">
-			<!--
-			<input type="text" class="form-control" id="rule" name="rl_rule" value="${group.rl_rule}"> 
-			<input type="text" class="form-control" id="rule" name="rl_rule">
-			<input type="text" class="form-control" id="rule" name="rl_rule">
-			<input type="text" class="form-control" id="rule" name="rl_rule">
-			<input type="text" class="form-control" id="rule" name="rl_rule">
-			 -->
+				<label class="form-label">규칙</label>
+				<input type="text" class="form-control" id="rule" name="ruleList[0].rl_rule">			 
+				<input type="text" class="form-control" id="rule" name="ruleList[1].rl_rule">
+				<input type="text" class="form-control" id="rule" name="ruleList[2].rl_rule">
+				<input type="text" class="form-control" id="rule" name="ruleList[3].rl_rule">
+				<input type="text" class="form-control" id="rule" name="ruleList[4].rl_rule">	
+			
 		</div>
+		
+		<div class="form-group mt-3">
+			<c:forEach items="${ruleList}" var="rule" varStatus="status">
+			    <!-- 숨겨진 PK 값 (rl_num) -->
+			    <input type="hidden" name="ruleList[${status.index}].rl_num" value="${rule.rl_num}" />
+			
+			    <!-- 규칙 내용 -->
+			    <input type="text" name="ruleList[${status.index}].rl_rule" value="${rule.rl_rule}" class="form-control" />
+			</c:forEach>
+		</div>
+		
 		<div class="form-group mt-3">
 			<label class="form-label">시작일</label>
 			<input type="text" class="form-control" id="startdate" name="gr_start_date" value="${group.gr_start_date}">

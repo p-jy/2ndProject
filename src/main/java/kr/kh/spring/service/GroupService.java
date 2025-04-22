@@ -32,6 +32,10 @@ public interface GroupService {
 
 	List<RuleVO> getRuleList(int gr_num);
 
+	boolean inviteMemberToGroup(int gr_num, String inviteId);
+
+	boolean isGroupLeader(int gr_num, String me_id);
+
 
 
 	

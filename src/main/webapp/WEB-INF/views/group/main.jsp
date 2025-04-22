@@ -6,12 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+	body{
+		
+	}
+	
+</style>
 </head>
 <body id="body">
 
 	<c:choose>
 		<c:when test="${group ne null}">			
-			<h1>그룹 메인페이지</h1>
+			<h1>${group.gr_name}</h1>
 			<div>
 				<div>
 					<label class="form-label">그룹이름</label>
@@ -33,7 +39,7 @@
 					<div class="form-group mt-3">
 						<label class="form-label">규칙</label>
 						<c:forEach items="${ruleList}" var="rule">
-							<input type="text" class="form-control" value="${ruleList[0].rl_rule}" readonly>
+							<input type="text" class="form-control" value="${rule.rl_rule}" readonly>
 						</c:forEach>
 						
 					</div>
@@ -71,8 +77,6 @@
 			<div class="btns">
 				<a href='<c:url value="/group/remake/${group.gr_num}"/>' class="btn">그룹설정 변경하기</a>
 				<a href='<c:url value="/group/delete/${group.gr_num}"/>' class="btn">그룹 삭제하기</a>
-				<a href='<c:url value="/"/>' class="btn">맴버 초대하기</a>
-				<a href='<c:url value="/"/>' class="btn">맴버 초대받기</a>
 			</div>
 		</c:if>
 		

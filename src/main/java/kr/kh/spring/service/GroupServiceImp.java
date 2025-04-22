@@ -191,8 +191,13 @@ public class GroupServiceImp implements GroupService{
 		}
 		for(RuleVO dbrule : ruleList) {
 			System.out.println(dbrule);
+			dbrule.setRl_num(dbGroup.getGr_num());
+			dbrule.setRl_gr_num(dbGroup.getGr_num());
 			if(dbrule.getRl_gr_num() == dbGroup.getGr_num()) {
+				System.out.println(dbrule);
 				updateRule(dbrule,dbrule.getRl_gr_num());
+				System.out.println("------");
+				System.out.println(dbrule);
 			}
 			
 		}
@@ -238,6 +243,29 @@ public class GroupServiceImp implements GroupService{
 		}
 		
 		return groupDao.selectMemberList(gr_num, user);
+	}
+
+	@Override
+	public boolean inviteMemberToGroup(int gr_num, String me_id) {
+		if(groupDao.isMemberInGroup(gr_num, me_id)) {
+			return false;
+		}
+		Group_MemberVO gm = new Group_MemberVO();
+		gm.setGm_gr_num(gr_num);
+		gm.setGm_me_id(me_id);
+		if(!groupDao.insertGroupMember(gm)) {
+			return false;
+		}
+		groupDao.updateParticipant(gr_num);
+		
+		
+		return true;
+	}
+
+	@Override
+	public boolean isGroupLeader(int gr_num, String me_id) {
+		GroupVO group = groupDao.selectGroup(gr_num);
+		return group != null && group.getGr_me_id().equals(me_id);
 	}
 
 	

@@ -150,4 +150,21 @@
 			rl_gr_num = #{rl_gr_num}
   	</update>
   	
+  	<select id="isMemberInGroup" resultType="boolean">
+  		select count(*) from `group_member`
+  		where gm_gr_num = #{gr_num} and gm_me_id=#{me_id}
+  	</select>
+  	
+  	<insert id="insertGroupMember" useGeneratedKeys="true" keyProperty="gm.rl_num">
+  		insert into `group_member`(gm_me_id,gm_gr_num)
+  		value(#{gm.gm_me_id},#{gm.gm_gr_num})
+  	</insert>
+  	
+  	
+  	<update id="updateParticipant">
+  		update `group`
+  		set gr_participant = gr_participant+1
+  		where gr_num=#{gr_num}
+  			
+  	</update>
 </mapper>

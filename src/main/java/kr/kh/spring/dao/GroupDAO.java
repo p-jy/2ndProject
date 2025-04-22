@@ -45,10 +45,17 @@ public interface GroupDAO {
 	int countByGroupCode(@Param("code")String code);
 
 	List<RuleVO> selectRuleList(@Param("gr_num")int gr_num);
-
+	
+	//규칙 삽입
 	void insertRule1(@Param("dbrule")RuleVO dbrule,@Param("gr_num") int gr_num);
-
+	//규칙 수정(아직 해결x)
 	void updateRule1(@Param("dbrule")RuleVO dbrule, @Param("rl_gr_num")int rl_gr_num);
+
+	boolean isMemberInGroup(@Param("gr_num")int gr_num, @Param("me_id")String me_id);
+
+	boolean insertGroupMember(@Param("gm")Group_MemberVO gm);
+
+	void updateParticipant(@Param("gr_num")int gr_num);
 
 	
 
