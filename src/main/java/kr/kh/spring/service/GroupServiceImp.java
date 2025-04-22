@@ -1,6 +1,7 @@
 package kr.kh.spring.service;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import kr.kh.spring.dao.GroupDAO;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.model.vo.RuleVO;
 
 @Service
 public class GroupServiceImp implements GroupService{
@@ -25,27 +27,42 @@ public class GroupServiceImp implements GroupService{
 	}
 
 	@Override
-	public boolean insertGroup(GroupVO group, MemberVO user) {
+	public boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule, Group_MemberVO gmVO) {
 		if(group == null) {
 			return false;
 		}
 		if(user == null) {
 			return false;
 		}
-		
+		if(group.getGr_name()==null) {
+			return false;
+		}
+		//해당 객체에 코드를 부여
+		group.setGr_code(generateUniqueGroupCode());
 		//그룹 테이블에 집어넣을 내용
-		group.setGr_me_id(user.getMe_id());
+		
+		group.setGr_me_id(user.getMe_id());				
 		boolean resultGroup =groupDao.insertGroup(group);
 		if(!resultGroup) {
 			return false;
 		}
 		System.out.println(group);
 		//규칙 테이블에 집어넣을 내용
+		if(rule == null) {
+			return false;
+		}
+		for(RuleVO dbrule : rule) {
+			
+			getRule(dbrule,group.getGr_num());
+		}
+		/*
 		group.setRl_gr_num(group.getGr_num());
 		boolean resultRule = groupDao.insertRule(group);
 		if(!resultRule) {
 			return false;
 		}
+		*/
+		
 		System.out.println(group);
 		//공유 기록에 집어넣을 내용
 		/*
@@ -63,13 +80,59 @@ public class GroupServiceImp implements GroupService{
 			return false;
 		}
 		*/
+		gmVO.setGm_me_id(user.getMe_id());
+		gmVO.setGm_gr_num(group.getGr_num());
 		
-		boolean groupmember = groupDao.GroupMember(group);
+		boolean groupmember = groupDao.GroupMember(gmVO);
 		if(!groupmember) {
 			return false;
 		}
 		
 		return true;
+	}
+
+	
+
+	private void getRule(RuleVO dbrule, int gr_num) {
+		try {
+			groupDao.insertRule1(dbrule,gr_num);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	private String generateUniqueGroupCode() {
+		 String code;
+		    do {
+		        code = generateGroupCode(); // 6자리 랜덤 코드 생성
+		    } while (groupDao.countByGroupCode(code) > 0); // DB에 이미 존재하는지 체크
+		    return code;
+	}
+
+	private String generateGroupCode() {
+		 int length = 6;
+		 String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		 StringBuilder code = new StringBuilder();
+
+		 Random rnd = new Random();
+		 for (int i = 0; i < length; i++) {
+		     code.append(chars.charAt(rnd.nextInt(chars.length())));
+		 }
+
+		 return code.toString();
+	}
+
+	@Override
+	public List<RuleVO> allRuleList() {
+		
+		return groupDao.getAllRuleList();
+	}
+
+	@Override
+	public List<RuleVO> getRuleList(int gr_num) {
+		
+		return groupDao.selectRuleList(gr_num);
 	}
 
 	@Override
@@ -105,12 +168,12 @@ public class GroupServiceImp implements GroupService{
 	}
 
 	@Override
-	public boolean updateGroup(GroupVO group, MemberVO user) {
+	public boolean updateGroup(GroupVO group, MemberVO user ,List<RuleVO> ruleList) {
 		if(user == null || group == null) {
 			return false;
 		}
 		GroupVO dbGroup = groupDao.selectGroup(group.getGr_num());
-		
+		System.out.println(dbGroup);
 		if(dbGroup == null || 
 		   !dbGroup.getGr_me_id().equals(user.getMe_id())) {
 			return false;
@@ -123,11 +186,30 @@ public class GroupServiceImp implements GroupService{
 		}
 		System.out.println(group);
 		//규칙 테이블에 수정할 내용
+		if(ruleList == null) {
+			return false;
+		}
+		for(RuleVO dbrule : ruleList) {
+			System.out.println(dbrule);
+			dbrule.setRl_num(dbGroup.getGr_num());
+			dbrule.setRl_gr_num(dbGroup.getGr_num());
+			if(dbrule.getRl_gr_num() == dbGroup.getGr_num()) {
+				System.out.println(dbrule);
+				updateRule(dbrule,dbrule.getRl_gr_num());
+				System.out.println("------");
+				System.out.println(dbrule);
+			}
+			
+		}
+		/*
 		boolean resultRule = groupDao.updateRule(group);
 		if(!resultRule) {
 			return false;
 		}
 		System.out.println(group);
+		 
+		*/
+		
 		//공유 기록에 수정할 내용
 		/*
 		 boolean resultS_Recode = groupDao.updateShareRecode(group);	
@@ -145,13 +227,48 @@ public class GroupServiceImp implements GroupService{
 		return true;
 	}
 
+	private void updateRule(RuleVO dbrule, int rl_gr_num) {
+		try {
+			groupDao.updateRule1(dbrule,rl_gr_num);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
 	@Override
 	public List<Group_MemberVO> getMemberList(int gr_num, MemberVO user) {
-		if(user == null) {
+		if(gr_num == 0 || user == null) {
 			return null;
 		}
-		return groupDao.selectMemberList(gr_num);
+		
+		return groupDao.selectMemberList(gr_num, user);
 	}
+
+	@Override
+	public boolean inviteMemberToGroup(int gr_num, String me_id) {
+		if(groupDao.isMemberInGroup(gr_num, me_id)) {
+			return false;
+		}
+		Group_MemberVO gm = new Group_MemberVO();
+		gm.setGm_gr_num(gr_num);
+		gm.setGm_me_id(me_id);
+		if(!groupDao.insertGroupMember(gm)) {
+			return false;
+		}
+		groupDao.updateParticipant(gr_num);
+		
+		
+		return true;
+	}
+
+	@Override
+	public boolean isGroupLeader(int gr_num, String me_id) {
+		GroupVO group = groupDao.selectGroup(gr_num);
+		return group != null && group.getGr_me_id().equals(me_id);
+	}
+
+	
 	
 
 	

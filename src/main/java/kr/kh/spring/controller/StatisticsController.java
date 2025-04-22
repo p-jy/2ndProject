@@ -34,4 +34,20 @@ public class StatisticsController {
 		return memberService.selectDietList(me_id, date);
 	}
 	
+	@ResponseBody
+	@PostMapping("/chart/workout")
+	public List<DietVO> chartWorkout(@RequestParam int date, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		String me_id = user.getMe_id();
+		return memberService.selectWorkoutList(me_id, date);
+	}
+	
+	@ResponseBody
+	@PostMapping("/chart/inbody")
+	public List<DietVO> chartInbody(@RequestParam int date, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		String me_id = user.getMe_id();
+		return memberService.selectInbodyList(me_id, date);
+	}
+	
 }

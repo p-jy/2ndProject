@@ -28,53 +28,69 @@
 		</div>
 		
 		<div class="form-group mt-3">
-			<label for="pw" class="form-label">비밀번호(4자리)</label>
-			<input type="password" class="form-control" id="groupPw" name="gr_pw" value="${group.gr_pw}">
-		</div>
-		<div class="form-group mt-3">
-			<label for="pw2" class="form-label">비밀번호 확인(4자리)</label>
-			<input type="password" class="form-control" id="groupPw2" name="gr_pw2" value="${group.gr_pw}">
+			
+			<!-- 
+			<label class="form-label">공개 여부(Y,N)을 입력하세요.</label>
+			<label class="form-label">Y => 공개, N => 비공개</label>
+			<input type="text" class="form-control" id="public" name="gr_public">
+			 -->
+			<label class="form-label">공개 여부(Y,N)을 선택하세요.</label>
+			<input type="radio"  id="public_y" name="gr_public"  value="Y" checked>Y
+			<input type="radio"  id="public_n" name="gr_public" value="N">N
+			
 		</div>
 		
+		<div class="form-group mt-3" id="passwordField">
+			<label for="pw" class="form-label">비밀번호(4자리)</label>
+			<input type="text" class="form-control" id="groupPw" name="gr_pw">	
+		</div>
+				
 		<div class="form-group mt-3">
 			<label class="form-label">소개글</label>
 			<textarea class="form-control" id="intro" name="gr_introduction" rows="10">${group.gr_introduction}</textarea>
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">공유할 기록</label>
-			<input type="text" class="form-control" id="recode" name="sr_gr_num" value="${group.sr_gr_num}">
+			<input type="text" class="form-control" id="recode" name="sr_gr_num" value="${group.sr_gr_num}" required>
 		</div>
 		<div class="form-group mt-3">
-			<label class="form-label">규칙</label>
-			<input type="text" class="form-control" id="rule" name="rl_rule" value="${group.rl_rule}">
+				<label class="form-label">규칙</label>
+				<input type="text" class="form-control" id="rule" name="ruleList[0].rl_rule">			 
+				<input type="text" class="form-control" id="rule" name="ruleList[1].rl_rule">
+				<input type="text" class="form-control" id="rule" name="ruleList[2].rl_rule">
+				<input type="text" class="form-control" id="rule" name="ruleList[3].rl_rule">
+				<input type="text" class="form-control" id="rule" name="ruleList[4].rl_rule">	
+			
 		</div>
+		
+		<div class="form-group mt-3">
+			<c:forEach items="${ruleList}" var="rule" varStatus="status">
+			    <!-- 숨겨진 PK 값 (rl_num) -->
+			    <input type="hidden" name="ruleList[${status.index}].rl_num" value="${rule.rl_num}" />
+			
+			    <!-- 규칙 내용 -->
+			    <input type="text" name="ruleList[${status.index}].rl_rule" value="${rule.rl_rule}" class="form-control" />
+			</c:forEach>
+		</div>
+		
 		<div class="form-group mt-3">
 			<label class="form-label">시작일</label>
 			<input type="text" class="form-control" id="startdate" name="gr_start_date" value="${group.gr_start_date}">
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">진행 기간</label>
-			<input type="text" class="form-control" id="period" name="gr_period" value="${group.gr_period}">
+			<input type="text" class="form-control" id="period" name="gr_period" value="${group.gr_period}" required>
 		</div>
 		
 		<div class="form-group mt-3">
 			<label class="form-label">최대정원</label>
-			<input type="text" class="form-control" id="person" name="gr_personnel" value="${group.gr_personnel}">
+			<input type="text" class="form-control" id="person" name="gr_personnel" value="${group.gr_personnel}" required>
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">목표</label>
-			<input type="text" class="form-control" id="goal" name="gg_gr_num" value="${group.gg_gr_num}">
+			<input type="text" class="form-control" id="goal" name="gg_gr_num" value="${group.gg_gr_num}" required>
 		</div>
-		<div class="form-group mt-3">
-			<label class="form-label">공개 여부(Y,N)을 입력하세요.</label>
-			<label class="form-label">Y => 공개, N => 비공개</label>
-			<input type="text" class="form-control" id="public" name="gr_public" value="${group.gr_public}">
-			<!--
-			<input type="radio"  id="public_y" name="gr_public" checked>Y
-			<input type="radio"  id="public_n" name="gr_public">N
-			 -->
-			
-		</div>
+		
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 수정하기</button>
 	</form>
 	<script type="text/javascript">
@@ -110,6 +126,28 @@
 				}
 			}
 		})
+	</script>
+	<script type="text/javascript">
+	 // DOM이 로딩되면 실행
+	    window.onload = function() {
+	        const radios = document.getElementsByName("gr_public");
+	        const pwField = document.getElementById("passwordField");
+	
+	        function togglePasswordField() {
+	            const selected = [...radios].find(r => r.checked).value;
+	            if (selected === "N") {
+	                pwField.style.display = "block";
+	            } else {
+	                pwField.style.display = "none";
+	            }
+	        }
+	
+	        // 라디오 버튼 변경 시마다 실행
+	        radios.forEach(r => r.addEventListener("change", togglePasswordField));
+	
+	        // 초기 상태 반영
+	        togglePasswordField();
+	    };
 	</script>
 </body>
 </html>
