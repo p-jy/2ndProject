@@ -31,7 +31,7 @@ public class RecordServiceImp implements RecordService{
 
 		//diet.setDi_Me_Id("irruyan"); 테스트 코드
 		
-		diet.setDi_Me_Id(user.getMe_id());
+		diet.setDi_me_id(user.getMe_id());
 		
 		return recordDAO.insertDietPost(diet);
 	}

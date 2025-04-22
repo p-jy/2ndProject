@@ -8,13 +8,14 @@ import lombok.Data;
 
 @Data
 public class DietVO {
-	int di_Num; 
-	String di_Name;
+	int di_num; 
+	String di_name;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	Date di_Date;
-	String di_AmPm; 
-	String di_Time; 
-	String di_Memo; 
-	String di_Me_Id;
+	Date di_date;
+	String di_amPm; 
+	String di_time; 
+	String di_memo; 
+	String di_me_id;
+	int di_score;
 
 }

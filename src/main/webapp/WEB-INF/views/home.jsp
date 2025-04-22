@@ -141,14 +141,14 @@
 			<div id="diet" class="container tab-pane active"><br>
 				<c:forEach var="diet" items="${dietList}">
 					<div class="form-group">
-					  <label for="di_Name">식단 이름 : </label>
-					  <input type="text" class="form-control" id="di_Name" value="${diet.di_Name }" readonly>
-					  <label for="di_Date">식단한 날짜 : </label>
-					  <input type="text" class="form-control" id="di_Date" value="${diet.di_Date }" readonly>
-					  <label for="di_AmPm">오전/오후 : </label>
-					  <input type="text" class="form-control" id="di_AmPm" value="${diet.di_AmPm }" readonly>
-					  <label for="di_Time">식단한 시간 : </label>
-					  <input type="text" class="form-control" id="di_Time" value="${diet.di_Time }" readonly>
+					  <label for="di_name">식단 이름 : </label>
+					  <input type="text" class="form-control" id="di_name" value="${diet.di_name }" readonly>
+					  <label for="di_date">식단한 날짜 : </label>
+					  <input type="text" class="form-control" id="di_date" value="${diet.di_date }" readonly>
+					  <label for="di_amPm">오전/오후 : </label>
+					  <input type="text" class="form-control" id="di_amPm" value="${diet.di_amPm }" readonly>
+					  <label for="di_time">식단한 시간 : </label>
+					  <input type="text" class="form-control" id="di_time" value="${diet.di_time }" readonly>
 					</div>
 				</c:forEach>				
 			</div>
