@@ -26,4 +26,8 @@ public interface MemberService {
 	void updateCookie(MemberVO user);
 
 	List<DietVO> selectDietList(String me_id, int date);
+
+	List<DietVO> selectWorkoutList(String me_id, int date);
+
+	List<DietVO> selectInbodyList(String me_id, int date);
 }

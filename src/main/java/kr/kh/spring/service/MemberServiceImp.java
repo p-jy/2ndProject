@@ -112,6 +112,22 @@ public class MemberServiceImp implements MemberService {
 		return memberDao.selectDietList(me_id, date);
 	}
 
+	@Override
+	public List<DietVO> selectWorkoutList(String me_id, int date) {
+		if(me_id == null || me_id == "") {
+			return null;
+		}
+		return memberDao.selectWorkoutList(me_id, date);
+	}
+
+	@Override
+	public List<DietVO> selectInbodyList(String me_id, int date) {
+		if(me_id == null || me_id == "") {
+			return null;
+		}
+		return memberDao.selectInbodyList(me_id, date);
+	}
+
 	
 	
 
