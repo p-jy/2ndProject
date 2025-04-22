@@ -3,6 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.GroupDAO">
+<resultMap type="Group_MemberVO" id="GroupMemberMap">
+	<result property="gm_gr_num" column="gm_gr_num"/>
+  	<result property="gm_me_id" column="gm_me_id"/>
+</resultMap>
+
+	<select id="countByGroupCode" resultType="int">
+		select count(*) from `group` where gr_code=#{code}
+	</select>
 	
 	<select id="selectGroupList" resultType="GroupVO">
 		select
@@ -15,11 +23,11 @@
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
 		insert into `group`
-			(gr_name, gr_pw, gr_introduction, gr_me_id
+			(gr_name, gr_code, gr_pw, gr_introduction, gr_me_id
 			, gr_start_date, gr_period,  gr_participant
 			, gr_personnel, gr_public) 
 		value
-			(#{group.gr_name},#{group.gr_pw} ,#{group.gr_introduction},#{group.gr_me_id}
+			(#{group.gr_name},#{group.gr_code} ,#{group.gr_pw} ,#{group.gr_introduction},#{group.gr_me_id}
 			,#{group.gr_start_date},#{group.gr_period}, 1
 			,#{group.gr_personnel},#{group.gr_public})			
 	</insert>
@@ -39,9 +47,9 @@
 		value(#{group.gg_gl_num}, #{group.gr_num})
 	</insert>
 	
-	<insert id="GroupMember" useGeneratedKeys="true" keyProperty="gm_num" >
+	<insert id="GroupMember"  useGeneratedKeys="true" keyProperty="gmVO.gm_num" >
 		insert into `group_member`(gm_me_id,gm_gr_num) 
-		value(#{group.gr_me_id}, #{group.gr_num})
+		value(#{gmVO.gm_me_id}, #{gmVO.gm_gr_num})
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVO">
@@ -55,13 +63,23 @@
 		select * from rule where rl_gr_num = #{gr_num}
 	</select>
 	
+	<select id="getAllRuleList" resultType="RuleVO">
+		select * from rule
+		join `group` on gr_num=rl_gr_num
+	</select>
+	
+	<select id="selectRuleList" resultType="RuleVO">
+		select * from rule
+		join `group` on gr_num=rl_gr_num
+		where rl_gr_num = #{gr_num}
+	</select>
+	
 	<update id="deleteGroup">
 		update 
 			`group`
 		set
 			gr_del = "Y",
 			gr_public = "N",
-			gr_name = null,
 			gr_pw = null,
 			gr_code = null,
 			gr_introduction = null,
@@ -112,10 +130,41 @@
 			gg_gr_num = #{group.gr_num}
 	</update>
   
-  	<select id="selectMemberList" resultType="Group_MemberVO">
+  	<select id="selectMemberList" resultMap="GroupMemberMap">
   		select * from `group_member`
   		join `group` on gm_gr_num = gr_num
+  		join `member` on gm_me_id = me_id
   		where gm_gr_num=#{gr_num}
   	</select>
   	
+  	<insert id="insertRule1" useGeneratedKeys="true" keyProperty="dbrule.rl_num">
+  		insert into rule(rl_rule,rl_gr_num)
+		value(#{dbrule.rl_rule},#{gr_num})
+  	</insert>
+  	
+  	<update id="updateRule1">
+  		update `rule`
+		set
+			rl_rule=#{dbrule.rl_rule}
+		where
+			rl_gr_num = #{rl_gr_num}
+  	</update>
+  	
+  	<select id="isMemberInGroup" resultType="boolean">
+  		select count(*) from `group_member`
+  		where gm_gr_num = #{gr_num} and gm_me_id=#{me_id}
+  	</select>
+  	
+  	<insert id="insertGroupMember" useGeneratedKeys="true" keyProperty="gm.rl_num">
+  		insert into `group_member`(gm_me_id,gm_gr_num)
+  		value(#{gm.gm_me_id},#{gm.gm_gr_num})
+  	</insert>
+  	
+  	
+  	<update id="updateParticipant">
+  		update `group`
+  		set gr_participant = gr_participant+1
+  		where gr_num=#{gr_num}
+  			
+  	</update>
 </mapper>

@@ -45,6 +45,11 @@
 		where me_id = #{user.me_id}
 	</update>
 	
+	<select id="selectMemberList" resultType="MemberVO">
+		select * from `member`
+		where me_del="N"
+	</select>
+
 	<select id="selectDietList" resultType="DietVO">
 		select
 			diet.*, me_id as di_me_id

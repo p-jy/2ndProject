@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.Pagination.Criteria;
 import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
+import kr.kh.spring.model.dto.GroupRuleListDTO;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.model.vo.RuleVO;
 import kr.kh.spring.service.GroupService;
+import kr.kh.spring.service.MemberService;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -29,6 +33,9 @@ public class GroupController {
 	
 	@Autowired
 	GroupService groupService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	//그룹 리스트 출력
 	@GetMapping("/list")
@@ -49,12 +56,20 @@ public class GroupController {
 	
 	//그룹 만들기
 	@PostMapping("/make")
-	public String makeGroup(Model model, GroupVO group, HttpSession session) {
+	public String makeGroup(Model model,GroupVO group, GroupRuleListDTO grList,
+			Group_MemberVO gmVO, HttpSession session) {
 		//유저 정보 호출
-		MemberVO user=(MemberVO) session.getAttribute("user");
+		MemberVO user=(MemberVO) session.getAttribute("user");		
+		
+		//규칙 리스트 호출
+		List<RuleVO> rule =grList.getRuleList();
+		
+		System.out.println(user);
+		System.out.println(group);		
+		System.out.println(rule);
 		//방 만들기
-		System.out.println(group);
-		if(groupService.insertGroup(group, user)) {
+		if(groupService.insertGroup(group, user, rule, gmVO)) {
+			
 			model.addAttribute("url", "/group/list");
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
 			return "msg/msg";
@@ -69,16 +84,22 @@ public class GroupController {
 	public String main(Model model,@PathVariable int gr_num, HttpSession session) {
 		//그룹 페이지 가져옴
 		GroupVO group = groupService.getGroup(gr_num);
-		GroupVO rule = groupService.getRule(gr_num);
+
+		//해당 그룹맴버 정보를 가져옴.
 		
-		group.setRl_num(rule.getRl_num());
-		group.setRl_rule(rule.getRl_rule());
-		group.setRl_gr_num(rule.getRl_gr_num());
+		//해당 그룹하고 같은 번호를 가진 규칙 테이블의 값들을 객체에 삽입.
+		List<RuleVO> ruleList=groupService.getRuleList(gr_num);
+		
+				
+		//해당 그룹하고 같은 번호를 가진 목표 테이블의 값들을 객체에 삽입.
+		
+		//해당 그룹하고 같은 번호를 가진 공유할 기록 테이블의 값들을 객체에 삽입.
 		
 		System.out.println(group);
-		
+		System.out.println(ruleList);
 		//화면에 전송
 		model.addAttribute("group", group);
+		model.addAttribute("ruleList", ruleList);
 		return "/group/main";
 	}
 	//그룹 삭제하기(작성중)
@@ -101,11 +122,6 @@ public class GroupController {
 	public String groupRemake(Model model, @PathVariable("gr_num")int gr_num, HttpSession session) {
 		//그룹 정보 호출
 		GroupVO group =groupService.getGroup(gr_num);
-		GroupVO rule = groupService.getRule(gr_num);
-		
-		group.setRl_num(rule.getRl_num());
-		group.setRl_rule(rule.getRl_rule());
-		group.setRl_gr_num(rule.getRl_gr_num());
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");
 		//로그인이 안되어있거나 그룹이 존재하지 않거나, 그룹장이 아닌경우
@@ -121,12 +137,14 @@ public class GroupController {
 	
 	//그룹 내용 수정하기(재작성)
 	@PostMapping("/remake")
-	public String remakeGroup(Model model, GroupVO group, 
-			HttpSession session) {
+	public String remakeGroup(Model model, GroupVO group, GroupRuleListDTO grList
+			,HttpSession session) {
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");
+		//해당 그룹 규칙 값 모두 받기
+		List<RuleVO> ruleList=grList.getRuleList();
 		//방 수정하기
-		if(groupService.updateGroup(group, user)) {
+		if(groupService.updateGroup(group, user, ruleList)) {
 			model.addAttribute("msg", "그룹을 수정하였습니다.");
 		}
 		//방 수정하기 실패했을 경우
@@ -139,16 +157,59 @@ public class GroupController {
 	
 	//그룹 맴버 리스트
 	@GetMapping("/groupmember/{gr_num}")
-	public String groupMember(Model model, @PathVariable("gr_num")int gr_num, HttpSession session) {
+	public String groupMember(Model model, @PathVariable("gr_num") int gr_num, HttpSession session) {
 		//맴버 정보를 가져옴
 		MemberVO user=(MemberVO) session.getAttribute("user");
+		List<MemberVO> members = memberService.getMemberList();
+		GroupVO group = groupService.getGroup(gr_num);
+		System.out.println("그룹번호 : "+gr_num);
+		
+		System.out.println(members);
+		
 		//그룹맴버 페이지를 가져옴
 		List<Group_MemberVO> memberList = groupService.getMemberList(gr_num,user);
 		System.out.println(memberList);
 		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("group", group);
+		model.addAttribute("gr_num", gr_num);
 		return "/group/groupmember";
 	}
+	
+	//맴버 초대하기 기능
+	@GetMapping("/invitation/{gr_num}")
+	public String invitation(Model model,@PathVariable int gr_num, HttpSession session) {
+		MemberVO user=(MemberVO) session.getAttribute("user");
+		GroupVO group = groupService.getGroup(gr_num);
+		
+		model.addAttribute("group", group);
+		model.addAttribute("gr_num", gr_num);
+		return "/group/invitation";
+	}
+	//맴버가 해당 그룹에 들어가기 위해 가입신청을 누름
+	
+	//그룹장이 초대하고 싶은 맴버에게 코드를 보냄
+	@PostMapping("/invitation/{gr_num}")
+	public String inviteUser(@PathVariable("gr_num") int gr_num,
+	                         @RequestParam("inviteId") String inviteId,
+	                         HttpSession session,
+	                         Model model) {
+	    MemberVO inviter = (MemberVO) session.getAttribute("user");
+
+	    // 로그인 체크 & 권한 확인 (그룹장만 초대 가능 등)
+	    if (inviter == null || !groupService.isGroupLeader(gr_num, inviter.getMe_id())) {
+	        model.addAttribute("msg", "그룹장만 초대할 수 있습니다.");
+	        model.addAttribute("url", "/group/main/" + gr_num);
+	        return "msg/msg";
+	    }
+
+	    boolean result = groupService.inviteMemberToGroup(gr_num, inviteId);
+
+	    model.addAttribute("msg", result ? "초대가 완료되었습니다." : "초대에 실패했습니다.");
+	    model.addAttribute("url", "/group/main/" + gr_num);
+	    return "msg/msg";
+	}
+	//그룹장이 가입신청 리스트를 보고 수락하고 싶은 유저를 골라 해당 그룹에 초대
 	
 	
 	@GetMapping("/message")
