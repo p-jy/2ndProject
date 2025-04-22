@@ -13,9 +13,9 @@ public class DietVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date di_date;
 	String di_amPm; 
-	String di_time; 
+	String di_time;
+	int di_score;
 	String di_memo; 
 	String di_me_id;
-	int di_score;
 
 }
