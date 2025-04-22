@@ -8,25 +8,35 @@
 
 </head>
 <body>
-	<h1>맴버리스트를 출력해봅시다.</h1>
-	<table>
+	<div class="title justify-content-center mb-3">
+		<h1>그룹 ${group.gr_name} 맴버</h1>
+	</div>
+	
+	<table class="table table-hover table-primary">
 		<thead>
 			<tr>
 				<th>맴버이름</th>
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${memberList}" var="group">
-		
-		</c:forEach>
+		<c:forEach items="${memberList}" var="group_member">
 			<tr>
 				<td>${group_member.gm_me_id}</td>
 			</tr>
-		</tbody>
-		
+		</c:forEach>			
+		</tbody>		
 	</table>
 	<div class="d-flex justify-content-between">
-		<a href='<c:url value="/group/list"/>' class="btn">그룹리스트로 돌아가기</a>		
+		<a href='<c:url value="/group/main/${group.gr_num}"/>' class="btn btn-back">그룹으로 돌아가기</a>		
+		<c:if test="${user.me_id eq group.gr_me_id}">
+			<div class="btns">
+				<a href='<c:url value="/group/invitation/${group.gr_num}"/>' class="btn">맴버 초대하기</a>
+			</div>
+		</c:if>
 	</div>
+	
 </body>
+<script type="text/javascript">
+	
+</script>
 </html>

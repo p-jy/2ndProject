@@ -26,5 +26,11 @@ public interface MemberDAO {
 	void updateCookie(@Param("user")MemberVO user);
 
 	List<DietVO> selectDietList(@Param("me_id")String me_id, @Param("date")int date);
+  
+	List<MemberVO> selectMemberList();
+  
+	List<DietVO> selectWorkoutList(@Param("me_id")String me_id, @Param("date")int date);
+
+	List<DietVO> selectInbodyList(@Param("me_id")String me_id, @Param("date")int date);
 	
 }
