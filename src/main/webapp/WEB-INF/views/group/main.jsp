@@ -33,7 +33,7 @@
 					<div class="form-group mt-3">
 						<label class="form-label">규칙</label>
 						<c:forEach items="${ruleList}" var="rule">
-							<input type="text" class="form-control" value="${rule.rl_rule}" readonly>
+							<input type="text" class="form-control" value="${ruleList[0].rl_rule}" readonly>
 						</c:forEach>
 						
 					</div>

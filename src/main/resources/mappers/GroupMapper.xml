@@ -49,7 +49,7 @@
 	
 	<insert id="GroupMember"  useGeneratedKeys="true" keyProperty="gm_num" >
 		insert into `group_member`(gm_me_id,gm_gr_num) 
-		value(#{group.gr_me_id}, #{group.gr_num})
+		value(#{gmVO.gm_me_id}, #{gmVO.gm_gr_num})
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVO">
@@ -61,6 +61,17 @@
 	
 	<select id="selectRule" resultType="GroupVO">
 		select * from rule where rl_gr_num = #{gr_num}
+	</select>
+	
+	<select id="getAllRuleList" resultType="RuleVO">
+		select * from rule
+		join `group` on gr_num=rl_gr_num
+	</select>
+	
+	<select id="selectRuleList" resultType="RuleVO">
+		select * from rule
+		join `group` on gr_num=rl_gr_num
+		where rl_gr_num = #{gr_num}
 	</select>
 	
 	<update id="deleteGroup">
@@ -125,5 +136,18 @@
   		join `member` on gm_me_id = me_id
   		where gm_gr_num=#{gr_num}
   	</select>
+  	
+  	<insert id="insertRule1" useGeneratedKeys="true" keyProperty="dbrule.rl_num">
+  		insert into rule(rl_rule,rl_gr_num)
+		value(#{dbrule.rl_rule},#{gr_num})
+  	</insert>
+  	
+  	<update id="updateRule1">
+  		update `rule`
+		set
+			rl_rule=#{dbrule.rl_rule}
+		where
+			rl_gr_num = #{rl_gr_num}
+  	</update>
   	
 </mapper>

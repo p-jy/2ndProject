@@ -44,6 +44,10 @@ public class GroupVO {
 	private int sr_rc_num;
 	private int sr_gr_num;
 	
+	//그룹맴버 테이블
+	private int gm_num;
+	private String gm_me_id;
+	private int gm_gr_num;
 	
 	
 	

@@ -16,9 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.kh.spring.Pagination.Criteria;
 import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
+import kr.kh.spring.model.dto.GroupRuleListDTO;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.model.vo.RuleVO;
 import kr.kh.spring.service.GroupService;
 import kr.kh.spring.service.MemberService;
 import lombok.extern.log4j.Log4j;
@@ -53,12 +55,18 @@ public class GroupController {
 	
 	//그룹 만들기
 	@PostMapping("/make")
-	public String makeGroup(Model model, GroupVO group, HttpSession session) {
+	public String makeGroup(Model model,GroupVO group, GroupRuleListDTO grList,HttpSession session) {
 		//유저 정보 호출
-		MemberVO user=(MemberVO) session.getAttribute("user");
+		MemberVO user=(MemberVO) session.getAttribute("user");		
+		
+		//규칙 리스트 호출
+		List<RuleVO> rule =grList.getRuleList();
+		
+		System.out.println(user);
+		System.out.println(group);		
+		System.out.println(rule);
 		//방 만들기
-		System.out.println(group);
-		if(groupService.insertGroup(group, user)) {
+		if(groupService.insertGroup(group, user, rule)) {
 			model.addAttribute("url", "/group/list");
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
 			return "msg/msg";
@@ -73,21 +81,22 @@ public class GroupController {
 	public String main(Model model,@PathVariable int gr_num, HttpSession session) {
 		//그룹 페이지 가져옴
 		GroupVO group = groupService.getGroup(gr_num);
-		GroupVO rule = groupService.getRule(gr_num);
+
 		//해당 그룹맴버 정보를 가져옴.
 		
 		//해당 그룹하고 같은 번호를 가진 규칙 테이블의 값들을 객체에 삽입.
-		group.setRl_num(rule.getRl_num());
-		group.setRl_rule(rule.getRl_rule());
-		group.setRl_gr_num(rule.getRl_gr_num());
+		List<RuleVO> ruleList=groupService.getRuleList(gr_num);
+		
+				
 		//해당 그룹하고 같은 번호를 가진 목표 테이블의 값들을 객체에 삽입.
 		
 		//해당 그룹하고 같은 번호를 가진 공유할 기록 테이블의 값들을 객체에 삽입.
 		
 		System.out.println(group);
-		
+		System.out.println(ruleList);
 		//화면에 전송
 		model.addAttribute("group", group);
+		model.addAttribute("ruleList", ruleList);
 		return "/group/main";
 	}
 	//그룹 삭제하기(작성중)
@@ -110,11 +119,6 @@ public class GroupController {
 	public String groupRemake(Model model, @PathVariable("gr_num")int gr_num, HttpSession session) {
 		//그룹 정보 호출
 		GroupVO group =groupService.getGroup(gr_num);
-		GroupVO rule = groupService.getRule(gr_num);
-		
-		group.setRl_num(rule.getRl_num());
-		group.setRl_rule(rule.getRl_rule());
-		group.setRl_gr_num(rule.getRl_gr_num());
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");
 		//로그인이 안되어있거나 그룹이 존재하지 않거나, 그룹장이 아닌경우
@@ -130,12 +134,14 @@ public class GroupController {
 	
 	//그룹 내용 수정하기(재작성)
 	@PostMapping("/remake")
-	public String remakeGroup(Model model, GroupVO group, 
-			HttpSession session) {
+	public String remakeGroup(Model model, GroupVO group
+			,HttpSession session) {
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");
+		//해당 그룹 규칙 값 모두 받기
+		List<RuleVO> ruleList=groupService.allRuleList();
 		//방 수정하기
-		if(groupService.updateGroup(group, user)) {
+		if(groupService.updateGroup(group, user, ruleList)) {
 			model.addAttribute("msg", "그룹을 수정하였습니다.");
 		}
 		//방 수정하기 실패했을 경우

@@ -55,8 +55,13 @@
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">규칙</label>
-			<input type="text" class="form-control" id="rule" name="rl_rule" value="${group.rl_rule}">
-			<!-- 
+			<input type="text" class="form-control" id="rule" name="ruleList[0].rl_rule">			 
+			<input type="text" class="form-control" id="rule" name="ruleList[1].rl_rule">
+			<input type="text" class="form-control" id="rule" name="ruleList[2].rl_rule">
+			<input type="text" class="form-control" id="rule" name="ruleList[3].rl_rule">
+			<input type="text" class="form-control" id="rule" name="ruleList[4].rl_rule">
+			<!--
+			<input type="text" class="form-control" id="rule" name="rl_rule" value="${group.rl_rule}"> 
 			<input type="text" class="form-control" id="rule" name="rl_rule">
 			<input type="text" class="form-control" id="rule" name="rl_rule">
 			<input type="text" class="form-control" id="rule" name="rl_rule">
