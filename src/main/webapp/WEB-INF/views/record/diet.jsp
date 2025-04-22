@@ -44,20 +44,20 @@
 			</label>
 		</div>
 		<div class="form-group">
-		  	<label for="di_Name" class="form-label">식단 이름 : </label>
-		  	<input type="text" class="form-control" name="di_Name" id="di_Name">
+		  	<label for="di_name" class="form-label">식단 이름 : </label>
+		  	<input type="text" class="form-control" name="di_name" id="di_name">
 		</div>
 		<div class="form-group">
-			<label for="di_Date" class="form-label">식단한 날짜 : </label>
-		  	<input type="text" class="form-control" name="di_Date" id="di_Date">
+			<label for="di_date" class="form-label">식단한 날짜 : </label>
+		  	<input type="text" class="form-control" name="di_date" id="di_date">
 		</div>
 		<div class="form-group">
-			<label for="di_AmPm" class="form-label">오전/오후 : </label>
-		  	<input type="text" class="form-control" name="di_AmPm" id="di_AmPm">
+			<label for="di_amPm" class="form-label">오전/오후 : </label>
+		  	<input type="text" class="form-control" name="di_amPm" id="di_amPm">
 		</div>
 		<div class="form-group">
-			<label for="di_Time" class="form-label">식단한 시간 : </label>
-		 	<input type="text" class="form-control" name="di_Time" id="di_Time">
+			<label for="di_time" class="form-label">식단한 시간 : </label>
+		 	<input type="text" class="form-control" name="di_time" id="di_time">
 		</div>
 		<button type="submit" class="btn btn-outline-secondary btn-block">등록하기</button>
 	</form>
