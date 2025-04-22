@@ -30,6 +30,9 @@
 
 .chart {
 	width: 70%;
+}
+.chart-container {
+	display: flex;
 	
 }
 </style>
@@ -38,242 +41,303 @@
 	<div class="period-tab">
 		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item"><a class="nav-link period week active"
-				data-target="week" onclick="week()">7일</a></li>
+				data-target="week">7일</a></li>
 			<li class="nav-item"><a class="nav-link period month"
-				data-target="month" onclick="month()">1개월</a></li>
+				data-target="month">1개월</a></li>
 			<li class="nav-item"><a class="nav-link period months"
-				data-target="months" onclick="months()">3개월</a></li>
+				data-target="months">3개월</a></li>
 			<li class="nav-item"><a class="nav-link period year"
-				data-target="year" onclick="year()">1년</a></li>
+				data-target="year">1년</a></li>
 		</ul>
 	</div>
 	<div class="type-tab mt-2">
 		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item"><a class="nav-link type diet active"
-				data-target="diet" onclick="diet()">식단</a></li>
+				data-target="diet">식단</a></li>
 			<li class="nav-item"><a class="nav-link type workout"
-				data-target="workout" onclick="workout()">운동</a></li>
+				data-target="workout">운동</a></li>
 			<li class="nav-item"><a class="nav-link type inbody"
-				data-target="inbody" onclick="inbody()">신체</a></li>
+				data-target="inbody">신체</a></li>
 		</ul>
 	</div>
 
-	<div class="chart-container">
+	<div class="chart-container justify-content-center">
 		<div class="chart mt-3">
 			<canvas id="chart"></canvas>
 		</div>
 	</div>
-
 	<script type="text/javascript">
-		var $period = $('.period');
-		var $type = $('.type');
-
-		var period = $(".period.active").data("target");
-		var type = $(".type.active").data("target");
-		var date = 7;
-		
+		let chartInstance = null;
+		let data = [];
+		let period = "week";
+		let type = "diet";
+		let date = 7;
+	
 		const x = [];
-		const y = [0,0,0,0,0,0,0];
-		
-		$period.click(function() {
-			$(this).addClass('active');
-			$period.not(this).removeClass('active');
+		const y = [];
+		const datasets = [];
+	
+		$(document).ready(function () {
+			setDateByPeriod();
+			updateChart();
 		});
-		$type.click(function() {
+	
+		$('.period').click(function () {
+			$('.period').removeClass('active');
 			$(this).addClass('active');
-			$type.not(this).removeClass('active');
+			period = $(this).data('target');
+			setDateByPeriod();
+			updateChart();
 		});
-		
-		
-		let data = dietAjax();
-		scoreAVG();
-		createDietChart(x, y);
-		
-		function diet() {
-			checkPeriod();
-			data = dietAjax();
-		}
-		function workout() {
-			checkPeriod();
-			data = workoutAjax();
-		}
-		function inbody() {
-			checkPeriod();
-			data = inbodyAjax();
-		}
-		function week() {
-			date = 7;
-			data = typeAjax();
-		}
-		function month() {
-			date = 30;
-			data = typeAjax();
-		}
-		function months() {
-			date = 90;
-			data = typeAjax();
-		}
-		function year() {
-			date = 365;
-			data = typeAjax();
-		}
-
-		function typeAjax() {
-			type = $(".type.active").data("target");
-
-			if (type === "diet") {
-				dietAjax();
-			}
-			if (type === "workout") {
-				workoutAjax();
-			}
-			if (type === "inbody") {
-				inbodyAjax();
+	
+		$('.type').click(function () {
+			$('.type').removeClass('active');
+			$(this).addClass('active');
+			type = $(this).data('target');
+			updateChart();
+		});
+	
+		function setDateByPeriod() {
+			switch (period) {
+				case 'week': date = 7; break;
+				case 'month': date = 28; break;
+				case 'months': date = 84; break;
+				case 'year': date = 360; break;
 			}
 		}
-
-		function checkPeriod() {
-			period = $(".period.active").data("target");
-			if (period === "week") {
-				date = 7;
+	
+		function fetchData(callback) {
+			let url = '';
+			if (type === 'diet') {
+				url = '<c:url value="/chart/diet"/>';
 			}
-			if (period === "month") {
-				date = 30;
+			if (type === 'workout') {
+				url = '<c:url value="/chart/workout"/>';
 			}
-			if (period === "months") {
-				date = 90;
+			if (type === 'inbody') {
+				url = '<c:url value="/chart/inbody"/>';
 			}
-			if (period === "year") {
-				date = 365;
-			}
-		}
-
-		function dietAjax() {
-			let res;
+	
 			$.ajax({
-				async : false,
-				url : '<c:url value="/chart/diet"/>',
-				type : 'post',
-				data : {
-					date : date
+				type: 'post',
+				url: url,
+				data: { date: date },
+				success: function (res) {
+					data = res;
+					callback();
 				},
-				success : function(data) {
-					res = data;
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-
+				error: function () {
+					console.error("데이터 호출 실패");
 				}
 			});
-			return res;
 		}
-
-		function workoutAjax() {
-			let res;
-			$.ajax({
-				async : false,
-				url : '<c:url value="/chart/workout"/>',
-				type : 'post',
-				data : {
-					date : date
-				},
-				success : function(data) {
-					res = data;
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-
-				}
+	
+		function updateChart() {
+			fetchData(() => {
+				scoreAVG();
 			});
-			return res;
 		}
-
-		function inbodyAjax() {
-			let res;
-			$.ajax({
-				async : false,
-				url : '<c:url value="/chart/inbody"/>',
-				type : 'post',
-				data : {
-					date : date
-				},
-				success : function(data) {
-					res = data;
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-
-				}
-			});
-			return res;
-		}
-
+	
 		function createDietChart(x, y) {
-			new Chart("chart", {
-				type : "bar",
-				data : {
-					labels : x,
-					datasets : [ {
-						data : y
-					} ]
+			let bgColors = [];
+	
+			if (type === 'diet') {
+				y.forEach(score => {
+					if (score <= 1) bgColors.push('#ffd5d5');
+					else if (score <= 2) bgColors.push('#ffe5b4');
+					else if (score <= 3) bgColors.push('#fffac8');
+					else if (score <= 4) bgColors.push('#d5fdd5');
+					else bgColors.push('#cce5ff');
+				});
+			} else {
+				bgColors = Array(y.length).fill('#cce5ff');
+			}
+	
+			if (chartInstance) chartInstance.destroy();
+	
+			chartInstance = new Chart("chart", {
+				type: "bar",
+				data: {
+					labels: x,
+					datasets: [{
+						data: y,
+						backgroundColor: bgColors
+					}]
 				},
-				options : {
-					legend : {
-						display : false
-					},
-					scales : {
-						yAxes : [ {
-							ticks : {
-								beginAtZero : true
+				options: {
+					legend: { display: false },
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true,
+								max: type === 'diet' ? 5 : undefined,
+								stepSize: type === 'diet' ? 1 : undefined
 							}
-						} ]
-					},
-
-					title : {
-						display : false,
-						text : "World Wine Production 2018"
+						}]
 					}
 				}
 			});
 		}
-		
-		function scoreAVG() {
-			let d = [];
-			console.log(data);
-			for(var i in data) {
-				let day;
-				let score = data[i].di_score;
-				let getDay = (new Date(data[i].di_date)).getDay()
-				if(getDay === 1) {
-					day = "월";
-				} else if(getDay === 2) {
-					day = "화";
-				} else if(getDay === 3) {
-					day = "수";
-				} else if(getDay === 4) {
-					day = "목";
-				} else if(getDay === 5) {
-					day = "금";
-				} else if(getDay === 6) {
-					day = "토";
-				} else {
-					day = "일";
-				}
-				d.push({score:score, day:day});
-			}
-			console.log(d);
-			let count = 0;
-			let sum = 0;
-			let avg = 0;
-			for(let i = 0; i < d.length - 1; i++) {
-				for(let j = 1; j < d.length; j++) {
-					if(d[i].day === d[j].day) {
-						count++;
-						sum += d[i].score;
+	
+		function createGroupedChart(x, datasets) {
+			if (chartInstance) chartInstance.destroy();
+	
+			chartInstance = new Chart("chart", {
+				type: "bar",
+				data: {
+					labels: x,
+					datasets: datasets
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true,
+								max: type === 'diet' ? 5 : undefined,
+								stepSize: type === 'diet' ? 1 : undefined
+							}
+						}]
+					},
+					legend: {
+						display: true
 					}
 				}
+			});
+		}
+	
+		function scoreAVG() {
+			const today = new Date();
+			x.length = 0;
+			y.length = 0;
+			datasets.length = 0;
+	
+			let valueKey = 'di_score';
+			if (type === 'workout') valueKey = 'wo_minute';
+			if (type === 'inbody') valueKey = 'ib_weight';
+	
+			if (date === 7) {
+				const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+				const scoresMap = {};
+	
+				for (let i = 6; i >= 0; i--) {
+					const d = new Date(today);
+					d.setDate(d.getDate() - i);
+					const dayName = dayNames[d.getDay()];
+					x.push(dayName);
+					scoresMap[dayName] = [];
+				}
+	
+				for (let i = 0; i < data.length; i++) {
+					const entry = data[i];
+					const d = new Date(parseInt(entry.di_date));
+					const dayName = dayNames[d.getDay()];
+					if (scoresMap[dayName] && entry[valueKey] != null) {
+						scoresMap[dayName].push(entry[valueKey]);
+					}
+				}
+	
+				x.forEach(day => {
+					const arr = scoresMap[day];
+					const avg = arr.length > 0
+						? (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(1)
+						: 0;
+					y.push(parseFloat(avg));
+				});
+	
+				createDietChart(x, y);
+				return;
 			}
-			avg = sum / count;
-			console.log(avg);
+	
+			let groupCount = 1, subgroupSize = 7;
+			if (date === 28) { groupCount = 4; subgroupSize = 7; }
+			else if (date === 84) { groupCount = 3; subgroupSize = 28; }
+			else if (date === 360) { groupCount = 4; subgroupSize = 90; }
+	
+			for (let g = 0; g < groupCount; g++) {
+				const groupEnd = new Date(today);
+				groupEnd.setDate(today.getDate() - (g * subgroupSize));
+	
+				const groupStart = new Date(groupEnd);
+				groupStart.setDate(groupEnd.getDate() - subgroupSize + 1);
+	
+				const label =
+					((groupStart.getMonth() + 1) + '/' + (groupStart.getDate())) +
+					'~' +
+					((groupEnd.getMonth() + 1) + '/' + (groupEnd.getDate()));
+				x.unshift(label);
+				
+				const subGroupCount = (date === 84) ? 4 : (date === 360 ? 3 : 1);
+				const subSize = subgroupSize / subGroupCount;
+				const yGroup = [];
+	
+				for (let s = 0; s < subGroupCount; s++) {
+					const subStart = new Date(groupStart);
+					subStart.setDate(subStart.getDate() + (s * subSize));
+					const subEnd = new Date(subStart);
+					subEnd.setDate(subEnd.getDate() + subSize - 1);
+	
+					const subValues = data.filter(d => {
+						const dDate = new Date(parseInt(d.di_date));
+						return dDate >= subStart && dDate <= subEnd && d[valueKey] != null;
+					}).map(d => d[valueKey]);
+	
+					const avg = subValues.length > 0
+						? (subValues.reduce((a, b) => a + b, 0) / subValues.length).toFixed(1)
+						: 0;
+	
+					yGroup.push(parseFloat(avg));
+				}
+	
+				y.unshift(yGroup);
+			}
+	
+			if (type === 'diet') {
+				const scoreRanges = [
+					{ min: 0, max: 1, label: '1점', color: '#ffd5d5' },
+					{ min: 1, max: 2, label: '2점', color: '#ffe5b4' },
+					{ min: 2, max: 3, label: '3점', color: '#fffac8' },
+					{ min: 3, max: 4, label: '4점', color: '#d5fdd5' },
+					{ min: 4, max: 5.1, label: '5점', color: '#cce5ff' }
+				];
+	
+				const groupedData = y.map(group => {
+					const counts = [0, 0, 0, 0, 0];
+					group.forEach(score => {
+						score = parseFloat(score);
+						for (let i = 0; i < scoreRanges.length; i++) {
+							if (score > scoreRanges[i].min && score <= scoreRanges[i].max) {
+								counts[i]++;
+								break;
+							}
+						}
+					});
+					return counts;
+				});
+	
+				for (let i = 0; i < scoreRanges.length; i++) {
+					datasets.push({
+						label: scoreRanges[i].label,
+						data: groupedData.map(group => group[i]),
+						backgroundColor: scoreRanges[i].color
+					});
+				}
+	
+				createGroupedChart(x, datasets);
+				return;
+			}
+	
+			const barCount = y[0].length;
+			for (let i = 0; i < barCount; i++) {
+				datasets.push({
+					label: `${i + 1}번째`,
+					data: y.map(group => group[i]),
+					backgroundColor: '#cce5ff'
+				});
+			}
+	
+			createGroupedChart(x, datasets);
 		}
 	</script>
-
+	
 </body>
 </html>
