@@ -54,6 +54,9 @@
 						</div>
 					</td>
 				</tr>
+				<tr>
+				  <td><span id="title-error" style="color: red;"></span></td>
+				</tr>
 			</tbody>
 		</table>
 		<table class="dayOfWeek">
@@ -71,6 +74,9 @@
 					<td><input type="checkbox" id="days" name="dy_day" value="금">금</td>
 					<td><input type="checkbox" id="days" name="dy_day" value="토">토</td>
 					<td><input type="checkbox" id="days" name="dy_day" value="일">일</td>
+				</tr>
+				<tr>
+				  <td colspan="7"><span id="day-error" style="color: red;"></span></td>
 				</tr>
 			</tbody>
 		</table>
@@ -97,6 +103,9 @@
 					<td><label for="option4">생활</label></td>
 					<td><input type="checkbox" id="option4" name="pl_mc_num" value="4" class="only-one"></td>
 				</tr>
+				<tr>
+				  <td colspan="2"><span id="division-error" style="color: red;"></span></td>
+				</tr>
 			</tbody>
 		</table>
 		<table class="processPeriod">
@@ -112,6 +121,9 @@
 							<input type="text" id="period" name="pl_period" placeholder="예) 30">
 						</div>
 					</td>
+				</tr>
+				<tr>
+				  <td><span id="period-error" style="color: red;"></span></td>
 				</tr>
 			</tbody>
 		</table>
@@ -148,5 +160,92 @@
 		})
 	</script>
 	
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	const titleInput = document.getElementById("title");
+	const daysCheckboxes = document.querySelectorAll("input[name='dy_day']");
+	const divisionCheckboxes = document.querySelectorAll("input[name='pl_mc_num']");
+	const periodInput = document.getElementById("period");
+	const submitBtn = document.querySelector(".btn-makeplan");
+	
+	const titleError = document.getElementById("title-error");
+	const dayError = document.getElementById("day-error");
+	const divisionError = document.getElementById("division-error");
+	const periodError = document.getElementById("period-error");
+	
+	// 실시간 유효성 제거
+	titleInput.addEventListener("input", () => {
+	if (titleInput.value.trim() !== "") {
+		titleError.innerText = "";
+		}
+	});
+	
+	periodInput.addEventListener("input", () => {
+	const val = periodInput.value.trim();
+	if (val !== "" && !isNaN(val) && parseInt(val) > 0) {
+		periodError.innerText = "";
+		}
+	});
+	
+	daysCheckboxes.forEach(cb => {
+	cb.addEventListener("change", () => {
+	if (document.querySelectorAll("input[name='dy_day']:checked").length > 0) {
+			dayError.innerText = "";
+			}
+		});
+	});
+	
+	divisionCheckboxes.forEach(cb => {
+	cb.addEventListener("change", () => {
+	if (document.querySelectorAll("input[name='pl_mc_num']:checked").length > 0) {
+			divisionError.innerText = "";
+			}
+		});
+	});
+	
+	// 제출 시 유효성 검사
+	submitBtn.addEventListener("click", function (e) {
+	let isValid = true;
+	
+	const title = titleInput.value.trim();
+	const days = document.querySelectorAll("input[name='dy_day']:checked");
+	const division = document.querySelectorAll("input[name='pl_mc_num']:checked");
+	const period = periodInput.value.trim();
+	
+	// 초기화
+	titleError.innerText = "";
+	dayError.innerText = "";
+	divisionError.innerText = "";
+	periodError.innerText = "";
+	
+	if (title === "") {
+		titleError.innerText = "제목을 입력해주세요.";
+		isValid = false;
+	}
+	
+	if (days.length === 0) {
+		dayError.innerText = "요일을 하나 이상 선택해주세요.";
+		isValid = false;
+	}
+	
+	if (division.length === 0) {
+		divisionError.innerText = "분류를 하나 선택해주세요.";
+		isValid = false;
+	}
+	
+	if (period === "") {
+		periodError.innerText = "진행 기간을 입력해주세요.";
+		isValid = false;
+	} else if (isNaN(period) || parseInt(period) <= 0) {
+		periodError.innerText = "유효한 숫자를 입력해주세요.";
+		isValid = false;
+	}
+	
+	if (!isValid) {
+			e.preventDefault(); // 제출 막기
+			}
+		});
+	});
+</script>
 </body>
 </html>
