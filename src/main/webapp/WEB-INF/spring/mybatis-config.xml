@@ -11,5 +11,8 @@
 		<typeAlias type="kr.kh.spring.model.vo.WorkoutVO" alias="WorkoutVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.Group_MemberVO" alias="Group_MemberVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.RuleVO" alias="RuleVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.RecordVO" alias="RecordVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.Share_RecordVO" alias="Share_RecordVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.MajorCateVO" alias="MajorCateVO"/>
 	</typeAliases>
 </configuration>

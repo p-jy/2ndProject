@@ -50,8 +50,11 @@
 			<textarea class="form-control" id="intro" name="gr_introduction" rows="10"></textarea>
 		</div>
 		<div class="form-group mt-3">
-			<label class="form-label">공유할 기록</label>
-			<input type="text" class="form-control" id="recode" name="sr_gr_num">
+			<label class="form-label">공유할 기록</label><br>
+		    <label><input type="checkbox" name="sharerecordList[0].sr_rc_num" value="1"> 운동</label>
+		    <label><input type="checkbox" name="sharerecordList[1].sr_rc_num" value="2"> 식단</label>
+		    <label><input type="checkbox" name="sharerecordList[2].sr_rc_num" value="3"> 신체</label>
+		    <label><input type="checkbox" name="sharerecordList[3].sr_rc_num" value="4"> 생활</label>
 		</div>
 		<div class="form-group mt-3">
 			<label class="form-label">규칙</label>
@@ -76,8 +79,15 @@
 			<input type="text" class="form-control" id="person" name="gr_personnel">
 		</div>
 		<div class="form-group mt-3">
-			<label class="form-label">목표</label>
-			<input type="text" class="form-control" id="goal" name="gg_gr_num">
+			 <label class="form-label">그룹목표</label>
+		     <select class="form-control" name="goal">
+		         <option name="" value="1">체지방 줄이기</option>
+		         <option value="2">근육량 늘리기</option>
+		         <option value="3">체력 키우기</option>
+		         <option value="4">바디 프로필</option>
+		         <option value="5">몸 유지하기</option>
+		         <option value="6">건강한 습관 만들기</option>
+		     </select>
 		</div>
 		
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 만들기</button>

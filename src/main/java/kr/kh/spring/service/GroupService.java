@@ -9,8 +9,10 @@ import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
+import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
+import kr.kh.spring.model.vo.Share_RecordVO;
 
 public interface GroupService {
 
@@ -18,7 +20,7 @@ public interface GroupService {
 
 	List<RuleVO> allRuleList();
 	
-	boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule, Group_MemberVO gmVO);
+	boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule, Group_MemberVO gmVO, List<Share_RecordVO> sr);
 
 	GroupVO getGroup(int gr_num);
 
@@ -35,6 +37,10 @@ public interface GroupService {
 	boolean inviteMemberToGroup(int gr_num, String inviteId);
 
 	boolean isGroupLeader(int gr_num, String me_id);
+
+	List<Share_RecordVO> getSRList(int gr_num);
+
+	List<MajorCateVO> getMCList();
 
 
 

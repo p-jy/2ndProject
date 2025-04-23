@@ -3,9 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.GroupDAO">
+
 <resultMap type="Group_MemberVO" id="GroupMemberMap">
 	<result property="gm_gr_num" column="gm_gr_num"/>
   	<result property="gm_me_id" column="gm_me_id"/>
+</resultMap>
+
+<resultMap type="Share_RecordVO" id="ShareRecordMap">
+	<result property="sr_rc_num" column="sr_rc_num"/>
+	<result property="sr_gr_num" column="sr_gr_num"/>
 </resultMap>
 
 	<select id="countByGroupCode" resultType="int">
@@ -19,6 +25,15 @@
 		where gr_public="Y" and gr_del="N"
 		order by gr_num desc
 		
+	</select>
+	
+	<select id="selectMajorCateList" resultType="MajorCateVO">
+		select * from `major_cate`
+		order by mc_num 
+	</select>
+	
+	<select id="selectSRList" resultMap="ShareRecordMap">
+		select * from `share_record` where sr_gr_num=#{gr_num}
 	</select>
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
@@ -35,16 +50,6 @@
 	<insert id="insertRule" useGeneratedKeys="true" keyProperty="group.rl_num">
 		insert into rule(rl_rule,rl_gr_num)
 		value(#{group.rl_rule},#{group.gr_num})
-	</insert>
-	
-	<insert id="insertShareRecode" useGeneratedKeys="true" keyProperty="group.sr_num">
-		insert into `share_record`(sr_rc_num, sr_gr_num)
-		value(#{group.sr_rc_num}, #{group.gr_num})
-	</insert>
-	
-	<insert id="insertGroupGoal" useGeneratedKeys="true" keyProperty="group.gg_num">
-		insert into `group_goal`(gg_gl_num, gg_gr_num)
-		value(#{group.gg_gl_num}, #{group.gr_num})
 	</insert>
 	
 	<insert id="GroupMember"  useGeneratedKeys="true" keyProperty="gmVO.gm_num" >
@@ -104,30 +109,6 @@
 			gr_public = #{group.gr_public}
 		where
 			gr_num = #{group.gr_num}
-	</update>
-	
-	<update id="updateRule">
-		update `rule`
-		set
-			rl_rule=#{group.rl_rule}
-		where
-			rl_gr_num = #{group.gr_num}
-	</update>
-	
-	<update id="updateShareRecode">
-		update `share_record`
-		set
-			sr_rc_num = #{group.sr_rc_num}
-		where
-			sr_gr_num = #{group.gr_num}
-	</update>
-	
-	<update id="updateGroupGoal">
-		update `group_goal`
-		set
-			gg_gl_num = #{group.gg_gl_num}
-		where
-			gg_gr_num = #{group.gr_num}
 	</update>
   
   	<select id="selectMemberList" resultMap="GroupMemberMap">
