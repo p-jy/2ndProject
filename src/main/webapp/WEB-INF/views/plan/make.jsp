@@ -175,8 +175,11 @@
 	
 	// 실시간 유효성 제거
 	titleInput.addEventListener("input", () => {
-	if (titleInput.value.trim() !== "") {
+	const val = titleInput.value.trim();
+	if (val !== "" && val.length <= 20) {
 		titleError.innerText = "";
+	} else if (val.length > 20) {
+		titleError.innerText = "제목은 20자 이내로 입력해주세요.";
 		}
 	});
 	
@@ -220,6 +223,9 @@
 	
 	if (title === "") {
 		titleError.innerText = "제목을 입력해주세요.";
+		isValid = false;
+	} else if (title.length > 20) {
+		titleError.innerText = "제목은 20자 이내로 입력해주세요.";
 		isValid = false;
 	}
 	
