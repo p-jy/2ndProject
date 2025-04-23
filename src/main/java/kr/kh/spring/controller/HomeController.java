@@ -147,10 +147,4 @@ public class HomeController {
 
 		return "msg/msg";
 	}
-	
-	@GetMapping("/watch")
-	public String watch() {
-		
-		return "/plan/watch";
-	}
 }
