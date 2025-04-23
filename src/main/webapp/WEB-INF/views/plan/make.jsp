@@ -50,7 +50,7 @@
 				<tr>
 					<td>
 						<div class="st">
-							<input type="text" id="title" name="title" value="${plan.pl_title}" placeholder="예) 밀가루 안먹기 등">
+							<input type="text" id="title" name="pl_title" placeholder="예) 밀가루 안먹기 등">
 						</div>
 					</td>
 				</tr>
@@ -64,13 +64,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="checkbox" id="days1" name="days" value="월">월</td>
-					<td><input type="checkbox" id="days2" name="days" value="화">화</td>
-					<td><input type="checkbox" id="days3" name="days" value="수">수</td>
-					<td><input type="checkbox" id="days4" name="days" value="목">목</td>
-					<td><input type="checkbox" id="days5" name="days" value="금">금</td>
-					<td><input type="checkbox" id="days6" name="days" value="토">토</td>
-					<td><input type="checkbox" id="days7" name="days" value="일">일</td>
+					<td><input type="checkbox" id="days" name="dy_day" value="월">월</td>
+					<td><input type="checkbox" id="days" name="dy_day" value="화">화</td>
+					<td><input type="checkbox" id="days" name="dy_day" value="수">수</td>
+					<td><input type="checkbox" id="days" name="dy_day" value="목">목</td>
+					<td><input type="checkbox" id="days" name="dy_day" value="금">금</td>
+					<td><input type="checkbox" id="days" name="dy_day" value="토">토</td>
+					<td><input type="checkbox" id="days" name="dy_day" value="일">일</td>
 				</tr>
 			</tbody>
 		</table>
@@ -83,19 +83,19 @@
 			<tbody>
 				<tr>
 					<td><label for="option1">운동</label></td>
-					<td><input type="checkbox" id="option1" name="workout" value="${plan.pl_mc_num}" class="only-one"></td>
+					<td><input type="checkbox" id="option1" name="pl_mc_num" value="1" class="only-one"></td>
 				</tr>
 				<tr>
 					<td><label for="option2">식단</label></td>
-					<td><input type="checkbox" id="option2" name="diet" value="${plan.pl_mc_num}" class="only-one"></td>
+					<td><input type="checkbox" id="option2" name="pl_mc_num" value="2" class="only-one"></td>
 				</tr>
 				<tr>
 					<td><label for="option3">신체</label></td>
-					<td><input type="checkbox" id="option3" name="body" value="${plan.pl_mc_num}" class="only-one"></td>
+					<td><input type="checkbox" id="option3" name="pl_mc_num" value="3" class="only-one"></td>
 				</tr>
 				<tr>
 					<td><label for="option4">생활</label></td>
-					<td><input type="checkbox" id="option4" name="life" value="${plan.pl_mc_num}" class="only-one"></td>
+					<td><input type="checkbox" id="option4" name="pl_mc_num" value="4" class="only-one"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -109,7 +109,7 @@
 				<tr>
 					<td>
 						<div class="st">
-							<input type="text" id="period" name="period" value="${plan.pl_period}" placeholder="예) 30">
+							<input type="text" id="period" name="pl_period" placeholder="예) 30">
 						</div>
 					</td>
 				</tr>

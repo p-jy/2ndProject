@@ -1,5 +1,7 @@
 package kr.kh.spring.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.kh.spring.model.dto.PlanListDTO;
+import kr.kh.spring.model.vo.DayVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PlanVO;
 import kr.kh.spring.service.PlanService;
@@ -27,14 +31,16 @@ public class PlanController {
 	}
 	
 	@PostMapping("/make")
-	public String insertPost(PlanVO plan, Model model, HttpSession session) {
+	public String insertPost(PlanVO plan, Model model, HttpSession session, PlanListDTO planlist) {
 		//유저 정보 끌어옴
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		if(planService.insertPlan(plan, user)) {
+		System.out.println(plan);
+		List<DayVO> dayList = planlist.getDayList();
+		
+		if(planService.insertPlan(plan, user, dayList)) {
 			model.addAttribute("plan", plan);
-			System.out.println(plan);
-			
+			model.addAttribute("list", dayList);
 			return "redirect:/make";
 		}
 		//계획 만들기 성공 시 메인으로?

@@ -3,9 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.PlanDAO">
-	<insert id="insertPlan" useGeneratedKeys="true" keyProperty="post.pl_num">
+	<insert id="insertPlan" useGeneratedKeys="true" keyProperty="plan.pl_num">
 		insert into plan (pl_title, pl_period, pl_me_id, pl_mc_num)
-		values (#{post.pl_title}, #{post.pl_period}, #{post.pl_me_id}, #{post.pl_mc_num})
+		values (#{plan.pl_title}, #{plan.pl_period}, #{plan.pl_me_id}, #{plan.pl_mc_num})
 	</insert>
-	
+	<insert id="insertDay" useGeneratedKeys="true" keyProperty="day.dy_num">
+		insert into day (dy_day, dy_pl_num)
+		values (#{day.dy_day}, #{pl_num})
+	</insert>
 </mapper>
