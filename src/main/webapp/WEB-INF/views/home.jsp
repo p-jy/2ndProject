@@ -127,56 +127,8 @@ a {
 			</li>
 		</ul>
 	</div>
-	
-	
-	<!-- 선택한 날짜에 신체 기록이 없을 경우 -->
-	<div class="tab-content">
-		<!-- 
-		<c:if test="${empty inbodyList}">
-			<p>등록된 리스트가 없습니다.</p>
-		</c:if>
-		<c:if test="${not empty inbodyList}">
-			<div id="inbody" class="container tab-pane fade">
-				<br>
-				<c:forEach var="inbody" items="${inbodyList}">
-					<div class="form-group">
-						<label for="ib_num">신체 번호 : </label> 
-						<input type="text" class="form-control" id="ib_num" value="${inbody.ib_num }" readonly> 
-						<label for="ib_date">신체 촬영 날짜 : </label> 
-						<input type="text" class="form-control" id="ib_date" value="${inbody.ib_Date }" readonly> 
-						<label for="ib_weight">몸무게 : </label> 
-						<input type="text" class="form-control" id="ib_weight" value="${inbody.ib_weight }" readonly> 
-						<label for="ib_smm">골격근량 : </label> 
-						<input type="text" class="form-control" id="ib_smm" value="${inbody.ib_smm }" readonly>
-					</div>
-				</c:forEach>
-			</div>
-		</c:if>
-		 -->
-	</div>
-	<!-- 선택한 날짜에 운동 기록이 없을 경우 -->
-	<!-- <div class="tab-content">
-		<c:if test="${empty workoutList}">
-			<p>등록된 리스트가 없습니다.</p>
-		</c:if>
-		<c:if test="${not empty workoutList}">
-			<div id="workout" class="container tab-pane fade">
-				<br>
-				<c:forEach var="workout" items="${workoutList}">
-					<div class="form-group">
-						<label for="wo_title">운동 제목 : </label> 
-						<input type="text" class="form-control" id="wo_title" value="${workout.wo_title }" readonly> 
-						<label for="wo_date">운동한 날짜 : </label> 
-						<input type="text" class="form-control" id="wo_date" value="${workout.wo_date }" readonly> 
-						<label for="wo_ampm">오전/오후 : </label> 
-						<input type="text" class="form-control" id="wo_ampm" value="${workout.wo_ampm }" readonly> 
-						<label for="wo_time">운동한 시간 : </label> 
-						<input type="text" class="form-control" id="wo_time" value="${workout.wo_time }" readonly>
-					</div>
-				</c:forEach>
-			</div>
-		</c:if>
-	</div>-->
+	<div class="tab-content"></div>
+	<!-- 식단/신체/운동 등록하기 버튼 -->
 	<form action="" method="post">
 		<div class="recordtitle">
 			<h2>오늘의 활동을 등록해보세요.</h2>
@@ -188,7 +140,8 @@ a {
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
 		</div>
 	</form>
-
+	
+	
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var calendarEl = document.getElementById('calendar');
@@ -220,9 +173,7 @@ a {
 				},
 			});
 			calendar.render();
-			addEventByType('2025-04-18','diet'); //테스트용
-			addEventByType('2025-04-18','inbody'); //테스트용
-			addEventByType('2025-04-18','workout'); //테스트용
+			addEventByType('2025-04-24','diet');
 			
 			function addEventByType(date, type) {
 			    let titleIcon = '';

@@ -33,6 +33,7 @@ public class RecordController {
 	@GetMapping("/diet")
 	public String selectDiet(Model model) {
 		List<DietVO> dietList = recordService.selectDietList();
+		System.out.println("식단 리스트: " + dietList);
 		model.addAttribute("dietList", dietList);
 		return "record/diet";
 	}
