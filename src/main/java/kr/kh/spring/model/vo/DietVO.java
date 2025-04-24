@@ -12,7 +12,7 @@ public class DietVO {
 	String di_name;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date di_date;
-	String di_amPm; 
+	String di_ampm; 
 	String di_time;
 	int di_score;
 	String di_memo; 
