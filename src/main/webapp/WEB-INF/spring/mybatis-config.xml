@@ -11,5 +11,7 @@
 		<typeAlias type="kr.kh.spring.model.vo.WorkoutVO" alias="WorkoutVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.Group_MemberVO" alias="Group_MemberVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.RuleVO" alias="RuleVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.PlanVO" alias="PlanVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.DayVO" alias="DayVO"/>
 	</typeAliases>
 </configuration>
