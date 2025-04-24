@@ -93,7 +93,7 @@
 						<div class="col-12">
 							<label class="form-label fw-bold">공유할 기록</label>
 							<c:forEach items="${srList}" var="sharerecord">
-								<input type="text" class="form-control bg-light" value="${sharerecord.sr_gr_num}" readonly>
+								<input type="text" class="form-control bg-light" value="${sharerecord.majorcates.mc_name}" readonly>
 							</c:forEach>							
 						</div>
 					</c:if>	

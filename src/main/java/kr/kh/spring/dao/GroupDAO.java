@@ -11,6 +11,7 @@ import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
 import kr.kh.spring.model.vo.Share_RecordVO;
+import kr.kh.spring.model.vo.SubCateVO;
 
 public interface GroupDAO {
 
@@ -56,6 +57,8 @@ public interface GroupDAO {
 	List<Share_RecordVO> selectSRList(@Param("gr_num")int gr_num);
 
 	void insertSR(@Param("dbsr")Share_RecordVO dbsr, @Param("gr_num")int gr_num);
+
+	List<SubCateVO> selectGoalList();
 
 	
 

@@ -13,6 +13,7 @@ import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
 import kr.kh.spring.model.vo.Share_RecordVO;
+import kr.kh.spring.model.vo.SubCateVO;
 
 public interface GroupService {
 
@@ -41,6 +42,8 @@ public interface GroupService {
 	List<Share_RecordVO> getSRList(int gr_num);
 
 	List<MajorCateVO> getMCList();
+
+	List<SubCateVO> getGoalList();
 
 
 

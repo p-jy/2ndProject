@@ -16,6 +16,7 @@ import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
 import kr.kh.spring.model.vo.Share_RecordVO;
+import kr.kh.spring.model.vo.SubCateVO;
 
 @Service
 public class GroupServiceImp implements GroupService{
@@ -110,6 +111,12 @@ public class GroupServiceImp implements GroupService{
 
 	
 
+	@Override
+	public List<SubCateVO> getGoalList() {
+		
+		return groupDao.selectGoalList();
+	}
+
 	private void getSr(Share_RecordVO dbsr, int gr_num) {
 		try {
 			groupDao.insertSR(dbsr,gr_num);
@@ -189,6 +196,7 @@ public class GroupServiceImp implements GroupService{
 		if(!result) {
 			return false;
 		}
+		
 		
 		return true;
 	}

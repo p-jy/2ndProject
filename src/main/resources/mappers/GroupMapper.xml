@@ -11,8 +11,12 @@
 
 <resultMap type="Share_RecordVO" id="ShareRecordMap">
 	<id property="sr_num" column="sr_num"/>
-	<result property="sr_rc_num" column="sr_rc_num"/>
+	<result property="sr_mc_num" column="sr_mc_num"/>
 	<result property="sr_gr_num" column="sr_gr_num"/>
+	<association property="majorcates" javaType="MajorCateVO">
+	    <result property="mc_num" column="mc_num" />
+	    <result property="mc_name" column="mc_name" />
+  	</association>
 </resultMap>
 
 
@@ -35,10 +39,19 @@
 	</select>
 	
 	<select id="selectSRList" resultMap="ShareRecordMap">		
-		select mc_name from share_record
-		join record on sr_rc_num=rc_num
-		join  major_cate on mc_num=rc_mc_num
-		where sr_gr_num=#{gr_num}
+		SELECT 
+		    share_record.*, mc_num, mc_name
+		  FROM 
+		    share_record 
+		  JOIN 
+		    major_cate  ON sr_mc_num = mc_num
+		  WHERE 
+		    sr_gr_num = #{gr_num}
+	</select>
+	
+	<select id="selectGoalList" resultType="SubCateVO">
+		select * from sub_cate
+		where sc_type="목표"
 	</select>
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
@@ -154,7 +167,8 @@
   	</update>
   	
   	<insert id="insertSR" useGeneratedKeys="true" keyProperty="dbsr.sr_num">
-  		insert into `share_record`(sr_rc_num, sr_gr_num)
-  		values(#{dbsr.sr_rc_num}, #{gr_num})
+  		insert into `share_record`(sr_mc_num, sr_gr_num)
+  		values(#{dbsr.sr_mc_num}, #{gr_num})
   	</insert>
+  	
 </mapper>

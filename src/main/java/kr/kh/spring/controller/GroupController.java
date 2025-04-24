@@ -25,6 +25,7 @@ import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
 import kr.kh.spring.model.vo.Share_RecordVO;
+import kr.kh.spring.model.vo.SubCateVO;
 import kr.kh.spring.service.GroupService;
 import kr.kh.spring.service.MemberService;
 import lombok.extern.log4j.Log4j;
@@ -53,7 +54,9 @@ public class GroupController {
 	
 	@GetMapping("/make")
 	public String make(Model model) {
-		
+		List<SubCateVO> subCate =groupService.getGoalList();
+		System.out.println(subCate);
+		model.addAttribute("subCate", subCate);
 		return "/group/make";
 	}
 	
@@ -67,11 +70,15 @@ public class GroupController {
 		//규칙 리스트 호출
 		List<RuleVO> rule =grList.getRuleList();
 		List<Share_RecordVO> sr = srList.getSharerecordList();
+		//목표 리스트 호출
+		List<SubCateVO> subCate =groupService.getGoalList();
 		
+		System.out.println(subCate);
 		System.out.println(user);
 		System.out.println(group);		
 		System.out.println(rule);
 		System.out.println(sr);
+		model.addAttribute("subCate", subCate);
 		//방 만들기
 		if(groupService.insertGroup(group, user, rule, gmVO, sr)) {
 			
@@ -110,6 +117,7 @@ public class GroupController {
 		//화면에 전송
 		model.addAttribute("group", group);
 		model.addAttribute("ruleList", ruleList);
+		model.addAttribute("srList", srList);
 		return "/group/main";
 	}
 	//그룹 삭제하기(작성중)

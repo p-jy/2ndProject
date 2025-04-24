@@ -13,5 +13,6 @@
 		<typeAlias type="kr.kh.spring.model.vo.RuleVO" alias="RuleVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.Share_RecordVO" alias="Share_RecordVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.MajorCateVO" alias="MajorCateVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.SubCateVO" alias="SubCateVO"/>
 	</typeAliases>
 </configuration>
