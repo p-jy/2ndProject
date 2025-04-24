@@ -7,8 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.spring.Pagination.Criteria;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
+import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
+import kr.kh.spring.model.vo.Share_RecordVO;
+import kr.kh.spring.model.vo.SubCateVO;
 
 public interface GroupDAO {
 
@@ -26,15 +29,7 @@ public interface GroupDAO {
 
 	boolean insertRule(@Param("group")GroupVO group);
 
-	boolean insertShareRecode(@Param("group")GroupVO group);
-
-	boolean insertGroupGoal(@Param("group")GroupVO group);
-
 	boolean updateRule(@Param("group")GroupVO group);
-
-	boolean updateShareRecode(@Param("group")GroupVO group);
-
-	boolean updateGroupGoal(@Param("group")GroupVO group);
 
 	GroupVO selectRule(@Param("gr_num")int gr_num);
 
@@ -56,6 +51,14 @@ public interface GroupDAO {
 	boolean insertGroupMember(@Param("gm")Group_MemberVO gm);
 
 	void updateParticipant(@Param("gr_num")int gr_num);
+
+	List<MajorCateVO> selectMajorCateList();
+
+	List<Share_RecordVO> selectSRList(@Param("gr_num")int gr_num);
+
+	void insertSR(@Param("dbsr")Share_RecordVO dbsr, @Param("gr_num")int gr_num);
+
+	List<SubCateVO> selectGoalList();
 
 	
 
