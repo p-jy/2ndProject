@@ -36,12 +36,12 @@ public class PlanController {
 		//유저 정보 끌어옴
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		System.out.println(plan);
 		List<DayVO> dayList = planlist.getDayList();
-		System.out.println(dayList);
+		
 		if(planService.insertPlan(plan, user, dayList)) {
 			model.addAttribute("plan", plan);
 			model.addAttribute("list", dayList);
+			
 			return "redirect:/make";
 		}
 		//계획 만들기 성공 시 메인으로?

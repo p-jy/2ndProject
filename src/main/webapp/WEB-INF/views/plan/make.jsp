@@ -67,13 +67,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="checkbox" id="days" name="dayList[0].dy_day">월</td>
-					<td><input type="checkbox" id="days" name="dayList[1].dy_day">화</td>
-					<td><input type="checkbox" id="days" name="dayList[2].dy_day">수</td>
-					<td><input type="checkbox" id="days" name="dayList[3].dy_day">목</td>
-					<td><input type="checkbox" id="days" name="dayList[4].dy_day">금</td>
-					<td><input type="checkbox" id="days" name="dayList[5].dy_day">토</td>
-					<td><input type="checkbox" id="days" name="dayList[6].dy_day">일</td>
+					<td><input type="checkbox" id="days" name="dayList[0].dy_day" value="월">월</td>
+					<td><input type="checkbox" id="days" name="dayList[1].dy_day" value="화">화</td>
+					<td><input type="checkbox" id="days" name="dayList[2].dy_day" value="수">수</td>
+					<td><input type="checkbox" id="days" name="dayList[3].dy_day" value="목">목</td>
+					<td><input type="checkbox" id="days" name="dayList[4].dy_day" value="금">금</td>
+					<td><input type="checkbox" id="days" name="dayList[5].dy_day" value="토">토</td>
+					<td><input type="checkbox" id="days" name="dayList[6].dy_day" value="일">일</td>
 				</tr>
 				<tr>
 				  <td colspan="7"><span id="day-error" style="color: red;"></span></td>

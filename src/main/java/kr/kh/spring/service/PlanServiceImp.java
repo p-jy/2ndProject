@@ -33,7 +33,10 @@ public class PlanServiceImp implements PlanService {
 			return false;
 		}
 		for (DayVO day : dayList) {
-			getdayList(day, plan.getPl_num());
+			if (day.getDy_day() != null && !day.getDy_day().isBlank()) {
+				day.setDy_pl_num(plan.getPl_num());
+				getdayList(day, plan.getPl_num());
+			}
 		}
 		return true;
 	}
