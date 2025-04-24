@@ -8,12 +8,37 @@
 <meta charset="UTF-8">
 <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style type="text/css">
-	body{
-		
+	.body{
+		 background: repeating-linear-gradient(
+	    white,
+	    white 29px,
+	    #f0f0f0 30px
+	  );
+	  font-family: 'Nanum Pen Script', cursive;
+	  padding: 40px;
 	}
-	
-	
+	.body, .form-control, .btn {
+	  font-family: 'Nanum Pen Script', cursive;
+	  font-size: 20px;
+	}
+	.form-control {
+	  background-color: transparent;
+	  border: none;
+	  border-bottom: 1px dashed #999;
+	  border-radius: 0;
+	  box-shadow: none;
+	  padding-left: 10px;
+	}
+	.card-notebook {
+	  background-color: #fff8dc;
+	  border: 1px solid #ddd;
+	  padding: 20px;
+	  border-radius: 10px;
+	  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+	  margin-bottom: 20px;
+	}
 </style>
 </head>
 <body id="body">
@@ -30,7 +55,7 @@
 				 -->
 				<div class="form-group mt-3">
 					<label class="form-label-muted">소개글</label>
-					<div class="form-control" id="content" style="min-height: 400px;">${group.gr_introduction}</div>
+					<div class="form-control" id="content" style="min-height: 100px;">${group.gr_introduction}</div>
 				</div>
 				<div class="row g-3">
 					<div class="col-md-6">
@@ -63,11 +88,16 @@
 								<input type="text" class="form-control bg-light" value="${rule.rl_rule}" readonly>
 							</c:forEach>						
 						</div>
+					</c:if>
+					<c:if test="${srList.size()>0}">
+						<div class="col-12">
+							<label class="form-label fw-bold">공유할 기록</label>
+							<c:forEach items="${srList}" var="sharerecord">
+								<input type="text" class="form-control bg-light" value="${sharerecord.sr_gr_num}" readonly>
+							</c:forEach>							
+						</div>
 					</c:if>	
-					<div class="col-12">
-						<label class="form-label fw-bold">공유할 기록</label>
-						<input type="text" class="form-control bg-light" value="${group.sr_gr_num}" readonly>
-					</div>
+					
 				</div>				
 			</div>
 			

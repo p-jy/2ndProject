@@ -111,7 +111,11 @@ public class GroupServiceImp implements GroupService{
 	
 
 	private void getSr(Share_RecordVO dbsr, int gr_num) {
-		// TODO Auto-generated method stub
+		try {
+			groupDao.insertSR(dbsr,gr_num);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

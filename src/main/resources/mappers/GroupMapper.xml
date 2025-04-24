@@ -10,9 +10,11 @@
 </resultMap>
 
 <resultMap type="Share_RecordVO" id="ShareRecordMap">
+	<id property="sr_num" column="sr_num"/>
 	<result property="sr_rc_num" column="sr_rc_num"/>
 	<result property="sr_gr_num" column="sr_gr_num"/>
 </resultMap>
+
 
 	<select id="countByGroupCode" resultType="int">
 		select count(*) from `group` where gr_code=#{code}
@@ -32,8 +34,11 @@
 		order by mc_num 
 	</select>
 	
-	<select id="selectSRList" resultMap="ShareRecordMap">
-		select * from `share_record` where sr_gr_num=#{gr_num}
+	<select id="selectSRList" resultMap="ShareRecordMap">		
+		select mc_name from share_record
+		join record on sr_rc_num=rc_num
+		join  major_cate on mc_num=rc_mc_num
+		where sr_gr_num=#{gr_num}
 	</select>
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
@@ -145,7 +150,11 @@
   	<update id="updateParticipant">
   		update `group`
   		set gr_participant = gr_participant+1
-  		where gr_num=#{gr_num}
-  			
+  		where gr_num=#{gr_num} 			
   	</update>
+  	
+  	<insert id="insertSR" useGeneratedKeys="true" keyProperty="dbsr.sr_num">
+  		insert into `share_record`(sr_rc_num, sr_gr_num)
+  		values(#{dbsr.sr_rc_num}, #{gr_num})
+  	</insert>
 </mapper>

@@ -55,6 +55,8 @@ public interface GroupDAO {
 
 	List<Share_RecordVO> selectSRList(@Param("gr_num")int gr_num);
 
+	void insertSR(@Param("dbsr")Share_RecordVO dbsr, @Param("gr_num")int gr_num);
+
 	
 
 	

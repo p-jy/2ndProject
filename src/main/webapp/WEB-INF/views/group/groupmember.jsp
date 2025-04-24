@@ -12,7 +12,7 @@
 <body>
 <div class="container my-5">
 	<div class="card shadow rounded-4 p-4">
-		<h2 class="mb-4 fw-bold text-primary">그룹 ${group.gr_name} 맴버</h2>
+		<h2 class="mb-4 fw-bold text-primary">${group.gr_name}의 맴버</h2>
 	</div>
 	
 	<table class="table table-hover table-primary rounded overflow-hidden">
