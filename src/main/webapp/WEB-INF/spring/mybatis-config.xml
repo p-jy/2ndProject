@@ -14,5 +14,7 @@
 		<typeAlias type="kr.kh.spring.model.vo.Share_RecordVO" alias="Share_RecordVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.MajorCateVO" alias="MajorCateVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.SubCateVO" alias="SubCateVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.PlanVO" alias="PlanVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.DayVO" alias="DayVO"/>
 	</typeAliases>
 </configuration>
