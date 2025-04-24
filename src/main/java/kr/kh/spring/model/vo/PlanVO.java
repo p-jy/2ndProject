@@ -9,4 +9,6 @@ public class PlanVO {
 	private int pl_period;
 	private String pl_me_id;
 	private int pl_mc_num;
+	
+	
 }

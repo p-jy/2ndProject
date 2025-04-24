@@ -3,10 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.GroupDAO">
+
 <resultMap type="Group_MemberVO" id="GroupMemberMap">
 	<result property="gm_gr_num" column="gm_gr_num"/>
   	<result property="gm_me_id" column="gm_me_id"/>
 </resultMap>
+
+<resultMap type="Share_RecordVO" id="ShareRecordMap">
+	<id property="sr_num" column="sr_num"/>
+	<result property="sr_mc_num" column="sr_mc_num"/>
+	<result property="sr_gr_num" column="sr_gr_num"/>
+	<association property="majorcates" javaType="MajorCateVO">
+	    <result property="mc_num" column="mc_num" />
+	    <result property="mc_name" column="mc_name" />
+  	</association>
+</resultMap>
+
 
 	<select id="countByGroupCode" resultType="int">
 		select count(*) from `group` where gr_code=#{code}
@@ -19,6 +31,27 @@
 		where gr_public="Y" and gr_del="N"
 		order by gr_num desc
 		
+	</select>
+	
+	<select id="selectMajorCateList" resultType="MajorCateVO">
+		select * from `major_cate`
+		order by mc_num 
+	</select>
+	
+	<select id="selectSRList" resultMap="ShareRecordMap">		
+		SELECT 
+		    share_record.*, mc_num, mc_name
+		  FROM 
+		    share_record 
+		  JOIN 
+		    major_cate  ON sr_mc_num = mc_num
+		  WHERE 
+		    sr_gr_num = #{gr_num}
+	</select>
+	
+	<select id="selectGoalList" resultType="SubCateVO">
+		select * from sub_cate
+		where sc_type="목표"
 	</select>
 	
 	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="group.gr_num">
@@ -35,16 +68,6 @@
 	<insert id="insertRule" useGeneratedKeys="true" keyProperty="group.rl_num">
 		insert into rule(rl_rule,rl_gr_num)
 		value(#{group.rl_rule},#{group.gr_num})
-	</insert>
-	
-	<insert id="insertShareRecode" useGeneratedKeys="true" keyProperty="group.sr_num">
-		insert into `share_record`(sr_rc_num, sr_gr_num)
-		value(#{group.sr_rc_num}, #{group.gr_num})
-	</insert>
-	
-	<insert id="insertGroupGoal" useGeneratedKeys="true" keyProperty="group.gg_num">
-		insert into `group_goal`(gg_gl_num, gg_gr_num)
-		value(#{group.gg_gl_num}, #{group.gr_num})
 	</insert>
 	
 	<insert id="GroupMember"  useGeneratedKeys="true" keyProperty="gmVO.gm_num" >
@@ -105,30 +128,6 @@
 		where
 			gr_num = #{group.gr_num}
 	</update>
-	
-	<update id="updateRule">
-		update `rule`
-		set
-			rl_rule=#{group.rl_rule}
-		where
-			rl_gr_num = #{group.gr_num}
-	</update>
-	
-	<update id="updateShareRecode">
-		update `share_record`
-		set
-			sr_rc_num = #{group.sr_rc_num}
-		where
-			sr_gr_num = #{group.gr_num}
-	</update>
-	
-	<update id="updateGroupGoal">
-		update `group_goal`
-		set
-			gg_gl_num = #{group.gg_gl_num}
-		where
-			gg_gr_num = #{group.gr_num}
-	</update>
   
   	<select id="selectMemberList" resultMap="GroupMemberMap">
   		select * from `group_member`
@@ -164,7 +163,12 @@
   	<update id="updateParticipant">
   		update `group`
   		set gr_participant = gr_participant+1
-  		where gr_num=#{gr_num}
-  			
+  		where gr_num=#{gr_num} 			
   	</update>
+  	
+  	<insert id="insertSR" useGeneratedKeys="true" keyProperty="dbsr.sr_num">
+  		insert into `share_record`(sr_mc_num, sr_gr_num)
+  		values(#{dbsr.sr_mc_num}, #{gr_num})
+  	</insert>
+  	
 </mapper>

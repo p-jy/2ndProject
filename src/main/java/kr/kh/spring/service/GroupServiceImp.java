@@ -12,8 +12,11 @@ import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.dao.GroupDAO;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
+import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
+import kr.kh.spring.model.vo.Share_RecordVO;
+import kr.kh.spring.model.vo.SubCateVO;
 
 @Service
 public class GroupServiceImp implements GroupService{
@@ -27,7 +30,21 @@ public class GroupServiceImp implements GroupService{
 	}
 
 	@Override
-	public boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule, Group_MemberVO gmVO) {
+	public List<Share_RecordVO> getSRList(int gr_num) {
+		
+		return groupDao.selectSRList(gr_num);
+	}
+
+	@Override
+	public List<MajorCateVO> getMCList() {
+		
+		return groupDao.selectMajorCateList();
+		//return null;
+	}
+
+	@Override
+	public boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule,
+			Group_MemberVO gmVO, List<Share_RecordVO> sr) {
 		if(group == null) {
 			return false;
 		}
@@ -41,6 +58,7 @@ public class GroupServiceImp implements GroupService{
 		group.setGr_code(generateUniqueGroupCode());
 		//그룹 테이블에 집어넣을 내용
 		
+		//해당 그룹테이블 기본키를 가져옴
 		group.setGr_me_id(user.getMe_id());				
 		boolean resultGroup =groupDao.insertGroup(group);
 		if(!resultGroup) {
@@ -65,13 +83,13 @@ public class GroupServiceImp implements GroupService{
 		
 		System.out.println(group);
 		//공유 기록에 집어넣을 내용
-		/*
-		group.setSr_gr_num(group.getGr_num());
-		boolean resultS_Recode = groupDao.insertShareRecode(group);
-		if(resultS_Recode) {
+		if(sr==null) {
 			return false;
 		}
-		*/
+		for(Share_RecordVO dbsr : sr) {
+			getSr(dbsr,group.getGr_num());
+		}
+		
 		//그룹 목표에 집어넣을 내용
 		/*
 		group.setGg_gr_num(group.getGg_gr_num());
@@ -92,6 +110,21 @@ public class GroupServiceImp implements GroupService{
 	}
 
 	
+
+	@Override
+	public List<SubCateVO> getGoalList() {
+		
+		return groupDao.selectGoalList();
+	}
+
+	private void getSr(Share_RecordVO dbsr, int gr_num) {
+		try {
+			groupDao.insertSR(dbsr,gr_num);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	private void getRule(RuleVO dbrule, int gr_num) {
 		try {
@@ -163,6 +196,7 @@ public class GroupServiceImp implements GroupService{
 		if(!result) {
 			return false;
 		}
+		
 		
 		return true;
 	}

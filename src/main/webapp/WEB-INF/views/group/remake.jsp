@@ -50,8 +50,11 @@
 			<textarea class="form-control" id="intro" name="gr_introduction" rows="10">${group.gr_introduction}</textarea>
 		</div>
 		<div class="form-group mt-3">
-			<label class="form-label">공유할 기록</label>
-			<input type="text" class="form-control" id="recode" name="sr_gr_num" value="${group.sr_gr_num}" required>
+			<label class="form-label">공유할 기록</label><br>
+		    <label><input type="checkbox" name="sharerecordList[0].sr_mc_num" value="1"> 운동</label>
+		    <label><input type="checkbox" name="sharerecordList[1].sr_mc_num" value="2"> 식단</label>
+		    <label><input type="checkbox" name="sharerecordList[2].sr_mc_num" value="3"> 신체</label>
+		    <label><input type="checkbox" name="sharerecordList[3].sr_mc_num" value="4"> 생활</label>
 		</div>
 		<div class="form-group mt-3">
 				<label class="form-label">규칙</label>
@@ -87,8 +90,19 @@
 			<input type="text" class="form-control" id="person" name="gr_personnel" value="${group.gr_personnel}" required>
 		</div>
 		<div class="form-group mt-3">
-			<label class="form-label">목표</label>
-			<input type="text" class="form-control" id="goal" name="gg_gr_num" value="${group.gg_gr_num}" required>
+		  <label class="form-label">그룹목표</label>
+		  <div class="border rounded p-3" style="height: 200px; overflow-y: auto;">
+		    <c:forEach items="${subCate}" var="subcate">
+		      <div class="form-check">
+		        <input class="form-check-input" type="checkbox" 
+		               name="goals" value="${subcate.sc_name}" 
+		               id="goal_${subcate.sc_num}">
+		        <label class="form-check-label" for="goal_${subcate.sc_num}">
+		          ${subcate.sc_name}
+		        </label>
+		      </div>
+		    </c:forEach>
+		  </div>
 		</div>
 		
 		<button type="submit" class="btn btn-outline-info mt-3 col-12 content-center">그룹 수정하기</button>

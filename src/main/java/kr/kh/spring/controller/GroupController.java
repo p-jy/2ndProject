@@ -17,11 +17,15 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.kh.spring.Pagination.Criteria;
 import kr.kh.spring.Pagination.GroupCriteria;
 import kr.kh.spring.Pagination.PageMaker;
+import kr.kh.spring.model.dto.Gro_Sha_RecDTO;
 import kr.kh.spring.model.dto.GroupRuleListDTO;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
+import kr.kh.spring.model.vo.MajorCateVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.RuleVO;
+import kr.kh.spring.model.vo.Share_RecordVO;
+import kr.kh.spring.model.vo.SubCateVO;
 import kr.kh.spring.service.GroupService;
 import kr.kh.spring.service.MemberService;
 import lombok.extern.log4j.Log4j;
@@ -50,25 +54,33 @@ public class GroupController {
 	
 	@GetMapping("/make")
 	public String make(Model model) {
-		
+		List<SubCateVO> subCate =groupService.getGoalList();
+		System.out.println(subCate);
+		model.addAttribute("subCate", subCate);
 		return "/group/make";
 	}
 	
 	//그룹 만들기
 	@PostMapping("/make")
 	public String makeGroup(Model model,GroupVO group, GroupRuleListDTO grList,
-			Group_MemberVO gmVO, HttpSession session) {
+			Gro_Sha_RecDTO srList,Group_MemberVO gmVO, HttpSession session) {
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");		
 		
 		//규칙 리스트 호출
 		List<RuleVO> rule =grList.getRuleList();
+		List<Share_RecordVO> sr = srList.getSharerecordList();
+		//목표 리스트 호출
+		List<SubCateVO> subCate =groupService.getGoalList();
 		
+		System.out.println(subCate);
 		System.out.println(user);
 		System.out.println(group);		
 		System.out.println(rule);
+		System.out.println(sr);
+		model.addAttribute("subCate", subCate);
 		//방 만들기
-		if(groupService.insertGroup(group, user, rule, gmVO)) {
+		if(groupService.insertGroup(group, user, rule, gmVO, sr)) {
 			
 			model.addAttribute("url", "/group/list");
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
@@ -92,14 +104,20 @@ public class GroupController {
 		
 				
 		//해당 그룹하고 같은 번호를 가진 목표 테이블의 값들을 객체에 삽입.
-		
+		List<MajorCateVO> mcList=groupService.getMCList();
 		//해당 그룹하고 같은 번호를 가진 공유할 기록 테이블의 값들을 객체에 삽입.
+		List<Share_RecordVO> srList=groupService.getSRList(gr_num);
+		
 		
 		System.out.println(group);
+		//현재 vo에 있는 값들을 모두 출력
 		System.out.println(ruleList);
+		System.out.println(mcList);
+		System.out.println(srList);
 		//화면에 전송
 		model.addAttribute("group", group);
 		model.addAttribute("ruleList", ruleList);
+		model.addAttribute("srList", srList);
 		return "/group/main";
 	}
 	//그룹 삭제하기(작성중)
