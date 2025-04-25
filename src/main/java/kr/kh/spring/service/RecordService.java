@@ -14,7 +14,7 @@ public interface RecordService {
 
 	List<DietVO> selectDietList();
   
-	boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile[] fileList);
+	boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile file);
 
 	List<InbodyVO> selectInbodyList();
 

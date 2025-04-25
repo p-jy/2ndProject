@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class InbodyVO {
 	int ib_num; 
-	Date ib_Date;
+	Date ib_date;
 	int ib_weight;
 	int ib_smm;
 	int ib_bfm;

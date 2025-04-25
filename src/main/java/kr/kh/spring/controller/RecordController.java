@@ -35,7 +35,6 @@ public class RecordController {
 	@GetMapping("/diet")
 	public String selectDiet(Model model) {
 		List<DietVO> dietList = recordService.selectDietList();
-		System.out.println("식단 리스트: " + dietList);
 		model.addAttribute("dietList", dietList);
 		return "record/diet";
 	}
@@ -45,14 +44,11 @@ public class RecordController {
 		return "record/diet";
 	}
 	
-	
 	@GetMapping("/calendar/list")
 	@ResponseBody
 	public List<RecordDTO> getAllRecords(@RequestParam String date){
 		return recordService.getAllRecords(date);
 	}
-	
-	
 	
 	@GetMapping("/inbody")
 	public String selectInbody(Model model) {
@@ -80,7 +76,7 @@ public class RecordController {
 	
 	@PostMapping("/insertDiet")
 	public String insertDietPost(@ModelAttribute DietVO diet, HttpSession session, 
-			MultipartFile[] fileList, Model model) {
+			MultipartFile file, Model model) {
 		
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		if(user == null) {
@@ -89,7 +85,7 @@ public class RecordController {
 			return "msg/msg";
 		}
 		
-		if(recordService.insertDietPost(diet, user, fileList)) {
+		if(recordService.insertDietPost(diet, user, file)) {
 			System.out.println(diet);
 			model.addAttribute("url", "/");
 	        model.addAttribute("msg", "식단이 기록되었습니다.");

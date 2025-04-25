@@ -8,6 +8,9 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 	<annotation-driven />
 
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/imgs/**" location="file:///D:/imgs/" />
+
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
@@ -25,6 +28,18 @@
 	            <beans:value>/WEB-INF/spring/tiles-def.xml</beans:value>
 	        </beans:list>
 	    </beans:property>
+	</beans:bean>
+	
+	<!-- 파일업로드 리졸버 -->
+	<beans:bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- 업로드 최대 크기 10Mb -->
+	<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+	<beans:bean id="uploadPath" class="java.lang.String">
+	
+	<!-- <beans:constructor-arg value="서버에 저장할 경로"/> -->
+	<beans:constructor-arg value="D:\imgs"/>
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.kh.spring.*" />

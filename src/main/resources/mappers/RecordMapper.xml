@@ -5,7 +5,10 @@
 <mapper namespace="kr.kh.spring.dao.RecordDAO">
 
   <select id="selectDietList" resultType="DietVO">
-  	select * from diet where di_date = curdate()
+  	SELECT d.*, p.dp_name
+	FROM diet d
+	LEFT JOIN diet_pic p ON d.di_num = p.dp_di_num
+	WHERE d.di_date = CURDATE();
   </select>
   <select id="selectInbodyList" resultType="InbodyVO">
   	select * from inbody
@@ -13,7 +16,7 @@
   <select id="selectWorkoutList" resultType="WorkoutVO">
   	select * from workout
   </select>
-  <insert id="insertDietPost">
+  <insert id="insertDietPost" useGeneratedKeys="true" keyProperty="diet.di_num">
   	insert into diet
   	(di_name, di_date, di_score, di_ampm, di_time, di_me_id)
   	value
@@ -26,5 +29,9 @@
   	union
   	SELECT distinct wo_me_id as id, wo_date as date, 'workout' as type FROM workout
   </select>
+  <insert id="insertFile">
+	insert into diet_pic(dp_name, dp_ori_name, dp_di_num)
+	value(#{dp_name}, #{dp_ori_name}, #{dp_di_num})
+  </insert>
 
 </mapper>
