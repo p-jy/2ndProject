@@ -122,7 +122,7 @@ a {
 			<li class="nav-item" onclick="loadDietList()">
 				<a class="nav-link active" id="diet-tab" data-toggle="tab" href="#diet" >식단</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item" onclick="loadInbodyList()">
 				<a class="nav-link" id="inbody-tab" data-toggle="tab" href="#inbody">신체</a>
 			</li>
 			<li class="nav-item">
@@ -141,7 +141,6 @@ a {
 		</div>
 		<div class="button-container">
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
-			<%-- <a href="<c:url value='/record/insertDiet' />" class="btn btn-outline-secondary btn-block">식단</a>  --%>
 			<a href="<c:url value='/record/inbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
 			<a href="<c:url value='/record/workout' />" class="btn btn-outline-secondary btn-block">운동</a> 
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
@@ -261,6 +260,18 @@ a {
 			$('.modal-content').load("<c:url value='/record/dietModal'/>", function () {
 		        $('#insertModal').modal('show');
 		    });
+		}
+	</script>
+	<script>
+		function loadInbodyList() {
+			$.ajax({
+				async : true,
+				url : '<c:url value="/record/inbody" />',
+				method : 'GET',
+				success : function(data) {
+					$('.tab-content').html(data);
+				}
+			});
 		}
 	</script>
 </body>

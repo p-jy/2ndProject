@@ -12,6 +12,7 @@ import kr.kh.spring.dao.RecordDAO;
 import kr.kh.spring.model.dto.RecordDTO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
+import kr.kh.spring.model.vo.Inbody_PicVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.WorkoutVO;
 import kr.kh.spring.model.vo.Diet_PicVO;
@@ -98,6 +99,59 @@ public class RecordServiceImp implements RecordService{
 	@Override
 	public List<RecordDTO> getAllRecords(String date) {
 		return recordDAO.selectAllRecordsList();
+	}
+
+	@Override
+	public boolean insertInbodyPost(InbodyVO inbody, MemberVO user, MultipartFile file) {
+		if(user == null || user.getMe_id() == null) {
+			return false;
+		}
+		inbody.setIb_me_id(user.getMe_id());
+		
+		//첨부파일
+		if(file == null || file.getOriginalFilename().length() == 0) {
+			return false;
+		}
+		
+		boolean res = recordDAO.insertInbodyPost(inbody);
+		
+		if(!res) {
+			return false;
+		}
+		int di_num = inbody.getIb_num();
+		
+		if (file != null && !file.getOriginalFilename().isEmpty()) {
+		        insertFile(di_num, file);
+		        }
+		
+		return true;
+	}
+
+	private void insertInbodyFile(int ib_num, MultipartFile file) {
+		if(file == null) {
+			return;
+		}
+		
+		String ip_ori_name = file.getOriginalFilename();
+		
+		if(ip_ori_name.length() == 0) {
+			return;
+		}
+		
+		int index = ip_ori_name.lastIndexOf(".");
+		String suffix = ip_ori_name.substring(index);
+		
+		try {
+			String ip_name = UploadFileUtils.uploadFile(uploadPath, ""+ ib_num, suffix, file.getBytes());
+			
+			Inbody_PicVO inbody_PicVO = new Inbody_PicVO(ip_ori_name, ip_name, ib_num);
+			
+			recordDAO.insertInbodyFile(inbody_PicVO);
+		}  catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("uploadPath = " + uploadPath);
 	}
 
 }

@@ -16,12 +16,7 @@
   <select id="selectWorkoutList" resultType="WorkoutVO">
   	select * from workout
   </select>
-  <insert id="insertDietPost" useGeneratedKeys="true" keyProperty="diet.di_num">
-  	insert into diet
-  	(di_name, di_date, di_score, di_ampm, di_time, di_me_id)
-  	value
-  	(#{diet.di_name}, #{diet.di_date}, #{diet.di_score}, #{diet.di_ampm}, #{diet.di_time}, #{diet.di_me_id})
-  </insert>
+  
   <select id="selectAllRecordsList" resultType="RecordDTO">
   	SELECT distinct di_me_id as id, di_date as date, 'diet' as type FROM diet
   	union
@@ -29,9 +24,27 @@
   	union
   	SELECT distinct wo_me_id as id, wo_date as date, 'workout' as type FROM workout
   </select>
+  
+  <insert id="insertDietPost" useGeneratedKeys="true" keyProperty="diet.di_num">
+  	insert into diet
+  	(di_name, di_date, di_score, di_ampm, di_time, di_me_id)
+  	value
+  	(#{diet.di_name}, #{diet.di_date}, #{diet.di_score}, #{diet.di_ampm}, #{diet.di_time}, #{diet.di_me_id})
+  </insert>
   <insert id="insertFile">
 	insert into diet_pic(dp_name, dp_ori_name, dp_di_num)
 	value(#{dp_name}, #{dp_ori_name}, #{dp_di_num})
+  </insert>
+  
+  <insert id="insertInbodyPost" useGeneratedKeys="true" keyProperty="inbody.ib_num">
+  	insert into inbody
+  	(ib_date, ib_weight, ib_smm, ib_bfm, ib_me_id)
+  	value
+  	(#{ib_date}, #{ib_weight}, #{ib_smm}, #{ib_bfm}, #{ib_me_id})
+  </insert>
+  <insert id="insertInbodyFile">
+	insert into inbody_pic(ip_name, ip_ori_name, ip_ib_num)
+	value(#{ip_name}, #{ip_ori_name}, #{ip_ib_num})
   </insert>
 
 </mapper>

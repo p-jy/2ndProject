@@ -95,4 +95,30 @@ public class RecordController {
 	}
 	
 	
+	@GetMapping("/insertInbody")
+	public String insertInbody(Model model) {
+		return "record/insertInbody";
+	}
+	
+	@PostMapping("/insertInbody")
+	public String insertInbodyPost(@ModelAttribute InbodyVO inbody, HttpSession session, 
+			MultipartFile file, Model model) {
+		
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		if(user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인해주세요.");
+			return "msg/msg";
+		}
+		
+		if(recordService.insertInbodyPost(inbody, user, file)) {
+			System.out.println(inbody);
+			model.addAttribute("url", "/");
+	        model.addAttribute("msg", "신체가 기록되었습니다.");
+			return "msg/msg";
+		}
+		return "redirect:/record/inbody";
+	}
+	
+	
 }
