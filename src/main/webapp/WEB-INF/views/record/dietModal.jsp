@@ -61,6 +61,10 @@
 		<form class="form" method="post">
 			<div class="containers">
 				<div class="f-container mb-3">
+					<label for="file" class="form-label">이미지</label>
+					<input type="file" class="form-control" name="file" />
+				</div>
+				<div class="f-container mb-3">
 					<label for="di_name" class="form-label" required>음식명</label>
 					<input type="text" class="form-control" name="di_name" id="di_name" placeholder="음식명을 입력하세요.">
 				</div>
