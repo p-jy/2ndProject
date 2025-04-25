@@ -58,7 +58,7 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<form class="form" method="post">
+		<form class="form" method="post" action="/spring/record/dietModal" enctype="multipart/form-data">
 			<div class="containers">
 				<div class="f-container mb-3">
 					<label for="file" class="form-label">이미지</label>
@@ -120,6 +120,8 @@
 			});
 			$('#di_date').datepicker('setDate', 'today'); //초기값을 오늘 날짜로 설정
 		});
+		
+		
 	</script>
 </body>
 </html>
