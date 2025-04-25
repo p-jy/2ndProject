@@ -3,36 +3,86 @@ package kr.kh.spring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.dao.RecordDAO;
+import kr.kh.spring.model.dto.RecordDTO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.WorkoutVO;
+import kr.kh.spring.model.vo.Diet_PicVO;
+import kr.kh.spring.utils.UploadFileUtils;
 
 @Service
+@PropertySource("classpath:config.properties")
 public class RecordServiceImp implements RecordService{
 	
 	@Autowired
 	RecordDAO recordDAO;
+	
+	@Value("${file.location}")
+	String uploadPath;
 
 	@Override
 	public List<DietVO> selectDietList() {
 		return recordDAO.selectDietList();
 	}
 
-	public boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile[] fileList) {
-		if(user == null) {
+	public boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile file) {
+		if(user == null || user.getMe_id() == null) {
 			return false;
 		}
-
-		//diet.setDi_Me_Id("irruyan"); 테스트 코드
-		
 		diet.setDi_me_id(user.getMe_id());
 		
-		return recordDAO.insertDietPost(diet);
+		//첨부파일
+		if(file == null || file.getOriginalFilename().length() == 0) {
+			return false;
+		}
+		
+		boolean res = recordDAO.insertDietPost(diet);
+		
+		if(!res) {
+			return false;
+		}
+		System.out.println(diet);
+		int di_num = diet.getDi_num();
+		
+		if (file != null && !file.getOriginalFilename().isEmpty()) {
+		        insertFile(di_num, file);
+		        }
+		
+		return true;
+	}
+
+	private void insertFile(int di_num, MultipartFile file) {
+		if(file == null) {
+			return;
+		}
+		
+		String dp_ori_name = file.getOriginalFilename();
+		
+		if(dp_ori_name.length() == 0) {
+			return;
+		}
+		
+		int index = dp_ori_name.lastIndexOf(".");
+		String suffix = dp_ori_name.substring(index);
+		
+		try {
+			String dp_name = UploadFileUtils.uploadFile(uploadPath, ""+ di_num, suffix, file.getBytes());
+			
+			Diet_PicVO diet_PicVO = new Diet_PicVO(dp_ori_name, dp_name, di_num);
+			
+			recordDAO.insertFile(diet_PicVO);
+		}  catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("uploadPath = " + uploadPath);
 	}
 
 	@Override
@@ -43,6 +93,11 @@ public class RecordServiceImp implements RecordService{
 	@Override
 	public List<WorkoutVO> selectWorkoutList() {
 		return recordDAO.selectWorkoutList();
+	}
+
+	@Override
+	public List<RecordDTO> getAllRecords(String date) {
+		return recordDAO.selectAllRecordsList();
 	}
 
 }

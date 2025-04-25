@@ -3,6 +3,7 @@ package kr.kh.spring.model.vo;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -17,5 +18,6 @@ public class DietVO {
 	int di_score;
 	String di_memo; 
 	String di_me_id;
+	String dp_name;
 
 }
