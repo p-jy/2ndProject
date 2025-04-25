@@ -8,7 +8,8 @@ import lombok.Data;
 
 @Data
 public class InbodyVO {
-	int ib_num; 
+	int ib_num;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date ib_date;
 	int ib_weight;
 	int ib_smm;
@@ -17,5 +18,6 @@ public class InbodyVO {
 	String ib_bed_date;
 	String ib_wakeTime;
 	String ib_memo;
+	String ib_me_id;
 
 }

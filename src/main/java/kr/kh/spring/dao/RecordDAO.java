@@ -8,6 +8,7 @@ import kr.kh.spring.model.dto.RecordDTO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.Diet_PicVO;
 import kr.kh.spring.model.vo.InbodyVO;
+import kr.kh.spring.model.vo.Inbody_PicVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.WorkoutVO;
 
@@ -24,5 +25,9 @@ public interface RecordDAO {
 	List<RecordDTO> selectAllRecordsList();
 
 	void insertFile(Diet_PicVO fileVo);
+
+	boolean insertInbodyPost(InbodyVO inbody);
+
+	void insertInbodyFile(Inbody_PicVO inbody_PicVO);
     
 }

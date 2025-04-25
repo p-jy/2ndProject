@@ -122,7 +122,7 @@ a {
 			<li class="nav-item" onclick="loadDietList()">
 				<a class="nav-link active" id="diet-tab" data-toggle="tab" href="#diet" >식단</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item" onclick="loadInbodyList()">
 				<a class="nav-link" id="inbody-tab" data-toggle="tab" href="#inbody">신체</a>
 			</li>
 			<li class="nav-item">
@@ -141,8 +141,8 @@ a {
 		</div>
 		<div class="button-container">
 			<a href="<c:url value='/record/insertDiet' />" class="btn btn-outline-secondary btn-block">식단</a> 
-			<a href="<c:url value='/record/inbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
-			<a href="<c:url value='/record/workout' />" class="btn btn-outline-secondary btn-block">운동</a> 
+			<a href="<c:url value='/record/insertInbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
+			<a href="<c:url value='/record/insertWorkout' />" class="btn btn-outline-secondary btn-block">운동</a> 
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
 		</div>
 	</form>
@@ -244,6 +244,18 @@ a {
 			$.ajax({
 				async : true,
 				url : '<c:url value="/record/diet" />',
+				method : 'GET',
+				success : function(data) {
+					$('.tab-content').html(data);
+				}
+			});
+		}
+	</script>
+	<script>
+		function loadInbodyList() {
+			$.ajax({
+				async : true,
+				url : '<c:url value="/record/inbody" />',
 				method : 'GET',
 				success : function(data) {
 					$('.tab-content').html(data);

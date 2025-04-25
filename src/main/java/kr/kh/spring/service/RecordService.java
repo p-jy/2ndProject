@@ -22,4 +22,6 @@ public interface RecordService {
 
 	List<RecordDTO> getAllRecords(String date);
 
+	boolean insertInbodyPost(InbodyVO inbody, MemberVO user, MultipartFile file);
+
 }
