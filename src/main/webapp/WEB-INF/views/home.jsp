@@ -215,7 +215,7 @@ a {
 				$.ajax({
 					async : true,
 					url : '<c:url value="/record/calendar/list" />',
-					data : { date : "week"},
+					data : { date : "month"},
 					method : 'GET',
 					success : function(data) {
 						console.log(data);
