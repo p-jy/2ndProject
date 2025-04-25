@@ -141,7 +141,6 @@ a {
 		</div>
 		<div class="button-container">
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
-			<%-- <a href="<c:url value='/record/insertDiet' />" class="btn btn-outline-secondary btn-block">식단</a>  --%>
 			<a href="<c:url value='/record/inbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
 			<a href="<c:url value='/record/workout' />" class="btn btn-outline-secondary btn-block">운동</a> 
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
