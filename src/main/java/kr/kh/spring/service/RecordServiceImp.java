@@ -34,17 +34,16 @@ public class RecordServiceImp implements RecordService{
 	}
 
 	public boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile file) {
+		if(diet == null || diet.getDi_name() == null || diet.getDi_date() == null || diet.getDi_ampm() == null || diet.getDi_time() == null || diet.getDi_score() == 0) {
+			return false;
+		}
 		if(user == null || user.getMe_id() == null) {
 			return false;
 		}
 		diet.setDi_me_id(user.getMe_id());
 		
-		//첨부파일
-		if(file == null || file.getOriginalFilename().length() == 0) {
-			return false;
-		}
-		
 		boolean res = recordDAO.insertDietPost(diet);
+		System.out.println(res);
 		
 		if(!res) {
 			return false;
@@ -52,9 +51,9 @@ public class RecordServiceImp implements RecordService{
 		System.out.println(diet);
 		int di_num = diet.getDi_num();
 		
-		if (file != null && !file.getOriginalFilename().isEmpty()) {
-		        insertFile(di_num, file);
-		        }
+		if (file != null) {
+			insertFile(di_num, file);
+		}
 		
 		return true;
 	}
@@ -66,7 +65,7 @@ public class RecordServiceImp implements RecordService{
 		
 		String dp_ori_name = file.getOriginalFilename();
 		
-		if(dp_ori_name.length() == 0) {
+		if(dp_ori_name == null || dp_ori_name.length() == 0) {
 			return;
 		}
 		
@@ -80,7 +79,7 @@ public class RecordServiceImp implements RecordService{
 			
 			recordDAO.insertFile(diet_PicVO);
 		}  catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		System.out.println("uploadPath = " + uploadPath);

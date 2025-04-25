@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,24 +75,30 @@ public class RecordController {
 		return "record/dietModal";
 	}
 	
-	@PostMapping("/dietModal")
-	public String insertDietPost(@ModelAttribute DietVO diet, HttpSession session, 
-			MultipartFile file, Model model) {
-		
-		MemberVO user = (MemberVO) session.getAttribute("user");
-		if(user == null) {
-			model.addAttribute("url", "/login");
-			model.addAttribute("msg", "로그인해주세요.");
-			return "msg/msg";
-		}
-		
-		if(recordService.insertDietPost(diet, user, file)) {
-			System.out.println(diet);
-			model.addAttribute("url", "/");
+	@RequestMapping(value = "/dietModal", method = RequestMethod.POST)
+	public String insertDietPost(@ModelAttribute DietVO diet,
+	                             @RequestParam("file") MultipartFile file,
+	                             HttpSession session,
+	                             Model model) {
+	    MemberVO user = (MemberVO) session.getAttribute("user");
+
+	    if (user == null) {
+	        model.addAttribute("url", "/login");
+	        model.addAttribute("msg", "로그인해주세요.");
+	        return "msg/msg";
+	    }
+
+	    boolean result = recordService.insertDietPost(diet, user, file);
+
+	    if (result) {
+	        model.addAttribute("url", "/");
 	        model.addAttribute("msg", "식단이 기록되었습니다.");
-			return "msg/msg";
-		}
-		return "redirect:/record/diet";
+	        return "msg/msg";
+	    }
+
+	    model.addAttribute("url", "/");
+	    model.addAttribute("msg", "식단 기록에 실패했습니다.");
+	    return "msg/msg";
 	}
 	
 	
