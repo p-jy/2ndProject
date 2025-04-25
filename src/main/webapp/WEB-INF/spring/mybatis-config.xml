@@ -16,5 +16,6 @@
 		<typeAlias type="kr.kh.spring.model.vo.SubCateVO" alias="SubCateVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.PlanVO" alias="PlanVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.DayVO" alias="DayVO"/>
+		<typeAlias type="kr.kh.spring.model.dto.RecordDTO" alias="RecordDTO"/>
 	</typeAliases>
 </configuration>

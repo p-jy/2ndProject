@@ -94,6 +94,12 @@ a {
 	margin-right: 5px;
 }
 /*탭 버든 관련 스타일 끝*/
+#calendar.week{
+	height : 200px;
+}
+#calendar.month{
+	height : 500px;
+}
 </style>
 
 <!-- 아래 세 줄은 달력 스크립트입니다. -->
@@ -147,12 +153,11 @@ a {
 		</div>
 	</div>
 	
-	
 	<script>
+	
 		document.addEventListener('DOMContentLoaded', function() {
 			var calendarEl = document.getElementById('calendar');
 			var calendar = new FullCalendar.Calendar(calendarEl, {
-				height: '200px',
 				initialView : 'dayGridWeek',
 				locale : 'ko',
 				headerToolbar : {
@@ -164,12 +169,16 @@ a {
 					week:{
 						text:'week',
 						click: function(){
+							calendarEl.classList.remove("month");
+							calendarEl.classList.add("week");
 							calendar.changeView('dayGridWeek');
 						}
 					},
 					month:{
 						text:'month',
 						click: function(){
+							calendarEl.classList.remove("week");
+							calendarEl.classList.add("month");
 							calendar.changeView('dayGridMonth');
 						}
 					}
@@ -179,8 +188,7 @@ a {
 				},
 			});
 			calendar.render();
-			addEventByType('2025-04-24','diet');
-			
+			setFullCalendar();
 			function addEventByType(date, type) {
 			    let titleIcon = '';
 			    let backgroundColor = '';
@@ -208,8 +216,32 @@ a {
 			      borderColor: backgroundColor
 			    });
 			  }
-			
+			function setFullCalendar(){
+				//비동기 통신으로 today/week/month에 맞게 기록 정보들을 가져옴
+				$.ajax({
+					async : true,
+					url : '<c:url value="/record/calendar/list" />',
+					data : { date : "month"},
+					method : 'GET',
+					success : function(data) {
+						console.log(data);
+						for(obj of data){
+							addEventByType(formatDate(new Date(obj.date)), obj.type);
+							console.log(formatDate(new Date(obj.date)))
+						}
+					}
+				})
+			}
+			$("button[title=week]").click();
 		});
+		
+		function formatDate(date) {
+		  const year = date.getFullYear();
+		  const month = String(date.getMonth() + 1).padStart(2, '0'); // 0-based month
+		  const day = String(date.getDate()).padStart(2, '0');
+		  return `\${year}-\${month}-\${day}`;
+		}
+		
 	</script>
 	<script>
 		$(".my-record .nav-item").first().click()

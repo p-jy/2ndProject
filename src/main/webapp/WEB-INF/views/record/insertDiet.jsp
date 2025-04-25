@@ -65,7 +65,11 @@
 </head>
 <body>
 <div class="dietTitle">식단 등록하기</div>
-	<form action="<c:url value="/record/insertDiet"/>" method="post">
+	<form action="<c:url value="/record/insertDiet"/>" method="post" enctype="multipart/form-data">
+ 		<div class="form-group">
+			<label>사진 첨부하기</label>
+			<input type="file" class="form-control" name="file"/>
+		</div>
 		<div class="form-group">
 		  	<label for="di_name" class="form-label">식단 이름 : </label>
 		  	<input type="text" class="form-control" name="di_name" id="di_name">
