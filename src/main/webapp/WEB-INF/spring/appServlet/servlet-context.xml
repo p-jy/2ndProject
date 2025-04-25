@@ -48,12 +48,17 @@
 	<beans:bean id="loginInterceptor" class="kr.kh.spring.interceptor.LoginInterceptor"/>
 	<beans:bean id="prevUrlInterceptor" class="kr.kh.spring.interceptor.PrevUrlInterceptor"/>
 	<beans:bean id="autoLoginInterceptor" class="kr.kh.spring.interceptor.AutoLoginInterceptor"/>
+	<beans:bean id="memberInterceptor" class="kr.kh.spring.interceptor.MemberInterceptor"/>
 	
 	<!-- 인터셉터 맵핑 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/login"/>
 			<beans:ref bean="prevUrlInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/statistics"/>
+			<beans:ref bean="memberInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/**"/>
