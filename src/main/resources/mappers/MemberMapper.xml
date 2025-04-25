@@ -62,13 +62,13 @@
 			workout.*, me_id as wo_me_id
 		from member
 		join workout on wo_me_id = me_id
-		where wo_me_id between date_sub(now(), interval #{date} day) and now() and wo_me_id = #{me_id}
+		where wo_date between date_sub(now(), interval #{date} day) and now() and wo_me_id = #{me_id}
 	</select>
 	<select id="selectInbodyList" resultType="InbodyVO">
 		select
 			inbody.*, me_id as ib_me_id
 		from member
 		join inbody on ib_me_id = me_id
-		where ib_me_id between date_sub(now(), interval #{date} day) and now() and ib_me_id = #{me_id}
+		where ib_date between date_sub(now(), interval #{date} day) and now() and ib_me_id = #{me_id}
 	</select>
 </mapper>
