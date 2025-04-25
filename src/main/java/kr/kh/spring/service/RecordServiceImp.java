@@ -15,6 +15,7 @@ import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.Inbody_PicVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.WorkoutVO;
+import kr.kh.spring.model.vo.Workout_PicVO;
 import kr.kh.spring.model.vo.Diet_PicVO;
 import kr.kh.spring.utils.UploadFileUtils;
 
@@ -151,6 +152,60 @@ public class RecordServiceImp implements RecordService{
 			e.printStackTrace();
 		}
 		System.out.println("uploadPath = " + uploadPath);
+	}
+
+	@Override
+	public boolean insertWorkoutPost(WorkoutVO workout, MemberVO user, MultipartFile file) {
+		if(user == null || user.getMe_id() == null) {
+			return false;
+		}
+		workout.setWo_me_id(user.getMe_id());
+		
+		//첨부파일
+		if(file == null || file.getOriginalFilename().length() == 0) {
+			return false;
+		}
+		
+		boolean res = recordDAO.insertWorkoutPost(workout);
+		
+		if(!res || workout.getWo_num() == 0) {
+			return false;
+		}
+		int wo_num = workout.getWo_num();
+		
+		if (file != null && !file.getOriginalFilename().isEmpty()) {
+		        insertWorkoutFile(wo_num, file);
+		        }
+		
+		return true;
+	}
+
+	private void insertWorkoutFile(int wo_num, MultipartFile file) {
+		if(file == null) {
+			return;
+		}
+		
+		String wp_ori_name = file.getOriginalFilename();
+		
+		if(wp_ori_name.length() == 0) {
+			return;
+		}
+		
+		int index = wp_ori_name.lastIndexOf(".");
+		String suffix = wp_ori_name.substring(index);
+		
+		try {
+			String wp_name = UploadFileUtils.uploadFile(uploadPath, ""+ wo_num, suffix, file.getBytes());
+			
+			Workout_PicVO workout_PicVO = new Workout_PicVO(wp_ori_name, wp_name, wo_num);
+			
+			recordDAO.insertWorkoutFile(workout_PicVO);
+		}  catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("uploadPath = " + uploadPath);
+		
 	}
 
 }

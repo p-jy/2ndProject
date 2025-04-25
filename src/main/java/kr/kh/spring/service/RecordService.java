@@ -24,4 +24,6 @@ public interface RecordService {
 
 	boolean insertInbodyPost(InbodyVO inbody, MemberVO user, MultipartFile file);
 
+	boolean insertWorkoutPost(WorkoutVO workout, MemberVO user, MultipartFile file);
+
 }

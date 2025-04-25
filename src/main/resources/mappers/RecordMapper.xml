@@ -17,7 +17,10 @@
   	where i.ib_date = curdate();
   </select>
   <select id="selectWorkoutList" resultType="WorkoutVO">
-  	select * from workout
+  	select w.*, p.wp_name 
+  	from workout w
+  	left join workout_pic p ON w.wo_num = p.wp_wo_num
+  	where w.wo_date = curdate();
   </select>
   
   <select id="selectAllRecordsList" resultType="RecordDTO">
@@ -48,6 +51,17 @@
   <insert id="insertInbodyFile">
 	insert into inbody_pic(ip_name, ip_ori_name, ip_ib_num)
 	value(#{ip_name}, #{ip_ori_name}, #{ip_ib_num})
+  </insert>
+  
+  <insert id="insertWorkoutPost" useGeneratedKeys="true" keyProperty="workout.wo_num">
+  	insert into workout
+  	(wo_title, wo_date, wo_ampm, wo_time, wo_minute, wo_text, wo_me_id)
+  	value
+  	(#{wo_title}, #{wo_date}, #{wo_ampm}, #{wo_time}, #{wo_minute}, #{wo_text}, #{wo_me_id})
+  </insert>
+  <insert id="insertWorkoutFile">
+	insert into workout_pic(wp_name, wp_ori_name, wp_wo_num)
+	value(#{wp_name}, #{wp_ori_name}, #{wp_wo_num})
   </insert>
 
 </mapper>

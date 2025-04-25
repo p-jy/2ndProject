@@ -11,6 +11,7 @@ import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.Inbody_PicVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.WorkoutVO;
+import kr.kh.spring.model.vo.Workout_PicVO;
 
 public interface RecordDAO {
 
@@ -29,5 +30,9 @@ public interface RecordDAO {
 	boolean insertInbodyPost(InbodyVO inbody);
 
 	void insertInbodyFile(Inbody_PicVO inbody_PicVO);
+
+	boolean insertWorkoutPost(WorkoutVO workout);
+
+	void insertWorkoutFile(Workout_PicVO workout_PicVO);
     
 }
