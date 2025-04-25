@@ -12,7 +12,6 @@ import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.WorkoutVO;
-import kr.kh.spring.model.vo.RecordVO;
 
 @Service
 public class RecordServiceImp implements RecordService{
