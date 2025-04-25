@@ -62,12 +62,12 @@ public class RecordController {
 		return "record/plan";
 	}
 	
-	@GetMapping("/insertDiet")
-	public String insertDiet(Model model) {
-		return "record/insertDiet";
+	@GetMapping("/dietModal")
+	public String insertDiet() {
+		return "record/dietModal";
 	}
 	
-	@PostMapping("/insertDiet")
+	@PostMapping("/dietModal")
 	public String insertDietPost(@ModelAttribute DietVO diet, HttpSession session, 
 			MultipartFile[] fileList, Model model) {
 		
