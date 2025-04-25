@@ -122,7 +122,7 @@ a {
 			<li class="nav-item" onclick="loadDietList()">
 				<a class="nav-link active" id="diet-tab" data-toggle="tab" href="#diet" >식단</a>
 			</li>
-			<li class="nav-item" onclick="loadInbodyList()">
+			<li class="nav-item">
 				<a class="nav-link" id="inbody-tab" data-toggle="tab" href="#inbody">신체</a>
 			</li>
 			<li class="nav-item">
@@ -135,17 +135,23 @@ a {
 	</div>
 	<div class="tab-content"></div>
 	<!-- 식단/신체/운동 등록하기 버튼 -->
-	<form action="" method="post">
+	<div>
 		<div class="recordtitle">
 			<h2>오늘의 활동을 등록해보세요.</h2>
 		</div>
 		<div class="button-container">
-			<a href="<c:url value='/record/insertDiet' />" class="btn btn-outline-secondary btn-block">식단</a> 
-			<a href="<c:url value='/record/insertInbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
-			<a href="<c:url value='/record/insertWorkout' />" class="btn btn-outline-secondary btn-block">운동</a> 
+			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
+			<%-- <a href="<c:url value='/record/insertDiet' />" class="btn btn-outline-secondary btn-block">식단</a>  --%>
+			<a href="<c:url value='/record/inbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
+			<a href="<c:url value='/record/workout' />" class="btn btn-outline-secondary btn-block">운동</a> 
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
 		</div>
-	</form>
+		<div id="insertModal" class="modal fade" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+	</div>
 	
 	<script>
 	
@@ -250,17 +256,11 @@ a {
 				}
 			});
 		}
-	</script>
-	<script>
-		function loadInbodyList() {
-			$.ajax({
-				async : true,
-				url : '<c:url value="/record/inbody" />',
-				method : 'GET',
-				success : function(data) {
-					$('.tab-content').html(data);
-				}
-			});
+		
+		function openDietModal() {
+			$('.modal-content').load("<c:url value='/record/dietModal'/>", function () {
+		        $('#insertModal').modal('show');
+		    });
 		}
 	</script>
 </body>
