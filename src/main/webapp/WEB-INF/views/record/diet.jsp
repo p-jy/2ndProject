@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<div >
+	<div>
 		<!-- 선택한 날짜에 식단 기록이 없을 경우 -->
 		<c:if test="${empty dietList}">
 			<p>등록된 리스트가 없습니다.</p>

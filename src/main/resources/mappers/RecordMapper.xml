@@ -19,4 +19,12 @@
   	value
   	(#{diet.di_name}, #{diet.di_date}, #{diet.di_score}, #{diet.di_ampm}, #{diet.di_time}, #{diet.di_me_id})
   </insert>
+  <select id="selectAllRecordsList" resultType="RecordDTO">
+  	SELECT distinct di_me_id as id, di_date as date, 'diet' as type FROM diet
+  	union
+  	SELECT distinct ib_me_id as id, ib_date as date, 'inbody' as type FROM inbody
+  	union
+  	SELECT distinct wo_me_id as id, wo_date as date, 'workout' as type FROM workout
+  </select>
+
 </mapper>

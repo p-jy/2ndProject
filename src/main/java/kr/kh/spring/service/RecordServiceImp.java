@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.dao.RecordDAO;
+import kr.kh.spring.model.dto.RecordDTO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.MemberVO;
@@ -44,6 +45,11 @@ public class RecordServiceImp implements RecordService{
 	@Override
 	public List<WorkoutVO> selectWorkoutList() {
 		return recordDAO.selectWorkoutList();
+	}
+
+	@Override
+	public List<RecordDTO> getAllRecords(String date) {
+		return recordDAO.selectAllRecordsList();
 	}
 
 }
