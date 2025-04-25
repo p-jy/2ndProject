@@ -11,7 +11,10 @@
 	WHERE d.di_date = CURDATE();
   </select>
   <select id="selectInbodyList" resultType="InbodyVO">
-  	select * from inbody
+  	select i.*, p.ip_name
+  	from inbody i
+  	left join inbody_pic p ON i.ib_num = p.ip_ib_num
+  	where i.ib_date = curdate();
   </select>
   <select id="selectWorkoutList" resultType="WorkoutVO">
   	select * from workout

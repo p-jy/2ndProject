@@ -57,6 +57,11 @@ public class RecordController {
 		return "record/inbody";
 	}
 	
+	@PostMapping("/inbody")
+	public String selectInbodyPost(Model model) {
+		return "record/inbody";
+	}
+	
 	@GetMapping("/workout")
 	public String selectWorkout(Model model) {
 		List<WorkoutVO> workoutList = recordService.selectWorkoutList();

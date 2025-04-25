@@ -115,13 +115,13 @@ public class RecordServiceImp implements RecordService{
 		
 		boolean res = recordDAO.insertInbodyPost(inbody);
 		
-		if(!res) {
+		if(!res || inbody.getIb_num() == 0) {
 			return false;
 		}
-		int di_num = inbody.getIb_num();
+		int ib_num = inbody.getIb_num();
 		
 		if (file != null && !file.getOriginalFilename().isEmpty()) {
-		        insertFile(di_num, file);
+		        insertInbodyFile(ib_num, file);
 		        }
 		
 		return true;

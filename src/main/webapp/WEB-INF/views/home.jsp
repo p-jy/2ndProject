@@ -120,16 +120,16 @@ a {
 	<div class="tab-container my-record">
 		<ul class="nav nav-tabs nav-justified" id="recordTabs" role="tablist">
 			<li class="nav-item" onclick="loadDietList()">
-				<a class="nav-link active" id="diet-tab" data-toggle="tab" href="#diet" >식단</a>
+				<a class="nav-link type active" id="diet-tab" data-toggle="tab" href="#diet" data-target="diet" >식단</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="inbody-tab" data-toggle="tab" href="#inbody">신체</a>
+				<a class="nav-link type" id="inbody-tab" data-toggle="tab" href="#inbody" data-target="inbody">신체</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="workout-tab" data-toggle="tab" href="#workout">운동</a>
+				<a class="nav-link type" id="workout-tab" data-toggle="tab" href="#workout" data-target="workout">운동</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" role="plan" href="#">계획</a>
+				<a class="nav-link type" role="plan" href="#" data-target="plan">계획</a>
 			</li>
 		</ul>
 	</div>
@@ -141,8 +141,8 @@ a {
 		</div>
 		<div class="button-container">
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
-			<a href="<c:url value='/record/inbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
-			<a href="<c:url value='/record/workout' />" class="btn btn-outline-secondary btn-block">운동</a> 
+			<a href="<c:url value='/record/insertInbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
+			<a href="<c:url value='/record/insertWorkout' />" class="btn btn-outline-secondary btn-block">운동</a> 
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
 		</div>
 		<div id="insertModal" class="modal fade" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
@@ -243,18 +243,37 @@ a {
 		
 	</script>
 	<script>
-		$(".my-record .nav-item").first().click()
+		let type = "diet";
+		console.log(type);
+		
+		loadList();
+		
+		$('.type').click(function () {
+			$('.type').removeClass('active');
+			$(this).addClass('active');
+			type = $(this).data('target');
+			console.log(type);
+			loadList();
+		});
 		//식단 리스트를 비동기통신으로 식단 탭에 뿌려줍니다.
-		function loadDietList() {
+		function loadList() {
+			let url = '';
+			if (type === 'diet') url = '<c:url value="/record/diet"/>';
+		    else if (type === 'workout') url = '<c:url value="/record/workout"/>';
+		    else if (type === 'inbody') url = '<c:url value="/record/inbody"/>';
+		    else if (type === 'plan') url = '<c:url value="/record/plan"/>';
+			
 			$.ajax({
 				async : true,
-				url : '<c:url value="/record/diet" />',
+				url : url,
 				method : 'GET',
 				success : function(data) {
 					$('.tab-content').html(data);
 				}
 			});
 		}
+		
+		
 		
 		function openDietModal() {
 			$('.modal-content').load("<c:url value='/record/dietModal'/>", function () {

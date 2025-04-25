@@ -84,30 +84,26 @@
 				<br>
 				<c:forEach var="inbody" items="${inbodyList}">
 					<div class="inbody-item-wrapper">
-					<div class="inbody-image-wrapper">
-						<img class="inbody-image" src="<c:url value="/imgs/${inbody.ip_name }"/>" alt="식단 이미지" onerror="this.onerror=null; this.src='/images/no-image.png';">
-					</div>
-					<div class="inbody-text-wrapper">
-						<div class="form-group">
-							<label>식단 이름 : </label> 
-							<input type="text" class="form-control" value="${inbody.di_name }" readonly>
-						</div> 
-						<div class="form-group">
-							<label>식단점수(1~5) : </label>
-							<input type="text" class="form-control" value="${inbody.di_score }" readonly>
-						</div> 
-						<div class="form-group">
-							<label>식단한 날짜	: </label>
-							<input type="text" class="form-control" value="<fmt:formatDate value='${inbody.di_date}' pattern='yyyy-MM-dd' />" readonly>
+						<div class="inbody-image-wrapper">
+							<img class="inbody-image" src="<c:url value="/imgs/${inbody.ip_name }"/>" alt="신체 이미지" onerror="this.onerror=null; this.src='/images/no-image.png';">
 						</div>
-						<div class="form-group">
-							<label>오전/오후 : </label> 
-							<input type="text" class="form-control" value="${inbody.di_ampm }" readonly>
-						</div> 
-						<div class="form-group">
-							<label>식단한 시간 : </label> 
-							<input type="text" class="form-control" value="${inbody.di_time }" readonly>
-						</div>
+						<div class="inbody-text-wrapper">
+							<div class="form-group">
+								<label>측정한 날짜	: </label>
+								<input type="text" class="form-control" value="<fmt:formatDate value='${inbody.ib_date}' pattern='yyyy-MM-dd' />" readonly>
+							</div>
+							<div class="form-group">
+								<label>체중 : </label> 
+								<input type="text" class="form-control" value="${inbody.ib_weight }" readonly>
+							</div>
+							<div class="form-group">
+								<label>골격근량 : </label> 
+								<input type="text" class="form-control" value="${inbody.ib_smm }" readonly>
+							</div>
+							<div class="form-group">
+								<label>체지방률 : </label> 
+								<input type="text" class="form-control" value="${inbody.ib_bfm }" readonly>
+							</div>  
 						</div>
 					</div>
 				</c:forEach>
