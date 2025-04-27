@@ -1,5 +1,8 @@
 package kr.kh.spring.model.vo;
 
+import lombok.Data;
+
+@Data
 public class DayVO {
 	
 	private int dy_num;

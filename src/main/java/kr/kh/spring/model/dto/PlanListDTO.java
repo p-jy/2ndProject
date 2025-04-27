@@ -15,4 +15,12 @@ public class PlanListDTO {
 	
 	private PlanVO plan;
 	private List<DayVO> dayList;
+	
+	public List<DayVO> getDayList() {
+        return dayList;
+    }
+
+    public void setDayList(List<DayVO> dayList) {
+        this.dayList = dayList;
+    }
 }
