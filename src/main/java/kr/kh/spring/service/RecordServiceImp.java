@@ -21,11 +21,11 @@ import kr.kh.spring.utils.UploadFileUtils;
 
 @Service
 @PropertySource("classpath:config.properties")
-public class RecordServiceImp implements RecordService{
-	
+public class RecordServiceImp implements RecordService {
+
 	@Autowired
 	RecordDAO recordDAO;
-	
+
 	@Value("${file.location}")
 	String uploadPath;
 
@@ -35,52 +35,53 @@ public class RecordServiceImp implements RecordService{
 	}
 
 	public boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile file) {
-		if(diet == null || diet.getDi_name() == null || diet.getDi_date() == null || diet.getDi_ampm() == null || diet.getDi_time() == null || diet.getDi_score() == 0) {
+		if (diet == null || diet.getDi_name() == null || diet.getDi_date() == null || diet.getDi_ampm() == null
+				|| diet.getDi_time() == null || diet.getDi_score() == 0) {
 			return false;
 		}
-		if(user == null || user.getMe_id() == null) {
+		if (user == null || user.getMe_id() == null) {
 			return false;
 		}
 		diet.setDi_me_id(user.getMe_id());
-		
+
 		boolean res = recordDAO.insertDietPost(diet);
 		System.out.println(res);
-		
-		if(!res) {
+
+		if (!res) {
 			return false;
 		}
 		System.out.println(diet);
 		int di_num = diet.getDi_num();
-		
+
 		if (file != null) {
 			insertFile(di_num, file);
 		}
-		
+
 		return true;
 	}
 
 	private void insertFile(int di_num, MultipartFile file) {
-		if(file == null) {
+		if (file == null) {
 			return;
 		}
-		
+
 		String dp_ori_name = file.getOriginalFilename();
-		
-		if(dp_ori_name == null || dp_ori_name.length() == 0) {
+
+		if (dp_ori_name == null || dp_ori_name.length() == 0) {
 			return;
 		}
-		
+
 		int index = dp_ori_name.lastIndexOf(".");
 		String suffix = dp_ori_name.substring(index);
-		
+
 		try {
-			String dp_name = UploadFileUtils.uploadFile(uploadPath, ""+ di_num, suffix, file.getBytes());
-			
+			String dp_name = UploadFileUtils.uploadFile(uploadPath, "" + di_num, suffix, file.getBytes());
+
 			Diet_PicVO diet_PicVO = new Diet_PicVO(dp_ori_name, dp_name, di_num);
-			
+
 			recordDAO.insertFile(diet_PicVO);
-		}  catch (Exception e) {
-			
+		} catch (Exception e) {
+
 			e.printStackTrace();
 		}
 		System.out.println("uploadPath = " + uploadPath);
@@ -103,52 +104,48 @@ public class RecordServiceImp implements RecordService{
 
 	@Override
 	public boolean insertInbodyPost(InbodyVO inbody, MemberVO user, MultipartFile file) {
-		if(user == null || user.getMe_id() == null) {
+		if (inbody == null || inbody.getIb_date() == null || inbody.getIb_weight() == 0) {
+			return false;
+		}
+		if (user == null || user.getMe_id() == null) {
 			return false;
 		}
 		inbody.setIb_me_id(user.getMe_id());
-		
-		//첨부파일
-		if(file == null || file.getOriginalFilename().length() == 0) {
-			return false;
-		}
-		
+
 		boolean res = recordDAO.insertInbodyPost(inbody);
-		
-		if(!res || inbody.getIb_num() == 0) {
+		if (!res) {
 			return false;
 		}
 		int ib_num = inbody.getIb_num();
-		
+
 		if (file != null && !file.getOriginalFilename().isEmpty()) {
-		        insertInbodyFile(ib_num, file);
-		        }
-		
+			insertInbodyFile(ib_num, file);
+		}
+
 		return true;
 	}
 
 	private void insertInbodyFile(int ib_num, MultipartFile file) {
-		if(file == null) {
+		if (file == null) {
 			return;
 		}
-		
+
 		String ip_ori_name = file.getOriginalFilename();
-		
-		if(ip_ori_name.length() == 0) {
+
+		if (ip_ori_name.length() == 0) {
 			return;
 		}
-		
+
 		int index = ip_ori_name.lastIndexOf(".");
 		String suffix = ip_ori_name.substring(index);
-		
+
 		try {
-			String ip_name = UploadFileUtils.uploadFile(uploadPath, ""+ ib_num, suffix, file.getBytes());
-			
+			String ip_name = UploadFileUtils.uploadFile(uploadPath, "" + ib_num, suffix, file.getBytes());
+
 			Inbody_PicVO inbody_PicVO = new Inbody_PicVO(ip_ori_name, ip_name, ib_num);
-			
+
 			recordDAO.insertInbodyFile(inbody_PicVO);
-		}  catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println("uploadPath = " + uploadPath);
@@ -156,56 +153,56 @@ public class RecordServiceImp implements RecordService{
 
 	@Override
 	public boolean insertWorkoutPost(WorkoutVO workout, MemberVO user, MultipartFile file) {
-		if(user == null || user.getMe_id() == null) {
+		if (user == null || user.getMe_id() == null) {
 			return false;
 		}
 		workout.setWo_me_id(user.getMe_id());
-		
-		//첨부파일
-		if(file == null || file.getOriginalFilename().length() == 0) {
+
+		// 첨부파일
+		if (file == null || file.getOriginalFilename().length() == 0) {
 			return false;
 		}
-		
+
 		boolean res = recordDAO.insertWorkoutPost(workout);
-		
-		if(!res || workout.getWo_num() == 0) {
+
+		if (!res || workout.getWo_num() == 0) {
 			return false;
 		}
 		int wo_num = workout.getWo_num();
-		
+
 		if (file != null && !file.getOriginalFilename().isEmpty()) {
-		        insertWorkoutFile(wo_num, file);
-		        }
-		
+			insertWorkoutFile(wo_num, file);
+		}
+
 		return true;
 	}
 
 	private void insertWorkoutFile(int wo_num, MultipartFile file) {
-		if(file == null) {
+		if (file == null) {
 			return;
 		}
-		
+
 		String wp_ori_name = file.getOriginalFilename();
-		
-		if(wp_ori_name.length() == 0) {
+
+		if (wp_ori_name.length() == 0) {
 			return;
 		}
-		
+
 		int index = wp_ori_name.lastIndexOf(".");
 		String suffix = wp_ori_name.substring(index);
-		
+
 		try {
-			String wp_name = UploadFileUtils.uploadFile(uploadPath, ""+ wo_num, suffix, file.getBytes());
-			
+			String wp_name = UploadFileUtils.uploadFile(uploadPath, "" + wo_num, suffix, file.getBytes());
+
 			Workout_PicVO workout_PicVO = new Workout_PicVO(wp_ori_name, wp_name, wo_num);
-			
+
 			recordDAO.insertWorkoutFile(workout_PicVO);
-		}  catch (Exception e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("uploadPath = " + uploadPath);
-		
+
 	}
 
 }

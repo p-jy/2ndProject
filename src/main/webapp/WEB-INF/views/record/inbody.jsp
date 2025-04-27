@@ -32,20 +32,20 @@
   flex: 1;
 }
 
-.form-group {
+.inbody-group {
   display: flex;
-  flex-wrap:wrap;
   gap: 10px;
   align-items: center;
   padding:0px;
+  margin-bottom: 10px;
 }
 
-.form-group label {
+.inbody-group label {
   font-weight: bold;
   width: 110px;
 }
 
-.form-control {
+.inbody-control {
   padding: 6px;
   font-size: 14px;
   border: 1px solid #ddd;
@@ -70,6 +70,15 @@
 .inbody-text-wrapper {
   flex: 2; /* 텍스트 영역의 flex 비율 */
 }
+
+.tab-content{
+	overflow-x: auto;
+}
+
+.inbody-image{
+	width: 100px;
+	height: auto;
+}
 </style>
 
 </head>
@@ -85,24 +94,24 @@
 				<c:forEach var="inbody" items="${inbodyList}">
 					<div class="inbody-item-wrapper">
 						<div class="inbody-image-wrapper">
-							<img class="inbody-image" src="<c:url value="/imgs/${inbody.ip_name }"/>" alt="신체 이미지" onerror="this.onerror=null; this.src='/images/no-image.png';">
+							<img class="inbody-image" src="<c:url value="/imgs/${inbody.ip_name }"/>" alt="신체 이미지" onerror="this.onerror=null; this.src='https://img.icons8.com/?size=100&id=1G2BW7-tQJJJ&format=png&color=000000';">
 						</div>
 						<div class="inbody-text-wrapper">
-							<div class="form-group">
-								<label>측정한 날짜	: </label>
-								<input type="text" class="form-control" value="<fmt:formatDate value='${inbody.ib_date}' pattern='yyyy-MM-dd' />" readonly>
+							<div class="inbody-group">
+								<label>측정일</label>
+								<input type="text" class="inbody-control" value="<fmt:formatDate value='${inbody.ib_date}' pattern='yyyy-MM-dd' />" readonly>
 							</div>
-							<div class="form-group">
-								<label>체중 : </label> 
-								<input type="text" class="form-control" value="${inbody.ib_weight }" readonly>
+							<div class="inbody-group">
+								<label>체중</label> 
+								<input type="text" class="inbody-control" value="${inbody.ib_weight}" readonly>
 							</div>
-							<div class="form-group">
-								<label>골격근량 : </label> 
-								<input type="text" class="form-control" value="${inbody.ib_smm }" readonly>
+							<div class="inbody-group">
+								<label>골격근량</label> 
+								<input type="text" class="inbody-control" value="${inbody.ib_smm != null ? inbody.ib_smm : '-'}" readonly>
 							</div>
-							<div class="form-group">
-								<label>체지방률 : </label> 
-								<input type="text" class="form-control" value="${inbody.ib_bfm }" readonly>
+							<div class="inbody-group">
+								<label>체지방률</label> 
+								<input type="text" class="inbody-control" value="${inbody.ib_bfm != null ? inbody.ib_bfm : '-'}" readonly>
 							</div>  
 						</div>
 					</div>

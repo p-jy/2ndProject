@@ -133,7 +133,9 @@ a {
 			</li>
 		</ul>
 	</div>
-	<div class="tab-content"></div>
+	<div class="tab-content">
+		
+	</div>
 	<!-- 식단/신체/운동 등록하기 버튼 -->
 	<div>
 		<div class="recordtitle">
@@ -141,7 +143,8 @@ a {
 		</div>
 		<div class="button-container">
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
-			<a href="<c:url value='/record/insertInbody' />" class="btn btn-outline-secondary btn-block">신체</a> 
+			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openInbodyModal()" role="button">신체</a>
+			<!-- <a href="<c:url value='/record/insertInbody' />" class="btn btn-outline-secondary btn-block">신체</a> --> 
 			<a href="<c:url value='/record/insertWorkout' />" class="btn btn-outline-secondary btn-block">운동</a> 
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
 		</div>
@@ -277,6 +280,11 @@ a {
 		
 		function openDietModal() {
 			$('.modal-content').load("<c:url value='/record/dietModal'/>", function () {
+		        $('#insertModal').modal('show');
+		    });
+		}
+		function openInbodyModal() {
+			$('.modal-content').load("<c:url value='/record/inbodyModal'/>", function () {
 		        $('#insertModal').modal('show');
 		    });
 		}

@@ -39,7 +39,7 @@
 	<beans:bean id="uploadPath" class="java.lang.String">
 	
 	<!-- <beans:constructor-arg value="서버에 저장할 경로"/> -->
-	<beans:constructor-arg value="D:\imgs"/>
+	<beans:constructor-arg value="D:\\imgs"/>
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.kh.spring.*" />
