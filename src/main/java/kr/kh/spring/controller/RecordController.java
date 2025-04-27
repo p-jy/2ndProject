@@ -20,8 +20,10 @@ import kr.kh.spring.model.dto.RecordDTO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.model.vo.SubCateVO;
 import kr.kh.spring.model.vo.WorkoutVO;
 import kr.kh.spring.service.RecordService;
+import kr.kh.spring.service.SubcateService;
 
 /**
  * Handles requests for the application home page.
@@ -32,6 +34,9 @@ public class RecordController {
 
 	@Autowired
 	RecordService recordService;
+	
+	@Autowired
+	SubcateService subcateService;
 
 	@GetMapping("/diet")
 	public String selectDiet(Model model) {
@@ -81,7 +86,10 @@ public class RecordController {
 	}
 
 	@GetMapping("/dietModal")
-	public String insertDiet() {
+	public String insertDiet(Model model) {
+		List<SubCateVO> mealtimeList = subcateService.getMealtimeList();
+		model.addAttribute("mealtimeList", mealtimeList);
+		
 		return "record/dietModal";
 	}
 
@@ -97,7 +105,7 @@ public class RecordController {
 		}
 
 		boolean res = recordService.insertDietPost(diet, user, file);
-
+		
 		if (res) {
 			model.addAttribute("url", "/");
 			model.addAttribute("msg", "식단이 기록되었습니다.");
@@ -110,7 +118,8 @@ public class RecordController {
 	}
 
 	@GetMapping("/inbodyModal")
-	public String insertInbody() {
+	public String insertInbody(Model model) {
+		
 		return "record/inbodyModal";
 	}
 
@@ -139,13 +148,13 @@ public class RecordController {
 		return "msg/msg";
 	}
 
-	@GetMapping("/insertWorkout")
-	public String insertWorkout(Model model) {
-		return "record/insertWorkout";
+	@GetMapping("/workoutModal")
+	public String insertWorkout() {
+		return "record/workoutModal";
 	}
 
-	@PostMapping("/insertWorkout")
-	public String insertWorkoutPost(@ModelAttribute WorkoutVO workout, HttpSession session, MultipartFile file,
+	@RequestMapping(value = "/workoutModal", method = RequestMethod.POST)
+	public String insertWorkoutPost(@ModelAttribute WorkoutVO workout, HttpSession session, @RequestParam("file")MultipartFile file,
 			Model model) {
 
 		MemberVO user = (MemberVO) session.getAttribute("user");
@@ -155,13 +164,17 @@ public class RecordController {
 			return "msg/msg";
 		}
 
-		if (recordService.insertWorkoutPost(workout, user, file)) {
-			System.out.println(workout);
+		boolean res = recordService.insertWorkoutPost(workout, user, file);
+
+		if (res) {
 			model.addAttribute("url", "/");
 			model.addAttribute("msg", "신체가 기록되었습니다.");
+			System.out.println(workout);
 			return "msg/msg";
 		}
-		return "redirect:/record/workout";
+		model.addAttribute("url", "/");
+		model.addAttribute("msg", "신체 기록에 실패했습니다.");
+		return "msg/msg";
 	}
 
 }

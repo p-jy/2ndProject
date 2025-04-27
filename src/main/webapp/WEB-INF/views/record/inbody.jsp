@@ -18,8 +18,8 @@
 }
 
 .inbody-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: auto;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -73,11 +73,6 @@
 
 .tab-content{
 	overflow-x: auto;
-}
-
-.inbody-image{
-	width: 100px;
-	height: auto;
 }
 </style>
 

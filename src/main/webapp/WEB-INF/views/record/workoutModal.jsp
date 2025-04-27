@@ -21,11 +21,23 @@
 	.insertBtn {
 		width: 150px;
 	}
+	.radio-group {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
 	
 	.form-label {
 		margin-right: 10px;
 		font-weight: bold;
 		min-width: 80px;
+	}
+	
+	.radio-option {
+		display: flex;
+		align-items: center;
+		gap: 4px;
 	}
 	
 	.form{
@@ -35,33 +47,48 @@
 </head>
 <body>
 	<div class="modal-header">
-		<h5 class="modal-title" id="insertModalLabel">신체 등록하기</h5>
+		<h5 class="modal-title" id="insertModalLabel">운동 등록하기</h5>
 		<button type="button" class="close mr-2" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">X</span>
 		</button>
 	</div>
 	<div class="modal-body">
-		<form class="form" method="post" action="/spring/record/inbodyModal" enctype="multipart/form-data">
+		<form class="form" method="post" action="/spring/record/workoutModal" enctype="multipart/form-data">
 			<div class="containers">
 				<div class="f-container mb-3">
 					<label for="file" class="form-label">이미지</label>
 					<input type="file" class="form-control" name="file" />
 				</div>
 				<div class="f-container mb-3">
-					<label for="ib_date" class="form-label">측정일</label>
-					<input type="text" class="form-control" name="ib_date" id="ib_date" required>
+					<label for="wo_title" class="form-label">타이틀</label>
+					<input type="text" class="form-control" name="wo_title" id="wo_title" required>
 				</div>
 				<div class="f-container mb-3">
-					<label for="ib_weight" class="form-label">체중</label>
-					<input type="text" class="form-control" name="ib_weight" id="ib_weight" required>
+					<label for="wo_date" class="form-label">날짜</label>
+					<input type="text" class="form-control" name="wo_date" id="wo_date" required>
+				</div>
+				<div class="f-container">
+					<div class="radio-group">
+						<label class="form-label">오전/오후</label>
+						<label class="radio-option">
+							<input type="radio" name="wo_ampm" id="am" value="오전" required> 오전
+						</label>
+						<label class="radio-option">
+							<input type="radio" name="wo_ampm" id="pm" value="오후"> 오후
+						</label>
+					</div>
 				</div>
 				<div class="f-container mb-3">
-					<label for="ib_smm" class="form-label">골격근량</label>
-					<input type="text" class="form-control" name="ib_smm" id="ib_smm">
+					<label for="wo_time" class="form-label">시작 시간</label>
+					<input type="text" class="form-control" name="wo_time" id="wo_time" required>
 				</div>
 				<div class="f-container mb-3">
-					<label for="ib_bfm" class="form-label">체지방률</label>
-					<input type="text" class="form-control" name="ib_bfm" id="ib_bfm">
+					<label for="wo_minute" class="form-label">운동 시간(분)</label>
+					<input type="text" class="form-control" name="wo_minute" id="wo_minute" required>
+				</div>
+				<div class="f-container mb-3">
+					<label for="wo_memo" class="form-label">메모</label>
+					<input type="text" class="form-control" name="wo_memo" id="wo_memo">
 				</div>
 				<div class="d-flex justify-content-center">
 					<button type="submit" class="btn btn-outline-secondary btn-block insertBtn">등록하기</button>
@@ -74,14 +101,14 @@
 	</div>
 	<script>
 	  $(function() {
-	    $( "#ib_date" ).datepicker({
+	    $( "#wo_date" ).datepicker({
 	    	dateFormat: 'yy-mm-dd', // 달력 날짜 형태
 	    	showOtherMonths: true, //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 	    	showMonthAfterYear: true, // 년도 - 월 순서
 	    	changeYear: true, // 년 선택 가능 옵션
 	    	changeMonth: true // 월 선택 가능 옵션
 	    });
-	    $('#ib_date').datepicker('setDate', 'today'); //초기값을 오늘 날짜로 설정
+	    $('#wo_date').datepicker('setDate', 'today'); //초기값을 오늘 날짜로 설정
 	  });
 	</script>
 </body>

@@ -144,8 +144,7 @@ a {
 		<div class="button-container">
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openInbodyModal()" role="button">신체</a>
-			<!-- <a href="<c:url value='/record/insertInbody' />" class="btn btn-outline-secondary btn-block">신체</a> --> 
-			<a href="<c:url value='/record/insertWorkout' />" class="btn btn-outline-secondary btn-block">운동</a> 
+			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openWorkoutModal()" role="button">운동</a>
 			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
 		</div>
 		<div id="insertModal" class="modal fade" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
@@ -285,6 +284,11 @@ a {
 		}
 		function openInbodyModal() {
 			$('.modal-content').load("<c:url value='/record/inbodyModal'/>", function () {
+		        $('#insertModal').modal('show');
+		    });
+		}
+		function openWorkoutModal() {
+			$('.modal-content').load("<c:url value='/record/workoutModal'/>", function () {
 		        $('#insertModal').modal('show');
 		    });
 		}

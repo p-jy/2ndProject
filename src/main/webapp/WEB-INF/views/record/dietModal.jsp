@@ -26,10 +26,16 @@
 	width: 150px;
 }
 .radio-group {
-	display: flex;
+	display: block;
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 10px;
+}
+
+.radio-group .form-label{
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
 }
 
 .form-label {
@@ -42,6 +48,12 @@
 	display: flex;
 	align-items: center;
 	gap: 4px;
+}
+
+.radio-options{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
 .form{
@@ -65,39 +77,55 @@
 					<input type="file" class="form-control" name="file" />
 				</div>
 				<div class="f-container mb-3">
-					<label for="di_name" class="form-label" required>음식명</label>
-					<input type="text" class="form-control" name="di_name" id="di_name" placeholder="음식명을 입력하세요.">
+					<label for="di_name" class="form-label">음식명</label>
+					<input type="text" class="form-control" name="di_name" id="di_name" placeholder="음식명을 입력하세요." required>
 				</div>
+				<%-- <div class="f-container mb-3">
+					<div class="radio-group">
+						<label class="form-label">분류</label>
+						<div class="radio-options">
+							<c:forEach var="sub" items="${mealtimeList}">
+								<label class="radio-option d-flex">
+									<input type="radio" name="option[분류]" id="sc_${sub.sc_num}" value="${sub.sc_name}">${sub.sc_name}
+								</label>
+							</c:forEach>
+						</div>
+					</div>
+				</div> --%>
 				<div class="f-container mb-3">
 					<label for="di_date" class="form-label">날짜</label>
-					<input type="text" class="form-control" name="di_date" id="di_date">
+					<input type="text" class="form-control" name="di_date" id="di_date" required>
 				</div>
 				<!-- 식단 점수 -->
 				<div class="f-container mb-3">
 					<div class="radio-group">
 						<label class="form-label">점수</label>
-						<c:forEach var="i" begin="1" end="5">
-							<label class="radio-option">
-								<input type="radio" name="di_score" id="score${i}" value="${i}" required>${i}점
-							</label>
-						</c:forEach>
+						<div class="radio-options">
+							<c:forEach var="i" begin="1" end="5">
+								<label class="radio-option">
+									<input type="radio" name="di_score" id="score${i}" value="${i}" required>${i}점
+								</label>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 				<!-- 오전/오후 -->
 				<div class="f-container">
 					<div class="radio-group">
 						<label class="form-label">오전/오후</label>
-						<label class="radio-option">
-							<input type="radio" name="di_ampm" id="am" value="오전" required> 오전
-						</label>
-						<label class="radio-option">
-							<input type="radio" name="di_ampm" id="pm" value="오후"> 오후
-						</label>
+						<div class="radio-options">
+							<label class="radio-option">
+								<input type="radio" name="di_ampm" id="am" value="오전" required> 오전
+							</label>
+							<label class="radio-option">
+								<input type="radio" name="di_ampm" id="pm" value="오후"> 오후
+							</label>
+						</div>
 					</div>
 				</div>
 				<div class="f-container mb-3">
 					<label for="di_time" class="form-label">시간</label>
-					<input type="text" class="form-control" name="di_time" id="di_time">
+					<input type="text" class="form-control" name="di_time" id="di_time" required>
 				</div>
 				<div class="d-flex justify-content-center">
 					<button type="submit" class="btn btn-outline-secondary btn-block insertBtn">등록하기</button>
