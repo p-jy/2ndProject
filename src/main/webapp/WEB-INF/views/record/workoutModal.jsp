@@ -61,7 +61,7 @@
 				</div>
 				<div class="f-container mb-3">
 					<label for="wo_title" class="form-label">타이틀</label>
-					<input type="text" class="form-control" name="wo_title" id="wo_title" required>
+					<input type="text" class="form-control" name="wo_title" id="wo_title" placeholder="타이틀을 입력해주세요." required>
 				</div>
 				<div class="f-container mb-3">
 					<label for="wo_date" class="form-label">날짜</label>

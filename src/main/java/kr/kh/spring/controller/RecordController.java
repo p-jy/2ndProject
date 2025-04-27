@@ -20,10 +20,8 @@ import kr.kh.spring.model.dto.RecordDTO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.MemberVO;
-import kr.kh.spring.model.vo.SubCateVO;
 import kr.kh.spring.model.vo.WorkoutVO;
 import kr.kh.spring.service.RecordService;
-import kr.kh.spring.service.SubcateService;
 
 /**
  * Handles requests for the application home page.
@@ -35,12 +33,11 @@ public class RecordController {
 	@Autowired
 	RecordService recordService;
 	
-	@Autowired
-	SubcateService subcateService;
-
 	@GetMapping("/diet")
-	public String selectDiet(Model model) {
-		List<DietVO> dietList = recordService.selectDietList();
+	public String selectDiet(Model model, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		List<DietVO> dietList = recordService.selectDietList(user.getMe_id());
 		model.addAttribute("dietList", dietList);
 		return "record/diet";
 	}
@@ -57,8 +54,10 @@ public class RecordController {
 	}
 
 	@GetMapping("/inbody")
-	public String selectInbody(Model model) {
-		List<InbodyVO> inbodyList = recordService.selectInbodyList();
+	public String selectInbody(Model model, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		List<InbodyVO> inbodyList = recordService.selectInbodyList(user.getMe_id());
 		model.addAttribute("inbodyList", inbodyList);
 		return "record/inbody";
 	}
@@ -69,8 +68,10 @@ public class RecordController {
 	}
 
 	@GetMapping("/workout")
-	public String selectWorkout(Model model) {
-		List<WorkoutVO> workoutList = recordService.selectWorkoutList();
+	public String selectWorkout(Model model, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		List<WorkoutVO> workoutList = recordService.selectWorkoutList(user.getMe_id());
 		model.addAttribute("workoutList", workoutList);
 		return "record/workout";
 	}
@@ -80,16 +81,8 @@ public class RecordController {
 		return "record/workout";
 	}
 
-	@GetMapping("/plan")
-	public String selectPlan(Model model) {
-		return "record/plan";
-	}
-
 	@GetMapping("/dietModal")
-	public String insertDiet(Model model) {
-		List<SubCateVO> mealtimeList = subcateService.getMealtimeList();
-		model.addAttribute("mealtimeList", mealtimeList);
-		
+	public String insertDiet() {
 		return "record/dietModal";
 	}
 

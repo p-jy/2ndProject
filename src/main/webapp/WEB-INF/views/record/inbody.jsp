@@ -81,7 +81,7 @@
 	<div>
 		<!-- 선택한 날짜에 식단 기록이 없을 경우 -->
 		<c:if test="${empty inbodyList}">
-			<p>등록된 리스트가 없습니다.</p>
+			<p>등록된 신체 기록이 없습니다.</p>
 		</c:if>
 		<c:if test="${not empty inbodyList}">
 			<div id="inbody" class="inbody-detail-wrapper container tab-pane active">
@@ -98,15 +98,15 @@
 							</div>
 							<div class="inbody-group">
 								<label>체중</label> 
-								<input type="text" class="inbody-control" value="${inbody.ib_weight}" readonly>
+								<input type="text" class="inbody-control" value="${inbody.ib_weight} kg" readonly>
 							</div>
 							<div class="inbody-group">
 								<label>골격근량</label> 
-								<input type="text" class="inbody-control" value="${inbody.ib_smm != null ? inbody.ib_smm : '-'}" readonly>
+								<input type="text" class="inbody-control" value="${inbody.ib_smm != null ? inbody.ib_smm + '%' : '-'}" readonly>
 							</div>
 							<div class="inbody-group">
 								<label>체지방률</label> 
-								<input type="text" class="inbody-control" value="${inbody.ib_bfm != null ? inbody.ib_bfm : '-'}" readonly>
+								<input type="text" class="inbody-control" value="${inbody.ib_bfm != null ? inbody.ib_bfm + '%' : '-'}" readonly>
 							</div>  
 						</div>
 					</div>

@@ -32,8 +32,8 @@ public class RecordServiceImp implements RecordService {
 	String uploadPath;
 
 	@Override
-	public List<DietVO> selectDietList() {
-		return recordDAO.selectDietList();
+	public List<DietVO> selectDietList(String me_id) {
+		return recordDAO.selectDietList(me_id);
 	}
 
 	public boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile file) {
@@ -90,13 +90,13 @@ public class RecordServiceImp implements RecordService {
 	}
 
 	@Override
-	public List<InbodyVO> selectInbodyList() {
-		return recordDAO.selectInbodyList();
+	public List<InbodyVO> selectInbodyList(String me_id) {
+		return recordDAO.selectInbodyList(me_id);
 	}
 
 	@Override
-	public List<WorkoutVO> selectWorkoutList() {
-		return recordDAO.selectWorkoutList();
+	public List<WorkoutVO> selectWorkoutList(String me_id) {
+		return recordDAO.selectWorkoutList(me_id);
 	}
 
 	@Override

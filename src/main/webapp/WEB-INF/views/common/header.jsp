@@ -19,24 +19,13 @@
 			</li>
 			
 			<li class="nav-item">
-				<a class="nav-link" href="<c:url value="/plan/make"/>">계획</a>
-			</li>
-			
-			<li class="nav-item">
 				<a class="nav-link" href="<c:url value="/statistics"/>">통계</a>
 			</li>
 			
 			<c:if test="${user == null}">
 				<li class="nav-item">
 					<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-					<!-- <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="openLoginModal()" role="button">로그인</a>  -->
 				</li>
-				<!-- <div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-						</div>
-					</div>
-				</div> -->
 				
 				<li class="nav-item">
 					<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
@@ -57,11 +46,5 @@
 			
 		</ul>
 	</nav>
-	<script>
-		function openLoginModal() {
-			$('.modal-content').load("<c:url value="/member/loginModal"/>");
-			$('#loginModal').modal();
-		}
-	</script>
 </body>
 </html>

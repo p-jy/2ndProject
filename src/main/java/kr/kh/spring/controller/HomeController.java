@@ -31,8 +31,9 @@ public class HomeController {
 	RecordService recordService;
 
 	@GetMapping("/")
-	public String selectDiet(Model model) {
-		List<DietVO> dietList = recordService.selectDietList();
+	public String selectDiet(Model model, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		List<DietVO> dietList = recordService.selectDietList(user.getMe_id());
 		model.addAttribute("dietList", dietList);
 		return "home";
 	}
