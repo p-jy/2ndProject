@@ -39,26 +39,20 @@ public class PlanController {
 		List<DayVO> dayList = planlist.getDayList();
 		
 		if(planService.insertPlan(plan, user, dayList)) {
-			model.addAttribute("plan", plan);
-			model.addAttribute("list", dayList);
+			model.addAttribute("msg", "계획 만들기 성공!");
+			model.addAttribute("url", "/");
 			
-			return "redirect:/make";
+			return "/msg/msg";
 		}
-		//계획 만들기 성공 시 메인으로?
-		return "redirect:/";		
-	}
-	/*
-	@GetMapping("/watch")
-	public String watch(Model model, @PathVariable int pl_num, HttpSession session) {
-		//유저 정보
-		MemberVO user = (MemberVO)session.getAttribute("user");
-
-		//계획을 가져옴
-		PlanVO planlist = planService.getPlanList(pl_num);
 		
-		model.addAttribute("planlist", planlist);
+		model.addAttribute("msg", "계획 만들기 실패! 다시 시도해주세요.");
+		model.addAttribute("url", "/plan/make");
+		return "/msg/msg";
+	}
+	
+	@GetMapping("/watch")
+	public String watch() {
 		
 		return "/plan/watch";
 	}
-	*/
 }
