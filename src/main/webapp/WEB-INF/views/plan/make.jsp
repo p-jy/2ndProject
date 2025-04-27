@@ -67,13 +67,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="checkbox" id="days" name="dy_day" value="월">월</td>
-					<td><input type="checkbox" id="days" name="dy_day" value="화">화</td>
-					<td><input type="checkbox" id="days" name="dy_day" value="수">수</td>
-					<td><input type="checkbox" id="days" name="dy_day" value="목">목</td>
-					<td><input type="checkbox" id="days" name="dy_day" value="금">금</td>
-					<td><input type="checkbox" id="days" name="dy_day" value="토">토</td>
-					<td><input type="checkbox" id="days" name="dy_day" value="일">일</td>
+					<td><input type="checkbox" id="days" name="dayList[0].dy_day" value="월">월</td>
+					<td><input type="checkbox" id="days" name="dayList[1].dy_day" value="화">화</td>
+					<td><input type="checkbox" id="days" name="dayList[2].dy_day" value="수">수</td>
+					<td><input type="checkbox" id="days" name="dayList[3].dy_day" value="목">목</td>
+					<td><input type="checkbox" id="days" name="dayList[4].dy_day" value="금">금</td>
+					<td><input type="checkbox" id="days" name="dayList[5].dy_day" value="토">토</td>
+					<td><input type="checkbox" id="days" name="dayList[6].dy_day" value="일">일</td>
 				</tr>
 				<tr>
 				  <td colspan="7"><span id="day-error" style="color: red;"></span></td>
@@ -163,7 +163,7 @@
 	<script>
 	document.addEventListener("DOMContentLoaded", function () {
 	const titleInput = document.getElementById("title");
-	const daysCheckboxes = document.querySelectorAll("input[name='dy_day']");
+	const daysCheckboxes = document.querySelectorAll("input[name^='dayList']");
 	const divisionCheckboxes = document.querySelectorAll("input[name='pl_mc_num']");
 	const periodInput = document.getElementById("period");
 	const submitBtn = document.querySelector(".btn-makeplan");
@@ -191,11 +191,11 @@
 	});
 	
 	daysCheckboxes.forEach(cb => {
-	cb.addEventListener("change", () => {
-	if (document.querySelectorAll("input[name='dy_day']:checked").length > 0) {
-			dayError.innerText = "";
-			}
-		});
+	  cb.addEventListener("change", () => {
+	    if (document.querySelectorAll("input[name^='dayList']:checked").length > 0) {
+	      dayError.innerText = "";
+	    }
+	  });
 	});
 	
 	divisionCheckboxes.forEach(cb => {
@@ -211,7 +211,7 @@
 	let isValid = true;
 	
 	const title = titleInput.value.trim();
-	const days = document.querySelectorAll("input[name='dy_day']:checked");
+	const days = document.querySelectorAll("input[name^='dayList']:checked");
 	const division = document.querySelectorAll("input[name='pl_mc_num']:checked");
 	const period = periodInput.value.trim();
 	

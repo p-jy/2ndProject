@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,16 +36,29 @@ public class PlanController {
 		//유저 정보 끌어옴
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		System.out.println(plan);
 		List<DayVO> dayList = planlist.getDayList();
 		
 		if(planService.insertPlan(plan, user, dayList)) {
 			model.addAttribute("plan", plan);
 			model.addAttribute("list", dayList);
+			
 			return "redirect:/make";
 		}
 		//계획 만들기 성공 시 메인으로?
 		return "redirect:/";		
 	}
-	
+	/*
+	@GetMapping("/watch")
+	public String watch(Model model, @PathVariable int pl_num, HttpSession session) {
+		//유저 정보
+		MemberVO user = (MemberVO)session.getAttribute("user");
+
+		//계획을 가져옴
+		PlanVO planlist = planService.getPlanList(pl_num);
+		
+		model.addAttribute("planlist", planlist);
+		
+		return "/plan/watch";
+	}
+	*/
 }
