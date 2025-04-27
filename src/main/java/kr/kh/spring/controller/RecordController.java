@@ -20,8 +20,10 @@ import kr.kh.spring.model.dto.RecordDTO;
 import kr.kh.spring.model.vo.DietVO;
 import kr.kh.spring.model.vo.InbodyVO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.model.vo.SubCateVO;
 import kr.kh.spring.model.vo.WorkoutVO;
 import kr.kh.spring.service.RecordService;
+import kr.kh.spring.service.SubcateService;
 
 /**
  * Handles requests for the application home page.
@@ -29,139 +31,150 @@ import kr.kh.spring.service.RecordService;
 @Controller
 @RequestMapping("/record")
 public class RecordController {
-	
+
 	@Autowired
 	RecordService recordService;
 	
+	@Autowired
+	SubcateService subcateService;
+
 	@GetMapping("/diet")
 	public String selectDiet(Model model) {
 		List<DietVO> dietList = recordService.selectDietList();
 		model.addAttribute("dietList", dietList);
 		return "record/diet";
 	}
-	
+
 	@PostMapping("/diet")
 	public String selectDietPost(Model model) {
 		return "record/diet";
 	}
-	
+
 	@GetMapping("/calendar/list")
 	@ResponseBody
-	public List<RecordDTO> getAllRecords(@RequestParam String date){
+	public List<RecordDTO> getAllRecords(@RequestParam String date) {
 		return recordService.getAllRecords(date);
 	}
-	
+
 	@GetMapping("/inbody")
 	public String selectInbody(Model model) {
 		List<InbodyVO> inbodyList = recordService.selectInbodyList();
 		model.addAttribute("inbodyList", inbodyList);
 		return "record/inbody";
 	}
-	
+
 	@PostMapping("/inbody")
 	public String selectInbodyPost(Model model) {
 		return "record/inbody";
 	}
-	
+
 	@GetMapping("/workout")
 	public String selectWorkout(Model model) {
 		List<WorkoutVO> workoutList = recordService.selectWorkoutList();
 		model.addAttribute("workoutList", workoutList);
 		return "record/workout";
 	}
-	
+
 	@PostMapping("/workout")
 	public String selectWorkoutPost(Model model) {
 		return "record/workout";
 	}
 
 	@GetMapping("/plan")
-	public String selectPlan(Model model) {		
+	public String selectPlan(Model model) {
 		return "record/plan";
 	}
-	
+
 	@GetMapping("/dietModal")
-	public String insertDiet() {
+	public String insertDiet(Model model) {
+		List<SubCateVO> mealtimeList = subcateService.getMealtimeList();
+		model.addAttribute("mealtimeList", mealtimeList);
+		
 		return "record/dietModal";
 	}
-	
+
 	@RequestMapping(value = "/dietModal", method = RequestMethod.POST)
-	public String insertDietPost(@ModelAttribute DietVO diet,
-	                             @RequestParam("file") MultipartFile file,
-	                             HttpSession session,
-	                             Model model) {
-	    MemberVO user = (MemberVO) session.getAttribute("user");
+	public String insertDietPost(@ModelAttribute DietVO diet, @RequestParam("file") MultipartFile file,
+			HttpSession session, Model model) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 
-	    if (user == null) {
-	        model.addAttribute("url", "/login");
-	        model.addAttribute("msg", "로그인해주세요.");
-	        return "msg/msg";
-	    }
+		if (user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인해주세요.");
+			return "msg/msg";
+		}
 
-	    boolean result = recordService.insertDietPost(diet, user, file);
+		boolean res = recordService.insertDietPost(diet, user, file);
+		
+		if (res) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "식단이 기록되었습니다.");
+			return "msg/msg";
+		}
 
-	    if (result) {
-	        model.addAttribute("url", "/");
-	        model.addAttribute("msg", "식단이 기록되었습니다.");
-	        return "msg/msg";
-	    }
-
-	    model.addAttribute("url", "/");
-	    model.addAttribute("msg", "식단 기록에 실패했습니다.");
-	    return "msg/msg";
+		model.addAttribute("url", "/");
+		model.addAttribute("msg", "식단 기록에 실패했습니다.");
+		return "msg/msg";
 	}
-	
-	
-	@GetMapping("/insertInbody")
+
+	@GetMapping("/inbodyModal")
 	public String insertInbody(Model model) {
-		return "record/insertInbody";
-	}
-	
-	@PostMapping("/insertInbody")
-	public String insertInbodyPost(@ModelAttribute InbodyVO inbody, HttpSession session, 
-			MultipartFile file, Model model) {
 		
+		return "record/inbodyModal";
+	}
+
+	@RequestMapping(value = "/inbodyModal", method = RequestMethod.POST)
+	public String insertInbodyPost(@ModelAttribute InbodyVO inbody, HttpSession session,
+			@RequestParam("file") MultipartFile file, Model model) {
+		System.out.println(inbody);
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		if(user == null) {
+		
+		if (user == null) {
 			model.addAttribute("url", "/login");
 			model.addAttribute("msg", "로그인해주세요.");
 			return "msg/msg";
 		}
-		
-		if(recordService.insertInbodyPost(inbody, user, file)) {
+
+		boolean res = recordService.insertInbodyPost(inbody, user, file);
+
+		if (res) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "신체가 기록되었습니다.");
 			System.out.println(inbody);
-			model.addAttribute("url", "/");
-	        model.addAttribute("msg", "신체가 기록되었습니다.");
 			return "msg/msg";
 		}
-		return "redirect:/record/inbody";
+		model.addAttribute("url", "/");
+		model.addAttribute("msg", "신체 기록에 실패했습니다.");
+		return "msg/msg";
 	}
-	
-	
-	@GetMapping("/insertWorkout")
-	public String insertWorkout(Model model) {
-		return "record/insertWorkout";
+
+	@GetMapping("/workoutModal")
+	public String insertWorkout() {
+		return "record/workoutModal";
 	}
-	
-	@PostMapping("/insertWorkout")
-	public String insertWorkoutPost(@ModelAttribute WorkoutVO workout, HttpSession session, 
-			MultipartFile file, Model model) {
-		
+
+	@RequestMapping(value = "/workoutModal", method = RequestMethod.POST)
+	public String insertWorkoutPost(@ModelAttribute WorkoutVO workout, HttpSession session, @RequestParam("file")MultipartFile file,
+			Model model) {
+
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		if(user == null) {
+		if (user == null) {
 			model.addAttribute("url", "/login");
 			model.addAttribute("msg", "로그인해주세요.");
 			return "msg/msg";
 		}
-		
-		if(recordService.insertWorkoutPost(workout, user, file)) {
-			System.out.println(workout);
+
+		boolean res = recordService.insertWorkoutPost(workout, user, file);
+
+		if (res) {
 			model.addAttribute("url", "/");
-	        model.addAttribute("msg", "신체가 기록되었습니다.");
+			model.addAttribute("msg", "신체가 기록되었습니다.");
+			System.out.println(workout);
 			return "msg/msg";
 		}
-		return "redirect:/record/workout";
+		model.addAttribute("url", "/");
+		model.addAttribute("msg", "신체 기록에 실패했습니다.");
+		return "msg/msg";
 	}
-	
-	
+
 }

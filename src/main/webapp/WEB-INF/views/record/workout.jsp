@@ -18,8 +18,8 @@
 }
 
 .workout-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: auto;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -32,20 +32,19 @@
   flex: 1;
 }
 
-.form-group {
+.workout-group {
   display: flex;
-  flex-wrap:wrap;
   gap: 10px;
   align-items: center;
   padding:0px;
 }
 
-.form-group label {
+.workout-group label {
   font-weight: bold;
   width: 110px;
 }
 
-.form-control {
+.workout-control {
   padding: 6px;
   font-size: 14px;
   border: 1px solid #ddd;
@@ -70,6 +69,10 @@
 .workout-text-wrapper {
   flex: 2; /* 텍스트 영역의 flex 비율 */
 }
+
+.tab-content{
+	overflow-x: auto;
+}
 </style>
 
 </head>
@@ -88,29 +91,29 @@
 						<img class="workout-image" src="<c:url value="/imgs/${workout.wp_name }"/>" alt="운동 이미지" onerror="this.onerror=null; this.src='/images/no-image.png';">
 					</div>
 					<div class="workout-text-wrapper">
-						<div class="form-group">
+						<div class="workout-group">
 							<label>운동 이름 : </label> 
-							<input type="text" class="form-control" value="${workout.wo_title }" readonly>
+							<input type="text" class="workout-control" value="${workout.wo_title }" readonly>
 						</div>
-						<div class="form-group">
+						<div class="workout-group">
 							<label>운동한 날짜	: </label>
-							<input type="text" class="form-control" value="<fmt:formatDate value='${workout.wo_date}' pattern='yyyy-MM-dd' />" readonly>
+							<input type="text" class="workout-control" value="<fmt:formatDate value='${workout.wo_date}' pattern='yyyy-MM-dd' />" readonly>
 						</div>
-						<div class="form-group">
+						<div class="workout-group">
 							<label>오전/오후 : </label> 
-							<input type="text" class="form-control" value="${workout.wo_ampm }" readonly>
+							<input type="text" class="workout-control" value="${workout.wo_ampm }" readonly>
 						</div> 
-						<div class="form-group">
+						<div class="workout-group">
 							<label>운동한 시간 : </label> 
-							<input type="text" class="form-control" value="${workout.wo_time }" readonly>
+							<input type="text" class="workout-control" value="${workout.wo_time }" readonly>
 						</div>
-						<div class="form-group">
+						<div class="workout-group">
 							<label>지속 시간 : </label> 
-							<input type="text" class="form-control" value="${workout.wo_minute }" readonly>
+							<input type="text" class="workout-control" value="${workout.wo_minute }" readonly>
 						</div>
-						<div class="form-group">
+						<div class="workout-group">
 							<label>메모 : </label> 
-							<input type="text" class="form-control" value="${workout.wo_text }" readonly>
+							<input type="text" class="workout-control" value="${workout.wo_text }" readonly>
 						</div>
 						</div>
 					</div>
