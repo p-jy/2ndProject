@@ -63,5 +63,4 @@
 	insert into workout_pic(wp_name, wp_ori_name, wp_wo_num)
 	value(#{wp_name}, #{wp_ori_name}, #{wp_wo_num})
   </insert>
-
 </mapper>

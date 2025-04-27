@@ -12,8 +12,8 @@ public class InbodyVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date ib_date;
 	double ib_weight;
-	double ib_smm;
-	double ib_bfm;
+	Double ib_smm;
+	Double ib_bfm;
 	String ib_bedTime;
 	String ib_bed_date;
 	String ib_wakeTime;

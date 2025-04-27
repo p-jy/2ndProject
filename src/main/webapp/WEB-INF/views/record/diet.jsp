@@ -18,8 +18,8 @@
 }
 
 .diet-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: auto;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -32,20 +32,20 @@
   flex: 1;
 }
 
-.form-group {
+.diet-group {
   display: flex;
-  flex-wrap:wrap;
   gap: 10px;
   align-items: center;
   padding:0px;
+  margin-bottom: 10px;
 }
 
-.form-group label {
+.diet-group label {
   font-weight: bold;
   width: 110px;
 }
 
-.form-control {
+.diet-control {
   padding: 6px;
   font-size: 14px;
   border: 1px solid #ddd;
@@ -70,6 +70,10 @@
 .diet-text-wrapper {
   flex: 2; /* 텍스트 영역의 flex 비율 */
 }
+
+.tab-content{
+	overflow-x: auto;
+}
 </style>
 
 </head>
@@ -85,28 +89,28 @@
 				<c:forEach var="diet" items="${dietList}">
 					<div class="diet-item-wrapper">
 					<div class="diet-image-wrapper">
-						<img class="diet-image" src="<c:url value="/imgs/${diet.dp_name }"/>" alt="식단 이미지" onerror="this.onerror=null; this.src='/images/no-image.png';">
+						<img class="diet-image" src="<c:url value="/imgs/${diet.dp_name }"/>" alt="식단 이미지" onerror="this.onerror=null; this.src='https://img.icons8.com/?size=100&id=1G2BW7-tQJJJ&format=png&color=000000';">
 					</div>
 					<div class="diet-text-wrapper">
-						<div class="form-group">
-							<label>식단 이름 : </label> 
-							<input type="text" class="form-control" value="${diet.di_name }" readonly>
+						<div class="diet-group">
+							<label>식단명</label> 
+							<input type="text" class="diet-control" value="${diet.di_name }" readonly>
 						</div> 
-						<div class="form-group">
-							<label>식단점수(1~5) : </label>
-							<input type="text" class="form-control" value="${diet.di_score }" readonly>
+						<div class="diet-group">
+							<label>점수(1~5)</label>
+							<input type="text" class="diet-control" value="${diet.di_score }" readonly>
 						</div> 
-						<div class="form-group">
-							<label>식단한 날짜	: </label>
-							<input type="text" class="form-control" value="<fmt:formatDate value='${diet.di_date}' pattern='yyyy-MM-dd' />" readonly>
+						<div class="diet-group">
+							<label>날짜</label>
+							<input type="text" class="diet-control" value="<fmt:formatDate value='${diet.di_date}' pattern='yyyy-MM-dd' />" readonly>
 						</div>
-						<div class="form-group">
-							<label>오전/오후 : </label> 
-							<input type="text" class="form-control" value="${diet.di_ampm }" readonly>
+						<div class="diet-group">
+							<label>오전/오후</label> 
+							<input type="text" class="diet-control" value="${diet.di_ampm }" readonly>
 						</div> 
-						<div class="form-group">
-							<label>식단한 시간 : </label> 
-							<input type="text" class="form-control" value="${diet.di_time }" readonly>
+						<div class="diet-group">
+							<label>시간</label> 
+							<input type="text" class="diet-control" value="${diet.di_time }" readonly>
 						</div>
 						</div>
 					</div>
