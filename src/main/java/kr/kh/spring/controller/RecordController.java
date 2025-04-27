@@ -58,10 +58,20 @@ public class RecordController {
 		return "record/inbody";
 	}
 	
+	@PostMapping("/inbody")
+	public String selectInbodyPost(Model model) {
+		return "record/inbody";
+	}
+	
 	@GetMapping("/workout")
 	public String selectWorkout(Model model) {
 		List<WorkoutVO> workoutList = recordService.selectWorkoutList();
 		model.addAttribute("workoutList", workoutList);
+		return "record/workout";
+	}
+	
+	@PostMapping("/workout")
+	public String selectWorkoutPost(Model model) {
 		return "record/workout";
 	}
 
@@ -125,6 +135,32 @@ public class RecordController {
 			return "msg/msg";
 		}
 		return "redirect:/record/inbody";
+	}
+	
+	
+	@GetMapping("/insertWorkout")
+	public String insertWorkout(Model model) {
+		return "record/insertWorkout";
+	}
+	
+	@PostMapping("/insertWorkout")
+	public String insertWorkoutPost(@ModelAttribute WorkoutVO workout, HttpSession session, 
+			MultipartFile file, Model model) {
+		
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		if(user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인해주세요.");
+			return "msg/msg";
+		}
+		
+		if(recordService.insertWorkoutPost(workout, user, file)) {
+			System.out.println(workout);
+			model.addAttribute("url", "/");
+	        model.addAttribute("msg", "신체가 기록되었습니다.");
+			return "msg/msg";
+		}
+		return "redirect:/record/workout";
 	}
 	
 	
