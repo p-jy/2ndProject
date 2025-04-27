@@ -16,13 +16,13 @@ import kr.kh.spring.model.vo.Workout_PicVO;
 
 public interface RecordDAO {
 
-	List<DietVO> selectDietList();
+	List<DietVO> selectDietList(String me_id);
 
 	boolean insertDietPost(@Param("diet")DietVO diet);
 
-	List<InbodyVO> selectInbodyList();
+	List<InbodyVO> selectInbodyList(String me_id);
 
-	List<WorkoutVO> selectWorkoutList();
+	List<WorkoutVO> selectWorkoutList(String me_id);
 
 	List<RecordDTO> selectAllRecordsList();
 

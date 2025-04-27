@@ -8,19 +8,19 @@
   	SELECT d.*, p.dp_name
 	FROM diet d
 	LEFT JOIN diet_pic p ON d.di_num = p.dp_di_num
-	WHERE d.di_date = CURDATE();
+	WHERE d.di_date = CURDATE() and d.di_me_id = #{me_id}
   </select>
   <select id="selectInbodyList" resultType="InbodyVO">
   	select i.*, p.ip_name
   	from inbody i
   	left join inbody_pic p ON i.ib_num = p.ip_ib_num
-  	where i.ib_date = curdate();
+  	where i.ib_date = curdate() and i.ib_me_id = #{me_id}
   </select>
   <select id="selectWorkoutList" resultType="WorkoutVO">
   	select w.*, p.wp_name 
   	from workout w
   	left join workout_pic p ON w.wo_num = p.wp_wo_num
-  	where w.wo_date = curdate();
+  	where w.wo_date = curdate() and w.wo_me_id = #{me_id}
   </select>
   
   <select id="selectAllRecordsList" resultType="RecordDTO">

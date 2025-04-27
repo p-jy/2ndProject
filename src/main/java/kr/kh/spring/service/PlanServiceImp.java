@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.spring.dao.PlanDAO;
-import kr.kh.spring.model.dto.PlanListDTO;
 import kr.kh.spring.model.vo.DayVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PlanVO;
@@ -47,6 +46,11 @@ public class PlanServiceImp implements PlanService {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<PlanVO> selectPlanList(String me_id) {
+		return planDao.selectPlanList(me_id);
 	}
 
 }

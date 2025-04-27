@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.kh.spring.model.dto.PlanListDTO;
 import kr.kh.spring.model.vo.DayVO;
@@ -25,26 +24,48 @@ public class PlanController {
 	@Autowired
 	PlanService planService;
 	
-	@GetMapping("/make")
-	public String insert() {
+	@GetMapping("/plan")
+	public String selectPlan(Model model, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			return "/";
+		}
 		
-		return "/plan/make";
+		List<PlanVO> planList = planService.selectPlanList(user.getMe_id());
+		model.addAttribute("planList", planList);
+		
+		return "plan/plan";
 	}
 	
-	@PostMapping("/make")
+	@GetMapping("/planModal")
+	public String insert() {
+		return "plan/planModal";
+	}
+	
+	@RequestMapping(value = "/planModal", method = RequestMethod.POST)
 	public String insertPost(PlanVO plan, Model model, HttpSession session, PlanListDTO planlist) {
-		//유저 정보 끌어옴
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		List<DayVO> dayList = planlist.getDayList();
 		
-		if(planService.insertPlan(plan, user, dayList)) {
-			model.addAttribute("plan", plan);
-			model.addAttribute("list", dayList);
-			
-			return "redirect:/make";
+		if(user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인해주세요.");
+			return "msg/msg";
 		}
-		//계획 만들기 성공 시 메인으로?
+		
+		boolean res = planService.insertPlan(plan, user, dayList);
+		
+		if(res) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "계획을 등록했습니다.");
+			
+			return "msg/msg";
+		}
+
+		model.addAttribute("url", "/");
+		model.addAttribute("msg", "계획 등록에 실패했습니다.");
+		
 		return "redirect:/";		
 	}
 	/*

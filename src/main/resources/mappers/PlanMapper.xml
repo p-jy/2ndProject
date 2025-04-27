@@ -11,4 +11,11 @@
 		insert into day (dy_day, dy_pl_num)
 		values (#{day.dy_day}, #{pl_num})
 	</insert>
+	<select id="selectPlanList" resultType="PlanVO">
+		select p.*, group_concat(d.dy_day order by d.dy_day asc) as pl_dy_day
+		from plan p
+		left join day d on p.pl_num = d.dy_pl_num
+		where p.pl_me_id = #{me_id}
+		group by p.pl_num
+	</select>
 </mapper>
