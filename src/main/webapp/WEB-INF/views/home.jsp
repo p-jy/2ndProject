@@ -145,7 +145,7 @@ a {
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openInbodyModal()" role="button">신체</a>
 			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openWorkoutModal()" role="button">운동</a>
-			<a href="<c:url value='/record/plan' />" class="btn btn-outline-secondary btn-block">계획</a>
+			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openPlanModal()" role="button">계획</a>
 		</div>
 		<div id="insertModal" class="modal fade" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -263,7 +263,7 @@ a {
 			if (type === 'diet') url = '<c:url value="/record/diet"/>';
 		    else if (type === 'workout') url = '<c:url value="/record/workout"/>';
 		    else if (type === 'inbody') url = '<c:url value="/record/inbody"/>';
-		    else if (type === 'plan') url = '<c:url value="/record/plan"/>';
+		    else if (type === 'plan') url = '<c:url value="/plan/plan"/>';
 			
 			$.ajax({
 				async : true,
@@ -289,6 +289,11 @@ a {
 		}
 		function openWorkoutModal() {
 			$('.modal-content').load("<c:url value='/record/workoutModal'/>", function () {
+		        $('#insertModal').modal('show');
+		    });
+		}
+		function openPlanModal() {
+			$('.modal-content').load("<c:url value='/plan/planModal'/>", function () {
 		        $('#insertModal').modal('show');
 		    });
 		}

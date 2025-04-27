@@ -80,7 +80,7 @@
 	<div>
 		<!-- 선택한 날짜에 식단 기록이 없을 경우 -->
 		<c:if test="${empty workoutList}">
-			<p>등록된 리스트가 없습니다.</p>
+			<p>등록된 운동 기록이 없습니다.</p>
 		</c:if>
 		<c:if test="${not empty workoutList}">
 			<div id="workout" class="workout-detail-wrapper container tab-pane active">

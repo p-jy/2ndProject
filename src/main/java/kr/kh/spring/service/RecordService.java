@@ -13,13 +13,13 @@ import kr.kh.spring.model.vo.WorkoutVO;
 
 public interface RecordService {
 
-	List<DietVO> selectDietList();
+	List<DietVO> selectDietList(String me_id);
   
 	boolean insertDietPost(DietVO diet, MemberVO user, MultipartFile file);
 
-	List<InbodyVO> selectInbodyList();
+	List<InbodyVO> selectInbodyList(String me_id);
 
-	List<WorkoutVO> selectWorkoutList();
+	List<WorkoutVO> selectWorkoutList(String me_id);
 
 	List<RecordDTO> getAllRecords(String date);
 
