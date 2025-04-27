@@ -19,5 +19,6 @@ public class InbodyVO {
 	String ib_wakeTime;
 	String ib_memo;
 	String ib_me_id;
+	String ip_name;
 
 }
