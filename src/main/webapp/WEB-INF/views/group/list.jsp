@@ -15,19 +15,19 @@
 			<p>등록된 그룹이 없습니다.</p>
 		</c:if>
 		<c:if test="${not empty groupList}">
-			<div id="group" class="group-detail-wrapper container">
+			<div id="group" class="group-detail-wrapper container" style="display: flex; flex-wrap: wrap; gap: 20px;">
 				<c:forEach var="group" items="${groupList}">
-					<div class="group-item-wrapper">
+					<div class="group-item-wrapper" style="border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; background: #fff;">
 						<div class="group-text-wrapper">
-							<div class="group-group">
-								<input type="text" class="group-control" value="${group.gr_name}" readonly>
+							<div class="group-group" style="margin-bottom: 10px;">
+								<input type="text" class="group-control" value="${group.gr_name}" readonly style="border: none; background: transparent; font-weight: bold; font-size: 18px; width: 100%;">
 							</div>
-							<div class="group-group">
-								<input type="text" class="group-control" value="${group.gr_introduction}" readonly>
+							<div class="group-group" style="margin-bottom: 10px;">
+								<input type="text" class="group-control" value="${group.gr_introduction}" readonly style="border: none; background: transparent; font-size: 14px; width: 100%;">
 							</div>
-							<div class="diet-group">
-								<input type="text" class="group-control" value="${group.gr_participant}명" readonly>
-							</div>
+					        <div class="group-group">
+								<input type="text" class="group-control" value="${group.gr_participant}/10명" readonly style="border: none; background: transparent; color: #777; font-size: 13px; width: 100%;">
+					        </div>
 						</div>
 					</div>
 				</c:forEach>
