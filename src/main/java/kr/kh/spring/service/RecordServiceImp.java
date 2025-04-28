@@ -175,6 +175,10 @@ public class RecordServiceImp implements RecordService {
 		if (file != null && !file.getOriginalFilename().isEmpty()) {
 			insertWorkoutFile(wo_num, file);
 		}
+		
+		if (workout.getWo_text() == null) {
+		    workout.setWo_text("");
+		}
 
 		return true;
 	}

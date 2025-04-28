@@ -57,7 +57,7 @@
   	insert into workout
   	(wo_title, wo_date, wo_ampm, wo_time, wo_minute, wo_text, wo_me_id)
   	value
-  	(#{wo_title}, #{wo_date}, #{wo_ampm}, #{wo_time}, #{wo_minute}, #{wo_text}, #{wo_me_id})
+  	(#{workout.wo_title}, #{workout.wo_date}, #{workout.wo_ampm}, #{workout.wo_time}, #{workout.wo_minute}, #{workout.wo_text}, #{workout.wo_me_id})
   </insert>
   <insert id="insertWorkoutFile">
 	insert into workout_pic(wp_name, wp_ori_name, wp_wo_num)

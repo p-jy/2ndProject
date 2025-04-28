@@ -32,7 +32,7 @@ public interface RecordDAO {
 
 	void insertInbodyFile(Inbody_PicVO inbody_PicVO);
 
-	boolean insertWorkoutPost(WorkoutVO workout);
+	boolean insertWorkoutPost(@Param("workout")WorkoutVO workout);
 
 	void insertWorkoutFile(Workout_PicVO workout_PicVO);
     

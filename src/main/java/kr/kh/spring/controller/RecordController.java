@@ -172,6 +172,10 @@ public class RecordController {
 	@RequestMapping(value = "/workoutModal", method = RequestMethod.POST)
 	public String insertWorkoutPost(@ModelAttribute WorkoutVO workout, HttpSession session, @RequestParam("file")MultipartFile file,
 			Model model) {
+		
+		if (workout.getWo_text() == null || workout.getWo_text().trim().isEmpty()) {
+	        workout.setWo_text(""); // 또는 "운동 내용 없음" 같은 기본 문구
+	    }
 
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		if (user == null) {
@@ -181,7 +185,8 @@ public class RecordController {
 		}
 
 		boolean res = recordService.insertWorkoutPost(workout, user, file);
-
+		
+		System.out.println(workout);
 		if (res) {
 			model.addAttribute("url", "/");
 			model.addAttribute("msg", "신체가 기록되었습니다.");
