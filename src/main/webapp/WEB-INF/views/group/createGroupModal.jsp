@@ -115,8 +115,12 @@
 					</div>
 				</div>
 				<div class="f-container mb-3">
-					<label for="rl_rule" class="form-label">규칙</label>
-					<input type="text" class="form-control" name="rl_rule" id="rl_rule" required>
+					<label class="form-label">규칙</label>
+					<input type="text" class="form-control" id="rule" name="ruleList[0].rl_rule" required>
+					<input type="text" class="form-control" id="rule" name="ruleList[1].rl_rule">
+					<input type="text" class="form-control" id="rule" name="ruleList[2].rl_rule">
+					<input type="text" class="form-control" id="rule" name="ruleList[3].rl_rule">
+					<input type="text" class="form-control" id="rule" name="ruleList[4].rl_rule">
 				</div>
 				<div class="f-container mb-3">
 					<label for="gr_start_date" class="form-label">시작일</label>
