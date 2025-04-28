@@ -81,6 +81,7 @@
 	<div>
 		<!-- 선택한 날짜에 식단 기록이 없을 경우 -->
 		<c:if test="${empty inbodyList}">
+			<br>
 			<p>등록된 신체 기록이 없습니다.</p>
 		</c:if>
 		<c:if test="${not empty inbodyList}">

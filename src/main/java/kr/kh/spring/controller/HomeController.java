@@ -33,6 +33,10 @@ public class HomeController {
 	@GetMapping("/")
 	public String selectDiet(Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		if(user == null) {
+			return "home";
+		}
 		List<DietVO> dietList = recordService.selectDietList(user.getMe_id());
 		model.addAttribute("dietList", dietList);
 		return "home";
