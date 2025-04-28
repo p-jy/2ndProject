@@ -38,6 +38,7 @@
 	  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 	  margin-bottom: 20px;
 	}
+	
 </style>
 </head>
 <body id="body">

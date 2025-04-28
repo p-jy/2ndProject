@@ -55,6 +55,11 @@
 	flex-wrap: wrap;
 	gap: 20px;
 }
+.group-item-wrapper:hover {
+  transform: translateY(-3px); /* 살짝 위로 뜨게 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* 그림자 강조 */
+  background-color: #f9f9f9; /* 살짝 밝은색 */
+}
 </style>
 </head>
 <body>
