@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style type="text/css">
 	.body{
-		 background: repeating-linear-gradient(
+		background: repeating-linear-gradient(
 	    white,
 	    white 29px,
 	    #f0f0f0 30px
@@ -20,7 +20,6 @@
 	  padding: 40px;
 	}
 	.body, .form-control, .btn {
-	  font-family: 'Nanum Pen Script', cursive;
 	  font-size: 20px;
 	}
 	.form-control {

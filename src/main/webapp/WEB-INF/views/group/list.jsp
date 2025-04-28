@@ -50,6 +50,11 @@
 	font-size: 13px;
 	width: 100%;
 }
+.container{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
 </style>
 </head>
 <body>
@@ -70,27 +75,28 @@
 				<p>등록된 그룹이 없습니다.</p>
 			</c:if>
 			<c:if test="${not empty groupList}">
-				<div id="group" class="group-detail-wrapper container"
-					style="display: flex; flex-wrap: wrap; gap: 20px;">
+				<div id="group" class="group-detail-wrapper container">
 					<c:forEach var="group" items="${groupList}">
-						<div class="group-item-wrapper">
-							<div class="group-text-wrapper">
-								<div class="group-group">
-									<div class="group-label titleLabel">${group.gr_name}</div>
-								</div>
-								<div class="group-group">
-									<div class="group-label introductionLabel">${group.gr_introduction}</div>
-								</div>
-								<div class="group-group">
-									<div class="group-label participantLabel">${group.gr_participant}/10명</div>
-								</div>
-								<div class="group-group">
-									<c:forEach var="shared_record" items="${group.sharedList}">
-										<div class="group-control">${shared_record.sr_mj_cate}</div>
-									</c:forEach>
+						<a href="<c:url value="/group/main/${group.gr_num}"/>" style="text-decoration: none; color: inherit;">
+							<div class="group-item-wrapper">
+								<div class="group-text-wrapper">
+									<div class="group-group">
+										<div class="group-label titleLabel">${group.gr_name}</div>
+									</div>
+									<div class="group-group">
+										<div class="group-label introductionLabel">${group.gr_introduction}</div>
+									</div>
+									<div class="group-group">
+										<div class="group-label participantLabel">${group.gr_participant}/10명</div>
+									</div>
+									<div class="group-group">
+										<c:forEach var="shared_record" items="${group.sharedList}">
+											<div class="group-control">${shared_record.sr_mj_cate}</div>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					</c:forEach>
 				</div>
 			</c:if>

@@ -8,8 +8,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm jumbotron navbar-light">
-		<a class="navbar-brand ml-3" href="<c:url value="/"/>">Logo</a>
-		<ul class="navbar-nav">
+		<ul class="navbar-nav ml-3">
 			<li class="nav-item active">
 				<a class="nav-link" href="<c:url value="/"/>">기록</a>
 			</li>
