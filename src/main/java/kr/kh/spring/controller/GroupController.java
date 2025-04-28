@@ -54,7 +54,15 @@ public class GroupController {
 	}
 	
 	@GetMapping("/createGroupModal")
-	public String make(Model model) {
+	public String make(Model model, HttpSession session) {
+		MemberVO user=(MemberVO) session.getAttribute("user");		
+		
+		if(user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "msg/msg";
+		}
+		
 		List<SubCateVO> subCate = groupService.getGoalList();
 		System.out.println(subCate);
 		model.addAttribute("subCate", subCate);
@@ -76,6 +84,7 @@ public class GroupController {
 		
 		//규칙 리스트 호출
 		List<RuleVO> rule = grList.getRuleList();
+		System.out.println(rule);
 		List<Share_RecordVO> sr = srList.getSharerecordList();
 		//목표 리스트 호출
 		List<SubCateVO> subCate = groupService.getGoalList();
