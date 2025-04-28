@@ -82,7 +82,15 @@ public class RecordController {
 	}
 
 	@GetMapping("/dietModal")
-	public String insertDiet() {
+	public String insertDiet(HttpSession session, Model model) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		if (user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "msg/msg";
+		}
+		
 		return "record/dietModal";
 	}
 
@@ -93,7 +101,7 @@ public class RecordController {
 
 		if (user == null) {
 			model.addAttribute("url", "/login");
-			model.addAttribute("msg", "로그인해주세요.");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
 			return "msg/msg";
 		}
 
@@ -111,7 +119,14 @@ public class RecordController {
 	}
 
 	@GetMapping("/inbodyModal")
-	public String insertInbody(Model model) {
+	public String insertInbody(Model model, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		if (user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "msg/msg";
+		}
 		
 		return "record/inbodyModal";
 	}
@@ -142,7 +157,15 @@ public class RecordController {
 	}
 
 	@GetMapping("/workoutModal")
-	public String insertWorkout() {
+	public String insertWorkout(HttpSession session, Model model) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		if (user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "msg/msg";
+		}
+		
 		return "record/workoutModal";
 	}
 
