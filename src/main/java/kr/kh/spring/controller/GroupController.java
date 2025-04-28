@@ -54,7 +54,15 @@ public class GroupController {
 	}
 	
 	@GetMapping("/createGroupModal")
-	public String make(Model model) {
+	public String make(Model model, HttpSession session) {
+		MemberVO user=(MemberVO) session.getAttribute("user");		
+		
+		if(user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "msg/msg";
+		}
+		
 		List<SubCateVO> subCate = groupService.getGoalList();
 		System.out.println(subCate);
 		model.addAttribute("subCate", subCate);
@@ -63,21 +71,28 @@ public class GroupController {
 	
 	//그룹 만들기
 	@RequestMapping(value = "/createGroupModal", method = RequestMethod.POST)
-	public String makeGroup(Model model,GroupVO group, GroupRuleListDTO grList,
-			Gro_Sha_RecDTO srList,Group_MemberVO gmVO, HttpSession session) {
+	public String makeGroup(Model model, GroupVO group, GroupRuleListDTO grList,
+			Gro_Sha_RecDTO srList, Group_MemberVO gmVO, HttpSession session) {
 		//유저 정보 호출
 		MemberVO user=(MemberVO) session.getAttribute("user");		
 		
+		if(user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "msg/msg";
+		}
+		
 		//규칙 리스트 호출
-		List<RuleVO> rule =grList.getRuleList();
+		List<RuleVO> rule = grList.getRuleList();
+		System.out.println(rule);
 		List<Share_RecordVO> sr = srList.getSharerecordList();
 		//목표 리스트 호출
-		List<SubCateVO> subCate =groupService.getGoalList();
+		List<SubCateVO> subCate = groupService.getGoalList();
 		
 		model.addAttribute("subCate", subCate);
 		//방 만들기
-		if(groupService.insertGroup(group, user, rule, gmVO, sr)) {
-			
+		boolean res = groupService.insertGroup(group, user, rule, gmVO, sr);
+		if(res) {
 			model.addAttribute("url", "/group/list");
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
 			return "msg/msg";

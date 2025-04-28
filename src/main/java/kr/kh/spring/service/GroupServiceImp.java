@@ -45,13 +45,10 @@ public class GroupServiceImp implements GroupService{
 	@Override
 	public boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule,
 			Group_MemberVO gmVO, List<Share_RecordVO> sr) {
-		if(group == null) {
+		if(group == null || group.getGr_name()==null) {
 			return false;
 		}
 		if(user == null) {
-			return false;
-		}
-		if(group.getGr_name()==null) {
 			return false;
 		}
 		//해당 객체에 코드를 부여
@@ -59,8 +56,8 @@ public class GroupServiceImp implements GroupService{
 		//그룹 테이블에 집어넣을 내용
 		
 		//해당 그룹테이블 기본키를 가져옴
-		group.setGr_me_id(user.getMe_id());				
-		boolean resultGroup =groupDao.insertGroup(group);
+		group.setGr_me_id(user.getMe_id());
+		boolean resultGroup = groupDao.insertGroup(group);
 		if(!resultGroup) {
 			return false;
 		}
