@@ -103,11 +103,13 @@
 							</div>
 							<div class="inbody-group">
 								<label>골격근량</label> 
-								<input type="text" class="inbody-control" value="${inbody.ib_smm != null ? inbody.ib_smm + '%' : '-'}" readonly>
+								<input type="text" class="inbody-control" value="${inbody.ib_smm != null ? (inbody.ib_smm) : '-'}%" readonly>
+								
 							</div>
 							<div class="inbody-group">
 								<label>체지방률</label> 
-								<input type="text" class="inbody-control" value="${inbody.ib_bfm != null ? inbody.ib_bfm + '%' : '-'}" readonly>
+								<input type="text" class="inbody-control" value="${inbody.ib_bfm != null ? (inbody.ib_bfm) : '-'}%" readonly>
+
 							</div>  
 						</div>
 					</div>
