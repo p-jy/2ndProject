@@ -5,12 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+.left{
+	margin-left: 100px;
+}
+.right{
+	margin-right: 100px;
+}
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm jumbotron navbar-light">
-		<ul class="navbar-nav ml-3">
+		<ul class="navbar-nav left">
 			<li class="nav-item active">
-				<a class="nav-link" href="<c:url value="/"/>">기록</a>
+				<a class="nav-link" href="<c:url value="/"/>">홈</a>
 			</li>
 			
 			<li class="nav-item">
@@ -20,7 +28,8 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value="/statistics"/>">통계</a>
 			</li>
-			
+		</ul>
+		<ul class="navbar-nav ml-auto right">
 			<c:if test="${user == null}">
 				<li class="nav-item">
 					<a class="nav-link" href="<c:url value="/login"/>">로그인</a>

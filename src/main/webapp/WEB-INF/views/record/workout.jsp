@@ -89,7 +89,7 @@
 				<c:forEach var="workout" items="${workoutList}">
 					<div class="workout-item-wrapper">
 					<div class="workout-image-wrapper">
-						<img class="workout-image" src="<c:url value="/imgs/${workout.wp_name }"/>" alt="운동 이미지" onerror="this.onerror=null; this.src='/images/no-image.png';">
+						<img class="workout-image" src="<c:url value="https://img.icons8.com/?size=100&id=1G2BW7-tQJJJ&format=png&color=000000"/>" alt="운동 이미지" onerror="this.onerror=null; this.src='/images/no-image.png';">
 					</div>
 					<div class="workout-text-wrapper">
 						<div class="workout-group">

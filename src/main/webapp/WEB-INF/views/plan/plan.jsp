@@ -79,6 +79,7 @@
 <body>
 	<div>
 		<c:if test="${empty planList}">
+			<br>
 			<p>등록된 계획이 없습니다.</p>
 		</c:if>
 		<c:if test="${not empty planList}">

@@ -75,7 +75,7 @@ public class HomeController {
 		// 이전 URL을 가져옴
 		String prevUrl = request.getHeader("Referer");
 		// 이전 URL이 있고, /login이 아니면 세션에 저장
-		if (prevUrl != null && !prevUrl.contains("/login")) {
+		if (prevUrl != null && !prevUrl.contains("/login") || !prevUrl.contains("/signup")) {
 			request.getSession().setAttribute("prevUrl", prevUrl);
 			System.out.println(prevUrl);
 		}

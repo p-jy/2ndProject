@@ -6,9 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
 <style>
+.container1 {
+	min-height: 690px;
+}
+
 form {
 	border: 3px solid #f1f1f1;
 }
@@ -58,25 +63,28 @@ P {
 
 /* 달력 css */
 a {
-    color: black;
+	color: black;
 }
+
 .fc-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .fc-toolbar-title {
-  font-weight: bold;
-  color: #333;
+	font-weight: bold;
+	color: #333;
 }
+
 .fc-toolbar-chunk:nth-child(3) {
-  display: flex;
+	display: flex;
 }
+
 .fc-button {
-  margin: 0 5px;
-  padding: 6px 12px;
-  border-radius: 6px;
+	margin: 0 5px;
+	padding: 6px 12px;
+	border-radius: 6px;
 }
 
 /*탭 버든 관련 스타일 시작*/
@@ -94,11 +102,12 @@ a {
 	margin-right: 5px;
 }
 /*탭 버든 관련 스타일 끝*/
-#calendar.week{
-	height : 200px;
+#calendar.week {
+	height: 200px;
 }
-#calendar.month{
-	height : 500px;
+
+#calendar.month {
+	height: 500px;
 }
 </style>
 
@@ -113,47 +122,50 @@ a {
 
 </head>
 <body>
-	<!-- 달력 영역입니다. -->
-	<div id='calendar'></div>
+	<div class="container1">
+		<!-- 달력 영역입니다. -->
+		<div id='calendar'></div>
 
-	<!-- 탭 버튼입니다. -->
-	<div class="tab-container my-record">
-		<ul class="nav nav-tabs nav-justified" id="recordTabs" role="tablist">
-			<li class="nav-item" onclick="loadDietList()">
-				<a class="nav-link type active" id="diet-tab" data-toggle="tab" href="#diet" data-target="diet" >식단</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link type" id="inbody-tab" data-toggle="tab" href="#inbody" data-target="inbody">신체</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link type" id="workout-tab" data-toggle="tab" href="#workout" data-target="workout">운동</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link type" role="plan" href="#" data-target="plan">계획</a>
-			</li>
-		</ul>
-	</div>
-	<div class="tab-content">
-		
-	</div>
-	<!-- 식단/신체/운동 등록하기 버튼 -->
-	<div>
-		<div class="recordtitle">
-			<h2>오늘의 활동을 등록해보세요.</h2>
+		<!-- 탭 버튼입니다. -->
+		<div class="tab-container my-record">
+			<ul class="nav nav-tabs nav-justified" id="recordTabs" role="tablist">
+				<li class="nav-item" onclick="loadDietList()"><a
+					class="nav-link type active" id="diet-tab" data-toggle="tab"
+					href="#diet" data-target="diet">식단</a></li>
+				<li class="nav-item"><a class="nav-link type" id="inbody-tab"
+					data-toggle="tab" href="#inbody" data-target="inbody">신체</a></li>
+				<li class="nav-item"><a class="nav-link type" id="workout-tab"
+					data-toggle="tab" href="#workout" data-target="workout">운동</a></li>
+				<li class="nav-item"><a class="nav-link type" role="plan"
+					href="#" data-target="plan">계획</a></li>
+			</ul>
 		</div>
-		<div class="button-container">
-			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
-			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openInbodyModal()" role="button">신체</a>
-			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openWorkoutModal()" role="button">운동</a>
-			<a class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#insertModal" onclick="openPlanModal()" role="button">계획</a>
-		</div>
-		<div id="insertModal" class="modal fade" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content"></div>
+		<div class="tab-content"></div>
+		<!-- 식단/신체/운동 등록하기 버튼 -->
+		<div>
+			<div class="recordtitle">
+				<h2>오늘의 활동을 등록해보세요.</h2>
+			</div>
+			<div class="button-container">
+				<a class="btn btn-outline-secondary btn-block" data-toggle="modal"
+					data-target="#insertModal" onclick="openDietModal()" role="button">식단</a>
+				<a class="btn btn-outline-secondary btn-block" data-toggle="modal"
+					data-target="#insertModal" onclick="openInbodyModal()"
+					role="button">신체</a> <a class="btn btn-outline-secondary btn-block"
+					data-toggle="modal" data-target="#insertModal"
+					onclick="openWorkoutModal()" role="button">운동</a> <a
+					class="btn btn-outline-secondary btn-block" data-toggle="modal"
+					data-target="#insertModal" onclick="openPlanModal()" role="button">계획</a>
+			</div>
+			<div id="insertModal" class="modal fade" tabindex="-1"
+				aria-labelledby="insertModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content"></div>
+				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
 	
 		document.addEventListener('DOMContentLoaded', function() {

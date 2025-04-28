@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,15 @@ public class StatisticsController {
 	MemberService memberService;
 	
 	@GetMapping("/statistics")
-	public String statistics() {
+	public String statistics(Model model, HttpSession session) {
+		MemberVO user=(MemberVO) session.getAttribute("user");		
+		
+		if(user == null) {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "msg/msg";
+		}
+		
 		return "/statistics/statistics";
 	}
 	
