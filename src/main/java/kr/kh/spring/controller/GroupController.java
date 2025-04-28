@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,16 +53,16 @@ public class GroupController {
 		return "/group/list";
 	}
 	
-	@GetMapping("/make")
+	@GetMapping("/createGroupModal")
 	public String make(Model model) {
-		List<SubCateVO> subCate =groupService.getGoalList();
+		List<SubCateVO> subCate = groupService.getGoalList();
 		System.out.println(subCate);
 		model.addAttribute("subCate", subCate);
-		return "/group/make";
+		return "group/createGroupModal";
 	}
 	
 	//그룹 만들기
-	@PostMapping("/make")
+	@RequestMapping(value = "/createGroupModal", method = RequestMethod.POST)
 	public String makeGroup(Model model,GroupVO group, GroupRuleListDTO grList,
 			Gro_Sha_RecDTO srList,Group_MemberVO gmVO, HttpSession session) {
 		//유저 정보 호출
@@ -73,11 +74,6 @@ public class GroupController {
 		//목표 리스트 호출
 		List<SubCateVO> subCate =groupService.getGoalList();
 		
-		System.out.println(subCate);
-		System.out.println(user);
-		System.out.println(group);		
-		System.out.println(rule);
-		System.out.println(sr);
 		model.addAttribute("subCate", subCate);
 		//방 만들기
 		if(groupService.insertGroup(group, user, rule, gmVO, sr)) {
@@ -86,9 +82,10 @@ public class GroupController {
 			model.addAttribute("msg", "그룹을 생성하였습니다.");
 			return "msg/msg";
 		}
-		//방 만들기 실패했을 경우
 		
-		return "redirect:/make";
+		model.addAttribute("url", "/");
+		model.addAttribute("msg", "그룹 생성에 실패했습니다.");
+		return "msg/msg";
 	}
 	
 	//그룹 출력

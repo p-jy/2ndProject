@@ -36,9 +36,6 @@
 	        	<li class="nav-item">
 		          <a class="nav-link" href="<c:url value="/mypage"/>">마이 페이지</a>
 		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="<c:url value="/watch"/>">내 계획 보기</a>
-		        </li>
 	        	<li class="nav-item">
 		          <a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
 		        </li>

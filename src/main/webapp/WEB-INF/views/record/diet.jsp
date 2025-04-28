@@ -81,6 +81,7 @@
 	<div>
 		<!-- 선택한 날짜에 식단 기록이 없을 경우 -->
 		<c:if test="${empty dietList}">
+			<br>
 			<p>등록된 식단 기록이 없습니다.</p>
 		</c:if>
 		<c:if test="${not empty dietList}">
