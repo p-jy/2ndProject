@@ -25,10 +25,8 @@
 	</select>
 	
 	<select id="selectGroupList" resultType="GroupVO">
-		select
-			*
-		from `group`
-		where gr_public="Y" and gr_del="N"
+		select * from `group`
+		where gr_del="N"
 		order by gr_num desc
 		
 	</select>
@@ -171,4 +169,9 @@
   		values(#{dbsr.sr_mc_num}, #{gr_num})
   	</insert>
   	
+  	<select id="selectSharedRecordList" resultType="Share_RecordVO">
+  		select mc_name from share_record
+		join major_cate on sr_mc_num = mc_num
+		where sr_gr_num = #{gr_num}
+  	</select>
 </mapper>

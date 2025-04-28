@@ -5,10 +5,7 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import kr.kh.spring.Pagination.Criteria;
-import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.dao.GroupDAO;
 import kr.kh.spring.model.vo.GroupVO;
 import kr.kh.spring.model.vo.Group_MemberVO;
@@ -45,10 +42,13 @@ public class GroupServiceImp implements GroupService{
 	@Override
 	public boolean insertGroup(GroupVO group, MemberVO user, List<RuleVO> rule,
 			Group_MemberVO gmVO, List<Share_RecordVO> sr) {
-		if(group == null || group.getGr_name()==null) {
+		if(group == null) {
 			return false;
 		}
 		if(user == null) {
+			return false;
+		}
+		if(group.getGr_name()==null) {
 			return false;
 		}
 		//해당 객체에 코드를 부여
@@ -56,8 +56,8 @@ public class GroupServiceImp implements GroupService{
 		//그룹 테이블에 집어넣을 내용
 		
 		//해당 그룹테이블 기본키를 가져옴
-		group.setGr_me_id(user.getMe_id());
-		boolean resultGroup = groupDao.insertGroup(group);
+		group.setGr_me_id(user.getMe_id());				
+		boolean resultGroup =groupDao.insertGroup(group);
 		if(!resultGroup) {
 			return false;
 		}
@@ -297,6 +297,11 @@ public class GroupServiceImp implements GroupService{
 	public boolean isGroupLeader(int gr_num, String me_id) {
 		GroupVO group = groupDao.selectGroup(gr_num);
 		return group != null && group.getGr_me_id().equals(me_id);
+	}
+
+	@Override
+	public List<Share_RecordVO> selectShareRecordList(int gr_num) {
+		return groupDao.selectSharedRecordList(gr_num);
 	}
 
 	

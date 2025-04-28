@@ -26,12 +26,10 @@ public class PlanController {
 	
 	@GetMapping("/plan")
 	public String selectPlan(Model model, HttpSession session) {
-		MemberVO user = (MemberVO) session.getAttribute("user");
+MemberVO user = (MemberVO) session.getAttribute("user");
 		
 		if (user == null) {
-			model.addAttribute("url", "/login");
-			model.addAttribute("msg", "로그인 후 이용가능합니다.");
-			return "msg/msg";
+			return "";
 		}
 		
 		List<PlanVO> planList = planService.selectPlanList(user.getMe_id());

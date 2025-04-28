@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import kr.kh.spring.Pagination.Criteria;
-import kr.kh.spring.Pagination.GroupCriteria;
-import kr.kh.spring.Pagination.PageMaker;
 import kr.kh.spring.model.dto.Gro_Sha_RecDTO;
 import kr.kh.spring.model.dto.GroupRuleListDTO;
 import kr.kh.spring.model.vo.GroupVO;
@@ -44,12 +40,20 @@ public class GroupController {
 	
 	//그룹 리스트 출력
 	@GetMapping("/list")
-	public String selectGroup(Model model, GroupCriteria cri) {
+	public String selectGroup(Model model) {
 		
 		List<GroupVO> groupList = groupService.selectGroupList();
-		System.out.println(groupList);
 		
+		for (GroupVO group : groupList) {
+		    List<Share_RecordVO> sharedList = groupService.selectShareRecordList(group.getGr_num());
+		    System.out.println(sharedList);
+		    group.setSharedList(sharedList);
+		}
+		
+		
+
 		model.addAttribute("groupList", groupList);
+		
 		return "/group/list";
 	}
 	
@@ -105,7 +109,7 @@ public class GroupController {
 	
 	//그룹 출력
 	@GetMapping("/main/{gr_num}")
-	public String main(Model model,@PathVariable int gr_num, HttpSession session) {
+	public String main(Model model, @PathVariable int gr_num, HttpSession session) {
 		//그룹 페이지 가져옴
 		GroupVO group = groupService.getGroup(gr_num);
 

@@ -60,6 +60,8 @@ public interface GroupDAO {
 
 	List<SubCateVO> selectGoalList();
 
+	List<Share_RecordVO> selectSharedRecordList(@Param("gr_num")int gr_num);
+
 	
 
 	

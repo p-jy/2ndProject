@@ -8,6 +8,7 @@ public class Share_RecordVO {
 	private int sr_mc_num;
 	private int sr_gr_num;
 	private MajorCateVO majorcates;
+	private String sr_mj_cate;
 	
 	public MajorCateVO getMajorcates() {
         return majorcates;
