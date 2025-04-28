@@ -1,8 +1,7 @@
 package kr.kh.spring.model.vo;
 
-
-
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,6 +24,7 @@ public class GroupVO {
 	private int gr_participant;
 	private char gr_del;
 	private String gr_me_id;
+	private List<Share_RecordVO> sharedList;
 	
 	//목표 테이블
 	private int gl_num;
@@ -48,7 +48,6 @@ public class GroupVO {
 	private int gm_num;
 	private String gm_me_id;
 	private int gm_gr_num;
-	
 	
 	
 }

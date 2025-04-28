@@ -45,6 +45,8 @@ public interface GroupService {
 
 	List<SubCateVO> getGoalList();
 
+	List<Share_RecordVO> selectShareRecordList(int gr_num);
+
 
 
 	

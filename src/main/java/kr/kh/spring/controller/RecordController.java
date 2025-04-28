@@ -37,6 +37,10 @@ public class RecordController {
 	public String selectDiet(Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
+		if (user == null) {
+			return "";
+		}
+		
 		List<DietVO> dietList = recordService.selectDietList(user.getMe_id());
 		model.addAttribute("dietList", dietList);
 		return "record/diet";
@@ -57,6 +61,10 @@ public class RecordController {
 	public String selectInbody(Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
+		if (user == null) {
+			return "";
+		}
+		
 		List<InbodyVO> inbodyList = recordService.selectInbodyList(user.getMe_id());
 		model.addAttribute("inbodyList", inbodyList);
 		return "record/inbody";
@@ -70,6 +78,10 @@ public class RecordController {
 	@GetMapping("/workout")
 	public String selectWorkout(Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		if (user == null) {
+			return "";
+		}
 		
 		List<WorkoutVO> workoutList = recordService.selectWorkoutList(user.getMe_id());
 		model.addAttribute("workoutList", workoutList);
