@@ -29,7 +29,6 @@
 </head>
 <body>
 <div class="jumbotron text-center">
-    <div class="footer-message">푸터에는 무슨 말을 써야할 지 모르겠다 문구 추천 받습니다.</div>
     <div class="footer-contact">제작: 박주영, 오준호, 유동훈, 표한결</div>
   </div>
 </body>
